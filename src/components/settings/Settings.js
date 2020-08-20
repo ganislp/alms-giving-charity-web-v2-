@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Paper, LinearProgress } from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import _ from 'lodash';
 import { fetchCompanyDetails, createCompanyDetails } from '../../actions/api/companyDetailsApi';
 import { showSuccessSnackbar } from '../../actions/snackbarActions'
 import CompanyForm from './companySettings/CompanyForm';

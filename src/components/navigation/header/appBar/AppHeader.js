@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { AppBar, Toolbar, Grid, Container, Hidden } from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
+import DrawerBuilder from './drawer/DrawerBuilder'
 
 import TopAppBar from './TopAppBar';
 import TabsBuilder from './tabsBuilder/TabsBuilder'
@@ -17,6 +18,21 @@ const useStyles = theme => ({
 });
 class AppHeader extends Component {
 
+  rednderDrawer() {
+    return (
+      <React.Fragment>
+        <Hidden smDown>
+          <TabsBuilder />
+        </Hidden>
+        <Hidden smUp>
+          <DrawerBuilder />
+        </Hidden>
+      </React.Fragment>
+    )
+  }
+  renderLogo(){
+   return <Hidden smDown>   <Logo /> </Hidden>
+  }
   render() {
     const { classes } = this.props;
     return (
@@ -29,15 +45,12 @@ class AppHeader extends Component {
             <Grid item container>
               <Container maxWidth="lg" >
                 <Toolbar disableGutters >
-                  <Grid container
-                    direction="row"
-                    justify="space-between"
-                    alignItems="center" >
+                  <Grid container direction="row" justify="space-between" alignItems="center" >
                     <Grid item>
-                     <Logo/>
+                     {this.renderLogo()}
                     </Grid>
                     <Grid item >
-                      <TabsBuilder />
+                      {this.rednderDrawer()}
                     </Grid>
                   </Grid>
                 </Toolbar>
