@@ -42,7 +42,6 @@ export const createCompanyDetails =  (formValues,uid) => async (dispatch) => {
     
 } catch (error) {
   dispatch(companyActionType.createCompanyDetailsError(error));
-  console.log('error', error)
   dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
 }
 }

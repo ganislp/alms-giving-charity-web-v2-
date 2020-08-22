@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Container, Paper, LinearProgress } from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
-import { fetchCompanyDetails, createCompanyDetails } from '../../actions/api/companyDetailsApi';
+import { createCompanyDetails,fetchCompanyDetails } from '../../actions/api/companyDetailsApi';
 import { showSuccessSnackbar } from '../../actions/snackbarActions'
 import CompanyForm from './companySettings/CompanyForm';
 
@@ -74,7 +74,7 @@ class Settings extends React.Component {
 
 
   renderCompantForm() { 
-const {addresses,contactDetails,companyName} = this.props.companyDetails;
+ const {addresses,contactDetails,companyName} = this.props.companyDetails;
     if (this.props.isLoading) {
       return <LinearProgress color="secondary"/>
     }
@@ -82,9 +82,7 @@ const {addresses,contactDetails,companyName} = this.props.companyDetails;
       return (
         <React.Fragment>
            {this.renderSubmitProcess()}
-          <CompanyForm
-            onSubmit={this.onSubmit}
-            initialValues={{...addresses,...contactDetails,companyName} } />  
+         <CompanyForm onSubmit={this.onSubmit}  initialValues={{...addresses,...contactDetails,companyName} } />  
              {this.renderSubmitProcess()}    
         </React.Fragment>
        
@@ -113,5 +111,5 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { createCompanyDetails, fetchCompanyDetails, showSuccessSnackbar })
+export default connect(mapStateToProps, { createCompanyDetails, fetchCompanyDetails,showSuccessSnackbar })
   (withTheme(withStyles(useStyles)(Settings)));

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { SwipeableDrawer, List, ListItem, ListItemText } from '@material-ui/core';
+import { SwipeableDrawer, List, ListItem, ListItemText,Grid,Typography } from '@material-ui/core';
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { withStyles, withTheme } from '@material-ui/core/styles';
@@ -87,14 +87,26 @@ class DrawerBuilder extends React.Component {
     </SwipeableDrawer>
   }
 
-  renderIconButton(classes) {
+  renderIconButton() {
+    const {companyName} = this.props.companyDetails;
     return (
-      <IconButton 
+      <Grid container justify="space-between" alignItems="center">
+        
+         <Grid item>
+       <Typography variant="h6" style={{...this.props.theme.palette.typography.h6Grey}}>
+       {companyName}
+       </Typography>
+      </Grid>
+
+        <Grid item>
+      <IconButton className={this.props.classes.drawerIconContainer}
         disableRipple
-        onClick={this.iconButtonDrawerHandler}
-        className={classes.drawerIconContainer}>
-        <MenuIcon className={classes.drawerIcon} />
+        onClick={this.iconButtonDrawerHandler} >
+        <MenuIcon/>
       </IconButton>
+      </Grid>
+     
+      </Grid>
     )
   }
 
@@ -103,15 +115,17 @@ class DrawerBuilder extends React.Component {
     return (
       <React.Fragment>
         {this.renderSwipeableDrawer()}
-        {this.renderIconButton(classes)}
+        {this.renderIconButton()}
       </React.Fragment>
     )
   }
 }
-const mapStateToProps = (state,ownProps) => {
+const mapStateToProps = (state) => {
   return {
+
     drawerOpen: state.drawerOpen,
     seletedValue: state.selectdTabValue,
+    companyDetails: Object.assign({}, ...Object.values(state.companyDetails)),
   }
 }
 

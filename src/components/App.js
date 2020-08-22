@@ -9,8 +9,7 @@ class App extends Component{
     return(
       <React.Fragment>
      <SuccessSnackbar/>
-      <ThemeProvider theme={appTheme}>
-    
+      <ThemeProvider theme={appTheme}>   
         <Header/>
         </ThemeProvider>
         </React.Fragment>

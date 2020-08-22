@@ -11,6 +11,17 @@ const useStyles = makeStyles(theme => ({
   submitButton: {
     ...theme.palette.typography.SubmitButton
   },
+
+ headerButton: {
+    ...theme.palette.typography.SubmitButton,
+    backgroundColor: theme.palette.common.grey,
+    color : theme.palette.common.white,
+    "&:hover": {
+      backgroundColor: theme.palette.common.grey,
+      color: theme.palette.common.white,
+    },
+
+  },
 }))
 
 
@@ -46,6 +57,15 @@ export const SubmitButton = (props) => {
       {renderButton()}
     </React.Fragment>
   )
+}
+
+
+export const DonateButtonHeader = (props) => {
+  const classes = useStyles();
+  return(
+    <Button variant="text" className={classes.headerButton}>Donate Now</Button>  
+  )
+
 }
 
 

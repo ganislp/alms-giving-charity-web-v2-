@@ -39,6 +39,15 @@ export default  createMuiTheme({
       fontSize: "1.2rem",
     },
 
+    
+    h6Grey : {
+      fontFamily: "Open Sans sans-serif",
+      textTransform: "none",
+      fontWeight: 600,
+      color: arcGrey,
+      fontSize: "1rem",
+    },
+
     caption:{
       fontFamily: "Open Sans sans-serif",
       color: appWhite,

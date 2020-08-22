@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { AppBar, Toolbar, Grid, Container, Hidden } from '@material-ui/core';
+import { AppBar, Toolbar, Grid, Container, Hidden  } from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import DrawerBuilder from './drawer/DrawerBuilder'
 import TopAppBar from './TopAppBar';
 import TabsBuilder from './tabsBuilder/TabsBuilder'
 import Logo from '../logo/Logo';
+
+
+
+
 
 
 const useStyles = theme => ({
@@ -15,8 +19,16 @@ const useStyles = theme => ({
       marginBottom: "2.4em"
     }
   },
+
+  appbar: {
+    zIndex: theme.zIndex.modal + 1,
+  },
 });
 class AppHeader extends Component {
+ 
+
+
+
   rednderDrawer() {
     return (
       <React.Fragment>    
@@ -34,10 +46,9 @@ class AppHeader extends Component {
   }
   render() {
     const { classes } = this.props;
-  
     return (
       <React.Fragment>
-        <AppBar position="fixed"  >
+        <AppBar position="fixed"  className={classes.appbar}>
           <Grid container  >
             <Grid item container>
               <TopAppBar />
@@ -49,9 +60,16 @@ class AppHeader extends Component {
                     <Grid item>
                      {this.renderLogo()}
                     </Grid>
+                    <Hidden smDown>
                     <Grid item >
                       {this.rednderDrawer()}
                     </Grid>
+                    </Hidden>
+                    <Hidden smUp>
+                    <Grid item container>
+                      {this.rednderDrawer()}
+                    </Grid>
+                    </Hidden>
                   </Grid>
                 </Toolbar>
               </Container>
@@ -59,15 +77,14 @@ class AppHeader extends Component {
           </Grid>
         </AppBar>
         <div className={classes.toolbarMargin} />
+        {/* {_.isEmpty(this.props.companyDetails) ? <CircularProgress color="secondary" /> : null} */}
       </React.Fragment>
     )
-
-
   }
 }
 
 
-export default (withTheme(withStyles(useStyles)(AppHeader)));
+export default  (withTheme(withStyles(useStyles)(AppHeader)));
 
 
 
