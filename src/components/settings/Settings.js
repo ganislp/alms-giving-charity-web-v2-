@@ -2,39 +2,41 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Paper, LinearProgress } from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
+import { green } from '@material-ui/core/colors';
 import { fetchCompanyDetails, createCompanyDetails } from '../../actions/api/companyDetailsApi';
 import { showSuccessSnackbar } from '../../actions/snackbarActions'
 import CompanyForm from './companySettings/CompanyForm';
-
-
 
 const useStyles = theme => ({
   root: {
     flexGrow: 1,
     width: '100%',
     backgroundColor: theme.palette.background.paper,
-
-    // padding:"2em"
-  },
-
-  rootHeader: {
-    flexGrow: 1,
-    width: '100%',
-    backgroundColor: theme.palette.common.blue,
   },
 
   mainContainer: {
-    paddingTop: "2em"
+  paddingTop: "1em",
+  [theme.breakpoints.down("md")]: {
+    paddingTop: "0em"
+  }
   },
+
+
   h6Heading: {
     ...theme.palette.typography.h6White,
-    padding: "0.5em"
   },
 
   donateButton: {
     ...theme.typography.donateButton,
     color: theme.palette.common.white
-  }
+  },
+
+  buttonSuccess: {
+    backgroundColor: green[500],
+    '&:hover': {
+      backgroundColor: green[500],
+    },
+  },
 });
 
 class Settings extends React.Component {
@@ -46,7 +48,6 @@ class Settings extends React.Component {
   }
 
   onSubmit = formValues => {
-   
  const convertedFormValues =    Object.assign({}, {
       companyName : formValues.companyName,
       addresses: {
@@ -67,29 +68,26 @@ class Settings extends React.Component {
 
   renderSubmitProcess() {
     if (this.props.isSubmiting) {
-      return <LinearProgress color="secondary" />
+      return <LinearProgress className={this.props.classes.buttonSuccess}/>
     }
   }
 
 
-  renderCompantForm() {
-   
+  renderCompantForm() { 
 const {addresses,contactDetails,companyName} = this.props.companyDetails;
-
-
- 
     if (this.props.isLoading) {
-      return <LinearProgress color="secondary" />
+      return <LinearProgress color="secondary"/>
     }
     else {
-    
       return (
         <React.Fragment>
+           {this.renderSubmitProcess()}
           <CompanyForm
             onSubmit={this.onSubmit}
-            initialValues={{...addresses,...contactDetails,companyName} } />
-          {this.renderSubmitProcess()}
+            initialValues={{...addresses,...contactDetails,companyName} } />  
+             {this.renderSubmitProcess()}    
         </React.Fragment>
+       
       )
     }
   }
@@ -98,10 +96,10 @@ const {addresses,contactDetails,companyName} = this.props.companyDetails;
     const { classes, theme } = this.props;
     return (
       <Container maxWidth="lg" className={classes.mainContainer}>
-        <Paper className={classes.root}>
+        <Paper className={classes.root} >
           {this.renderCompantForm(classes, theme)}
         </Paper>
-      </Container>
+       </Container>
 
     )
   }

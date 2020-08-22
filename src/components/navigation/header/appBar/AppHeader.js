@@ -2,31 +2,30 @@ import React, { Component } from 'react';
 import { AppBar, Toolbar, Grid, Container, Hidden } from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import DrawerBuilder from './drawer/DrawerBuilder'
-
 import TopAppBar from './TopAppBar';
 import TabsBuilder from './tabsBuilder/TabsBuilder'
-import Logo from '../logo/Logo'
+import Logo from '../logo/Logo';
+
 
 const useStyles = theme => ({
   toolbarMargin: {
     ...theme.mixins.toolbar,
-    marginBottom: "3.1em",
+    marginBottom: "4em",
     [theme.breakpoints.down("sm")]: {
       marginBottom: "2.4em"
     }
   },
 });
 class AppHeader extends Component {
-
   rednderDrawer() {
     return (
-      <React.Fragment>
-        <Hidden smDown>
-          <TabsBuilder />
-        </Hidden>
-        <Hidden smUp>
-          <DrawerBuilder />
-        </Hidden>
+      <React.Fragment>    
+        <Hidden xsDown>   
+          <TabsBuilder /> 
+          </Hidden>  
+          <Hidden smUp>   
+          <DrawerBuilder  />
+          </Hidden>      
       </React.Fragment>
     )
   }
@@ -35,6 +34,7 @@ class AppHeader extends Component {
   }
   render() {
     const { classes } = this.props;
+  
     return (
       <React.Fragment>
         <AppBar position="fixed"  >
@@ -65,6 +65,7 @@ class AppHeader extends Component {
 
   }
 }
+
 
 export default (withTheme(withStyles(useStyles)(AppHeader)));
 

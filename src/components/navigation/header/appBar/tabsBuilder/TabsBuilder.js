@@ -3,9 +3,10 @@ import {connect} from 'react-redux';
 import {Tabs,Tab} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 import { withStyles, withTheme } from '@material-ui/core/styles';
+import {headerMenutabAct} from '../../../../../actions/navigationAcions'
 
 import {routes} from '../../../../constants';
-import {selectdAppTab} from '../../../../../actions/navigationAcions'
+
 
 const useStyles = theme => ({
   tab:{
@@ -18,12 +19,28 @@ const useStyles = theme => ({
 
 class TabsBuilder extends React.Component{
 
+  componentDidMount(){
+    routes.forEach(route => {
+      switch (window.location.pathname){
+        case `${route.link}` :
+          if(this.props.seletedValue !== route.activeIndex){
+            this.props.headerMenutabAct(route.activeIndex)
+          }
+          break;
+          default: break;
+      }   
+
+    })
+  }
+
+
+
   render(){
     const { classes } = this.props;
     return(
       <Tabs 
       value={this.props.seletedValue} 
-      textColor="secondary" onChange={(e,newValue) => this.props.selectdAppTab(newValue)}>
+      textColor="secondary" onChange={(e,newValue) => this.props.headerMenutabAct(newValue)}>
         {routes.map((route,index) => (
           <Tab label={route.label} component={Link} to={route.link} disableRipple
           key={`${route} ${index}`}
@@ -38,8 +55,9 @@ class TabsBuilder extends React.Component{
 
 const mapStateToProps = (state) => {
   return {
-    seletedValue: state.tabOnSelect
+    seletedValue: state.selectdTabValue,
+   
   }
 }
 
-export default connect(mapStateToProps,{selectdAppTab}) (withTheme(withStyles(useStyles)(TabsBuilder)));
+export default connect(mapStateToProps,{headerMenutabAct}) (withTheme(withStyles(useStyles)(TabsBuilder)));

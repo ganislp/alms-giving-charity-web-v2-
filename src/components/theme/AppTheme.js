@@ -32,15 +32,17 @@ export default  createMuiTheme({
     },
 
     h6White : {
-      fontFamily: "Raleway",
+      fontFamily: "Open Sans sans-serif",
       textTransform: "none",
-      fontWeight: 600,
+      fontWeight: 400,
       color: appWhite,
-      fontSize: "1rem",
+      fontSize: "1.2rem",
     },
 
     caption:{
+      fontFamily: "Open Sans sans-serif",
       color: appWhite,
+      fontSize: "1.2rem",
     },
     submitButton: {
       fontFamily: "Roboto",
@@ -49,10 +51,16 @@ export default  createMuiTheme({
       color: appBlue,
       backgroundColor: appBlue,
       "&:hover": {
-        backgroundColor: arcGrey,
-        color: appBlue,
+        backgroundColor: appBlue,
+        color: appWhite,
       },
-    
+    },
+
+    submitIconButton: {
+      "&:hover": {
+        backgroundColor: appBlue,
+        color: appWhite,
+      },
     },
 
     donateButton: {

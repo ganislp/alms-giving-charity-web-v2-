@@ -1,11 +1,11 @@
 import {ON_SELECT_APP_TAB,DRAWER_OPEN} from '../actions/actionTypes'
 
-export const   selectdAppTabReducer = (selectdAppTab=0,action) => {
+export const   selectdAppTabReducer = (selectdTabValue=0,action) => {
   switch (action.type) {
     case ON_SELECT_APP_TAB:
       return action.payload;      
       default:
-        return selectdAppTab;
+        return selectdTabValue;
     }
 
 }

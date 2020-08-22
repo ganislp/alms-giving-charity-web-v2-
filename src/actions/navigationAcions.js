@@ -1,9 +1,9 @@
 import {ON_SELECT_APP_TAB,DRAWER_OPEN} from './actionTypes'
 
-export const selectdAppTab = (selectdTab) => {
+export const headerMenutabAct = (selectdTabValue) => {
   return {
     type: ON_SELECT_APP_TAB,
-    payload: selectdTab
+    payload: selectdTabValue
 }
 }
 

@@ -16,8 +16,14 @@ const  Header = (props) => {
   const matchesSMD = useMediaQuery(theme.breakpoints.down("sm"));
   return(
     <Router history={history}>
-<AppHeader/>
+<AppHeader />
 <Switch>
+<Route exact path="/" component={() => <div>Home</div>}></Route>
+<Route exact path="/aboutus" component={() => <div>About Us</div>}></Route>
+<Route exact path="/causes" component={() => <div>Causes</div>}></Route>
+<Route exact path="/news" component={() => <div>News</div>}></Route>
+<Route exact path="/gallery" component={() => <div>Gallery</div>}></Route>
+<Route exact path="/contact" component={() => <div>News</div>}></Route>
 <Route exact path="/settings" component={props => (<Settings {...props} /> )}></Route>
   </Switch>
 </Router>
