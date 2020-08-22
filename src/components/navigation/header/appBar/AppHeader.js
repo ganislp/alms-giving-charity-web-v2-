@@ -6,11 +6,6 @@ import TopAppBar from './TopAppBar';
 import TabsBuilder from './tabsBuilder/TabsBuilder'
 import Logo from '../logo/Logo';
 
-
-
-
-
-
 const useStyles = theme => ({
   toolbarMargin: {
     ...theme.mixins.toolbar,
@@ -25,9 +20,6 @@ const useStyles = theme => ({
   },
 });
 class AppHeader extends Component {
- 
-
-
 
   rednderDrawer() {
     return (
