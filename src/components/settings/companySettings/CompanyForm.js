@@ -4,8 +4,6 @@ import _ from 'lodash';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import { TextField, Grid, Paper, Typography, Hidden } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel'
-import Select from '@material-ui/core/Select'
 import MuiPhoneNumber from "material-ui-phone-number";
 import { SubmitButton } from '../../ui/Buttons';
 import NativeSelect from '@material-ui/core/NativeSelect';
