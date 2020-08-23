@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Button, IconButton } from '@material-ui/core';
 import Tooltip from '@material-ui/core/Tooltip';
 import { useTheme } from '@material-ui/core/styles';
@@ -23,8 +24,6 @@ const useStyles = makeStyles(theme => ({
 
   },
 }))
-
-
 
 export const SubmitButton = (props) => {
   const theme = useTheme();

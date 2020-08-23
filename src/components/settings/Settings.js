@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Container, Paper, LinearProgress } from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
-import { createCompanyDetails,fetchCompanyDetails } from '../../actions/api/companyDetailsApi';
+import { createCompanyDetails } from '../../actions/api/companyDetailsApi';
 import { showSuccessSnackbar } from '../../actions/snackbarActions'
 import CompanyForm from './companySettings/CompanyForm';
 
@@ -16,10 +16,10 @@ const useStyles = theme => ({
   },
 
   mainContainer: {
-  paddingTop: "1em",
-  [theme.breakpoints.down("md")]: {
-    paddingTop: "0em"
-  }
+    paddingTop: "1em",
+    [theme.breakpoints.down("md")]: {
+      paddingTop: "0em"
+    }
   },
 
 
@@ -42,56 +42,55 @@ const useStyles = theme => ({
 
 class Settings extends React.Component {
 
-  componentDidMount(){
-    this.props.fetchCompanyDetails()
-  }
-
-
   onSubmit = formValues => {
- const convertedFormValues =    Object.assign({}, {
-      companyName : formValues.companyName,
+    const convertedFormValues = Object.assign({}, {
+      companyName: formValues.companyName,
       addresses: {
         addressline1: formValues.addressline1,
         addressline2: formValues.addressline2,
         citytown: formValues.citytown,
-        province :formValues.province,
-        zipcode:formValues.zipcode,
-        country:formValues.country,
+        province: formValues.province,
+        zipcode: formValues.zipcode,
+        country: formValues.country,
       },
       contactDetails: {
         email: formValues.email,
         phone: formValues.phone,
       }
     })
-    const {uid} = Object.assign({}, ...Object.values(this.props.companyDetails));
- this.props.createCompanyDetails(convertedFormValues, uid);
-//  history.push('/');
+    const { uid } = Object.assign({}, ...Object.values(this.props.companyDetails));
+    this.props.createCompanyDetails(convertedFormValues, uid);
   };
+
+
 
   renderSubmitProcess() {
     if (this.props.isSubmiting) {
-      return <LinearProgress className={this.props.classes.buttonSuccess}/>
+      return <LinearProgress className={this.props.classes.buttonSuccess} />
     }
-   
-  }
- 
 
-  renderCompantForm() { 
-       if (this.props.isLoading) {
-         return <LinearProgress color="secondary"/>
-       }
-       else {
-        const {addresses,contactDetails,companyName} =Object.assign({}, ...Object.values(this.props.companyDetails));
-         return (
-           <React.Fragment>
-              {this.renderSubmitProcess()}
-            <CompanyForm onSubmit={this.onSubmit}  initialValues={{...addresses,...contactDetails,companyName} } />  
-                {this.renderSubmitProcess()}    
-           </React.Fragment>
-          
-         )
-       }
-     }
+  }
+
+
+  renderCompantForm() {
+    const { addresses, contactDetails, companyName } = Object.assign({}, ...Object.values(this.props.companyDetails));
+    if (this.props.isLoading) {
+      return <LinearProgress color="secondary" />
+    }
+    else {
+
+      return (
+        <React.Fragment>
+          {this.renderSubmitProcess()}
+          <CompanyForm onSubmit={this.onSubmit}
+            initialValues={{ ...addresses, ...contactDetails, companyName }}
+          />
+          {this.renderSubmitProcess()}
+        </React.Fragment>
+
+      )
+    }
+  }
 
   render() {
     const { classes, theme } = this.props;
@@ -100,7 +99,7 @@ class Settings extends React.Component {
         <Paper className={classes.root} >
           {this.renderCompantForm(classes, theme)}
         </Paper>
-       </Container>
+      </Container>
 
     )
   }
@@ -114,5 +113,5 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { createCompanyDetails,showSuccessSnackbar,fetchCompanyDetails })
+export default connect(mapStateToProps, { createCompanyDetails, showSuccessSnackbar })
   (withTheme(withStyles(useStyles)(Settings)));

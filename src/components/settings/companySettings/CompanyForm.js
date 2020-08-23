@@ -96,6 +96,7 @@ class CompanyForm extends React.Component {
 
   renderHeader() {
     const { classes } = this.props;
+   
     return (
       <Paper className={classes.paperHeader}>
         <Grid container alignItems="center" justify="space-between">
@@ -104,7 +105,7 @@ class CompanyForm extends React.Component {
               className={classes.h6Heading}>Create Company</Typography>
           </Grid>
           <Grid item >
-            <SubmitButton isEdit={_.isEmpty(this.props.initialValues)}/>
+            <SubmitButton isEdit={_.isEmpty(this.props.initialValues.companyName)}/>
           </Grid>
         </Grid>
       </Paper>
@@ -113,7 +114,7 @@ class CompanyForm extends React.Component {
   }
 
   onSubmit = formValues => {
-    this.props.onSubmit(formValues);  
+    this.props.onSubmit(formValues);    
   };
 
 
@@ -256,4 +257,6 @@ const validate = values => {
 export default reduxForm({
   form: 'companyForm', // a unique identifier for this form
  validate,
+ enableReinitialize: true,
+ destroyOnUnmount: false
 })(withTheme(withStyles(useStyles)(CompanyForm)));

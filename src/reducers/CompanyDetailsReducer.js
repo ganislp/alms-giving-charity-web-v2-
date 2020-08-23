@@ -16,6 +16,7 @@ export default   (state = {}, action) => {
         return { ...state, ..._.mapKeys(action.payload.companyDetails, 'uid'),loading:action.payload.loading  };
         case  companyActionTypes.GET_COMPANY_DETAILS_ERROR:
         return { ...state, ...action.payload  };
+       
     default:
       return state;
   }

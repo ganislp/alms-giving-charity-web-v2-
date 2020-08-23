@@ -90,8 +90,7 @@ class DrawerBuilder extends React.Component {
   renderIconButton() {
     const {companyName} = this.props.companyDetails;
     return (
-      <Grid container justify="space-between" alignItems="center">
-        
+      <Grid container justify="space-between" alignItems="center">        
          <Grid item>
        <Typography variant="h6" style={{...this.props.theme.palette.typography.h6Grey}}>
        {companyName}
@@ -111,7 +110,6 @@ class DrawerBuilder extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
     return (
       <React.Fragment>
         {this.renderSwipeableDrawer()}

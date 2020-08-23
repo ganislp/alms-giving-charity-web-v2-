@@ -37,8 +37,7 @@ export const createCompanyDetails =  (formValues,uid) => async (dispatch) => {
      else{
      const response = await  db.collection('companyDetails').add({ ...formValues, createdAt: createdAt, }, );
      dispatch(companyActionType.createCompanyDetailsSuccess(response.id));
-     dispatch(showSuccessSnackbar("Data Saved Sucessfully!"));
-  
+     dispatch(showSuccessSnackbar("Data Saved Sucessfully!")); 
      }
  
 } catch (error) {

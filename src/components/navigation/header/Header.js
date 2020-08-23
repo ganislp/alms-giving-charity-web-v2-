@@ -1,21 +1,29 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import _ from 'lodash';
 import { Router, Route, Switch } from 'react-router-dom';
+import { LinearProgress } from '@material-ui/core';
 import AppHeader from './appBar/AppHeader';
 import history from '../../../history';
 import Settings from '../../settings/Settings';
-
+import { fetchCompanyDetails } from '../../../actions/api/companyDetailsApi';
 
 
 
 
 class Header extends React.Component {
 
+  componentDidMount(){
+  this.props.fetchCompanyDetails()
+  }
 
-  render() {
-
+  renderComponents(){
     
-    return (
-      <Router history={history}>
+    if(!_.isEmpty(this.props.companyDetails) && this.props.isLoading){
+      return <LinearProgress color="secondary"/>
+     }
+     else{
+return <Router history={history}>
         <AppHeader />
         <Switch>
           <Route exact path="/" component={() => <div>Home</div>}></Route>
@@ -27,10 +35,21 @@ class Header extends React.Component {
            <Route exact path="/settings" component={() => (<Settings {...this.props}/>)}></Route> 
         </Switch>
       </Router>
-    )
-    
+     }
+  }
+
+  render() {
+    return (
+      this.renderComponents()
+    )  
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    companyDetails: state.companyDetails,
+    isLoading: state.companyDetails.loading
+  };
+};
 
-export default  Header;
+export default  connect(mapStateToProps,{fetchCompanyDetails})(Header);
