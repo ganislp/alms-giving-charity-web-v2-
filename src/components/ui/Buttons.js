@@ -41,7 +41,7 @@ export const SubmitButton = (props) => {
       </IconButton>
     }
     else {
-      return <Button variant="text" type="submit" color="primary"
+      return <Button variant="text" type="submit" color="primary" 
         className={classes.submitButton}
         startIcon={props.isEdit ?
           <Tooltip title="Add Company Details" interactive><SaveIcon /></Tooltip> :

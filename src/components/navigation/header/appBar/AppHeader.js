@@ -69,7 +69,7 @@ class AppHeader extends Component {
           </Grid>
         </AppBar>
         <div className={classes.toolbarMargin} />
-        {/* {_.isEmpty(this.props.companyDetails) ? <CircularProgress color="secondary" /> : null} */}
+      
       </React.Fragment>
     )
   }

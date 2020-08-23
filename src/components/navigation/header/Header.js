@@ -10,7 +10,10 @@ import Settings from '../../settings/Settings';
 
 class Header extends React.Component {
 
+
   render() {
+
+    
     return (
       <Router history={history}>
         <AppHeader />
@@ -21,12 +24,13 @@ class Header extends React.Component {
           <Route exact path="/news" component={() => <div>News</div>}></Route>
           <Route exact path="/gallery" component={() => <div>Gallery</div>}></Route>
           <Route exact path="/contact" component={() => <div>News</div>}></Route>
-           <Route exact path="/settings" component={() => <Settings />}></Route> 
+           <Route exact path="/settings" component={() => (<Settings {...this.props}/>)}></Route> 
         </Switch>
       </Router>
     )
+    
   }
 }
 
 
-export default Header;
+export default  Header;

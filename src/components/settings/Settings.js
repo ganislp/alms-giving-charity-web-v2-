@@ -7,6 +7,7 @@ import { createCompanyDetails,fetchCompanyDetails } from '../../actions/api/comp
 import { showSuccessSnackbar } from '../../actions/snackbarActions'
 import CompanyForm from './companySettings/CompanyForm';
 
+
 const useStyles = theme => ({
   root: {
     flexGrow: 1,
@@ -41,11 +42,10 @@ const useStyles = theme => ({
 
 class Settings extends React.Component {
 
-
-
-  componentDidMount() {
-    this.props.fetchCompanyDetails();
+  componentDidMount(){
+    this.props.fetchCompanyDetails()
   }
+
 
   onSubmit = formValues => {
  const convertedFormValues =    Object.assign({}, {
@@ -63,32 +63,35 @@ class Settings extends React.Component {
         phone: formValues.phone,
       }
     })
- this.props.createCompanyDetails(convertedFormValues, this.props.companyDetails.uid)
+    const {uid} = Object.assign({}, ...Object.values(this.props.companyDetails));
+ this.props.createCompanyDetails(convertedFormValues, uid);
+//  history.push('/');
   };
 
   renderSubmitProcess() {
     if (this.props.isSubmiting) {
       return <LinearProgress className={this.props.classes.buttonSuccess}/>
     }
+   
   }
-
+ 
 
   renderCompantForm() { 
- const {addresses,contactDetails,companyName} = this.props.companyDetails;
-    if (this.props.isLoading) {
-      return <LinearProgress color="secondary"/>
-    }
-    else {
-      return (
-        <React.Fragment>
-           {this.renderSubmitProcess()}
-         <CompanyForm onSubmit={this.onSubmit}  initialValues={{...addresses,...contactDetails,companyName} } />  
-             {this.renderSubmitProcess()}    
-        </React.Fragment>
-       
-      )
-    }
-  }
+       if (this.props.isLoading) {
+         return <LinearProgress color="secondary"/>
+       }
+       else {
+        const {addresses,contactDetails,companyName} =Object.assign({}, ...Object.values(this.props.companyDetails));
+         return (
+           <React.Fragment>
+              {this.renderSubmitProcess()}
+            <CompanyForm onSubmit={this.onSubmit}  initialValues={{...addresses,...contactDetails,companyName} } />  
+                {this.renderSubmitProcess()}    
+           </React.Fragment>
+          
+         )
+       }
+     }
 
   render() {
     const { classes, theme } = this.props;
@@ -104,12 +107,12 @@ class Settings extends React.Component {
 }
 const mapStateToProps = state => {
   return {
-    companyDetails: Object.assign({}, ...Object.values(state.companyDetails)),
-    isLoading: state.companyDetails.loading,
+    companyDetails: state.companyDetails,
     isSubmiting: state.companyDetails.onSubmiting,
-    errorSubmit: state.companyDetails.error
+    errorSubmit: state.companyDetails.error,
+    isLoading: state.companyDetails.loading
   };
 };
 
-export default connect(mapStateToProps, { createCompanyDetails, fetchCompanyDetails,showSuccessSnackbar })
+export default connect(mapStateToProps, { createCompanyDetails,showSuccessSnackbar,fetchCompanyDetails })
   (withTheme(withStyles(useStyles)(Settings)));
