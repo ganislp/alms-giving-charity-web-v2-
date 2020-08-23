@@ -8,6 +8,8 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "material-ui-phone-number": "^2.2.6",
+    "material-ui-selectfield": "^1.0.24",
+    "material-ui-superselectfield": "^1.10.0",
     "moment": "^2.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

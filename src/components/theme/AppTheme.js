@@ -106,7 +106,11 @@ overrides: {
   //    color:arcGrey,
 
   //   },
- 
+  MuiFormLabel: {
+    asterisk: {
+    color: 'red',
+    }
+  },
    underline:{
      "&:before":{
        borderBottem:`2px solid ${arcGrey}`

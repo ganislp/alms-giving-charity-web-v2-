@@ -2,14 +2,14 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import _ from 'lodash';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import { TextField, Grid, Paper, Typography,Hidden } from '@material-ui/core';
+import { TextField, Grid, Paper, Typography, Hidden } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel'
 import Select from '@material-ui/core/Select'
 import MuiPhoneNumber from "material-ui-phone-number";
 import { SubmitButton } from '../../ui/Buttons';
-
-
+import NativeSelect from '@material-ui/core/NativeSelect';
+import FormHelperText from '@material-ui/core/FormHelperText'
 
 
 const useStyles = theme => ({
@@ -17,19 +17,19 @@ const useStyles = theme => ({
     flexGrow: 1,
     width: '100%',
     backgroundColor: theme.palette.common.blue,
-   
+
   },
-  mainContainer:{
-    padding:"1em"
-},
+  mainContainer: {
+    padding: "1em"
+  },
 
   h6Heading: {
     ...theme.palette.typography.h6White,
-    paddingLeft:"0.3em",
-    paddingRight:"0.3em",
-     [theme.breakpoints.down("md")]: {
-   
-     }
+    paddingLeft: "0.3em",
+    paddingRight: "0.3em",
+    [theme.breakpoints.down("md")]: {
+
+    }
   },
 
   donateButton: {
@@ -37,66 +37,78 @@ const useStyles = theme => ({
     color: theme.palette.common.white,
   },
 
-  itemTextField:{
-    marginBottom:"0.5em",
+  itemTextField: {
+    marginBottom: "0.5em",
   },
- 
+
+  labelAsterisk: {
+    color: "orange"
+  }
+
 });
 class CompanyForm extends React.Component {
 
-  renderTextField({ label, input, meta: { touched, invalid, error }, ...custom }) {
+  renderTextField({ classes, label, input, meta: { touched, invalid, error }, ...custom }) {
     return (
       <TextField
         label={label}
+        // required      
         placeholder={label}
         error={touched && invalid}
         helperText={touched && error}
-        color="secondary" 
+        color="secondary"
         {...input}
         {...custom}
       />
     )
   }
 
+
+
   renderSelectField({ label, input, meta: { touched, error }, children, ...custom }) {
+
     return (
-      <FormControl error={touched && error}  >
-      <InputLabel htmlFor="age-native-simple">Country</InputLabel>
-      <Select
-        {...input}
-        {...custom}
-        inputProps={{
-          name: 'country',
-          id: 'age-native-simple'
-        }}
-        autoWidth={true}
-      >
-       
-        {children}
-      </Select>
-    </FormControl>
+      <FormControl error={touched && error}>
+        {/* <InputLabel htmlFor="country-native-label-placeholder">Please Select Country</InputLabel> */}
+        <NativeSelect
+          required
+          {...input}
+          {...custom}
+          inputProps={{
+            name: 'country',
+            id: 'country-native-label-placeholder',
+          }}
+
+        >
+          {children}
+        </NativeSelect>
+        {renderFromHelper({ touched, error })}
+      </FormControl>
     )
   }
-  renderPhoneField({ label,classes, input, meta: { touched, invalid, error }, ...custom }) {
+
+
+  renderPhoneField({ label, classes, input, meta: { touched, invalid, error }, ...custom }) {
     return (
       <MuiPhoneNumber
         label={label}
+        required
         placeholder={label}
         error={touched && invalid}
         helperText={touched && error}
-        color="secondary" 
+        color="secondary"
         defaultCountry={"za"}
-        as={MuiPhoneNumber}        
+        as={MuiPhoneNumber}
         {...input}
         {...custom}
-     
+
       />
     )
   }
 
   renderHeader() {
     const { classes } = this.props;
-   
+
     return (
       <Paper className={classes.paperHeader}>
         <Grid container alignItems="center" justify="space-between">
@@ -105,7 +117,7 @@ class CompanyForm extends React.Component {
               className={classes.h6Heading}>Create Company</Typography>
           </Grid>
           <Grid item >
-            <SubmitButton isEdit={_.isEmpty(this.props.initialValues.companyName)}/>
+            <SubmitButton isEdit={_.isEmpty(this.props.initialValues.companyName)} />
           </Grid>
         </Grid>
       </Paper>
@@ -114,17 +126,17 @@ class CompanyForm extends React.Component {
   }
 
   onSubmit = formValues => {
-    this.props.onSubmit(formValues);    
+    this.props.onSubmit(formValues);
   };
 
 
- render(){
-  const { classes } = this.props;
-   return(
-<form onSubmit={this.props.handleSubmit(this.onSubmit)} >
+  render() {
+    const { classes } = this.props;
+    return (
+      <form onSubmit={this.props.handleSubmit(this.onSubmit)} >
         {this.renderHeader()}
-        <Grid container justify="center"  className={classes.mainContainer} spacing={2}>
-          <Grid item  className={this.props.classes.itemTextField}  xs={12} sm={6} >
+        <Grid container justify="center" className={classes.mainContainer} spacing={2}>
+          <Grid item className={this.props.classes.itemTextField} xs={12} sm={6} >
             <Field
               name="companyName"
               component={this.renderTextField}
@@ -133,29 +145,29 @@ class CompanyForm extends React.Component {
             />
           </Grid>
           <Grid item className={classes.itemTextField} xs={12} sm={6}>
-            <Field             
+            <Field
               name="email"
               component={this.renderTextField}
               label="Email"
               fullWidth
-              inputProps={{
-                name: 'phone',
-                required: true,
-                autoFocus: true
-              }}
+
             />
           </Grid>
 
           <Grid item className={classes.itemTextField} xs={12} sm={6}>
-            <Field 
+            <Field
               name="phone"
               component={this.renderPhoneField}
               label="Phone Number"
               fullWidth
-                 
+            // inputProps={{
+            //   name: 'phone',
+            //   required: true,
+            //   autoFocus: true
+            // }}  
             />
           </Grid>
-          <Grid item  className={classes.itemTextField} xs={12} sm={6}>
+          <Grid item className={classes.itemTextField} xs={12} sm={6}>
             <Field
               name="addressline1"
               component={this.renderTextField}
@@ -163,7 +175,7 @@ class CompanyForm extends React.Component {
               fullWidth
             />
           </Grid>
-          <Grid item  className={classes.itemTextField} xs={12} sm={6}>
+          <Grid item className={classes.itemTextField} xs={12} sm={6}>
             <Field
               name="addressline2"
               component={this.renderTextField}
@@ -171,7 +183,7 @@ class CompanyForm extends React.Component {
               fullWidth
             />
           </Grid>
-          <Grid item  className={classes.itemTextField} xs={12} sm={6}>
+          <Grid item className={classes.itemTextField} xs={12} sm={6}>
             <Field
               name="citytown"
               component={this.renderTextField}
@@ -179,7 +191,7 @@ class CompanyForm extends React.Component {
               fullWidth
             />
           </Grid>
-          <Grid item  className={classes.itemTextField} xs={12} sm={6}>
+          <Grid item className={classes.itemTextField} xs={12} sm={6}>
             <Field
               name="province"
               component={this.renderTextField}
@@ -187,7 +199,7 @@ class CompanyForm extends React.Component {
               fullWidth
             />
           </Grid>
-          <Grid item  className={classes.itemTextField} xs={12} sm={6}>
+          <Grid item className={classes.itemTextField} xs={12} sm={6}>
             <Field
               name="zipcode"
               component={this.renderTextField}
@@ -196,30 +208,29 @@ class CompanyForm extends React.Component {
               fullWidth
             />
           </Grid>
-          <Grid item  className={classes.itemTextField} xs={12} sm={12}>
-          <Field                
-          name="country"
-          component={this.renderSelectField}
-          label="Country" >
-          <option value="" disabled>
-            Please Select
-          </option>
-          <option value="south Africa">South Africa</option>
-        </Field>
+          <Grid item className={classes.itemTextField} xs={12} sm={12}>
+            <Field
+              name="country"
+
+              component={this.renderSelectField}
+              label="Country" >
+              <option value="">Please Select Country</option>
+              <option value="south Africa">South Africa</option>
+            </Field>
           </Grid>
-          </Grid>
-          <Hidden smUp>
+        </Grid>
+        <Hidden smUp>
           {this.renderHeader()}
-          </Hidden>
+        </Hidden>
       </form>
-   )
- }
+    )
+  }
 
 }
 
 const validate = values => {
 
- 
+
   const errors = {}
   const requiredFields = [
     'companyName',
@@ -230,10 +241,9 @@ const validate = values => {
     'citytown',
     'province',
     'zipcode',
-    'country'
   ]
   requiredFields.forEach(field => {
-    if (!values[field] ) {
+    if (!values[field]) {
       errors[field] = 'Required'
     }
   })
@@ -246,17 +256,26 @@ const validate = values => {
   }
 
   if (values.phone) {
- 
-    if(values.phone.length < 12){
-      errors.phone = 'Invalid phone number'  
+
+    if (values.phone.length < 12) {
+      errors.phone = 'Invalid phone number'
     }
   }
 
   return errors
 }
+
+const renderFromHelper = ({ touched, error }) => {
+  if (!(touched && error)) {
+    return
+  } else {
+    return <FormHelperText>{touched && error}</FormHelperText>
+  }
+}
 export default reduxForm({
   form: 'companyForm', // a unique identifier for this form
- validate,
- enableReinitialize: true,
- destroyOnUnmount: false
+  validate,
+  enableReinitialize: true,
+  destroyOnUnmount: false,
+
 })(withTheme(withStyles(useStyles)(CompanyForm)));
