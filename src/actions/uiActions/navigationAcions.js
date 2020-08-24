@@ -1,4 +1,4 @@
-import {ON_SELECT_APP_TAB,DRAWER_OPEN} from './actionTypes'
+import {ON_SELECT_APP_TAB,DRAWER_OPEN} from '../actionTypes/uiActionTypes'
 
 export const headerMenutabAct = (selectdTabValue) => {
   return {
@@ -13,11 +13,3 @@ export const drawerOpenAct = (drawerOpen) => {
     payload: drawerOpen
 }
 }
-
-
-// export const fetchMediaQuery = (mediaQueryValus) => {
-//   return {
-//     type: FETCH_MEDIA_QUERY,
-//     payload: mediaQueryValus
-// }
-// }

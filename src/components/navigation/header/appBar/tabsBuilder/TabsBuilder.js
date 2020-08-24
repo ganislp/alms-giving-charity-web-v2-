@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Tabs,Tab} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import {headerMenutabAct} from '../../../../../actions/navigationAcions'
+import {headerMenutabAct} from '../../../../../actions/uiActions/navigationAcions'
 
 import {routes} from '../../../../constants';
 

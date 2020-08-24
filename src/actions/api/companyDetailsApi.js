@@ -1,13 +1,13 @@
 import { db,createdAt } from '../../firebase';
 import moment from 'moment';
-import * as companyActionType  from '../companyActions';
-import {showFaildSnackbar,showSuccessSnackbar} from '../snackbarActions';
+import * as companyActions  from '../companyActions/companyActions';
+import {showFaildSnackbar,showSuccessSnackbar} from '../../actions/uiActions/snackbarActions';
 
 
 
 
 export const fetchCompanyDetails= () => async dispatch => {
-  dispatch(companyActionType.loadCompanyDetailsRequest());
+  dispatch(companyActions.loadCompanyDetailsRequest());
   try {
    await db.collection('companyDetails').onSnapshot(snap => {
     const data = snap.docs.map(doc => ( 
@@ -17,31 +17,31 @@ export const fetchCompanyDetails= () => async dispatch => {
         uid: doc.id,
       }
     ));
-    dispatch(companyActionType.loadCompanyDetailsSuccess(data));
+    dispatch(companyActions.loadCompanyDetailsSuccess(data));
   });
 } catch (error) {
-  dispatch(companyActionType.loadCompanyDetailsError(error));
+  dispatch(companyActions.loadCompanyDetailsError(error));
 }
 
 }
 
 export const createCompanyDetails =  (formValues,uid) => async (dispatch) => {
-  dispatch(companyActionType.createCompanyDetailsRequest());
+  dispatch(companyActions.createCompanyDetailsRequest());
   try {
      if(uid){
     await  db.collection('companyDetails').doc(`${uid}`)
        .update({ ...formValues, createdAt: createdAt,uid:uid } );
-       dispatch(companyActionType.createCompanyDetailsSuccess(uid)); 
+       dispatch(companyActions.createCompanyDetailsSuccess(uid)); 
        dispatch(showSuccessSnackbar("Data Updated sucessfully!")); 
      }
      else{
      const response = await  db.collection('companyDetails').add({ ...formValues, createdAt: createdAt, }, );
-     dispatch(companyActionType.createCompanyDetailsSuccess(response.id));
+     dispatch(companyActions.createCompanyDetailsSuccess(response.id));
      dispatch(showSuccessSnackbar("Data Saved Sucessfully!")); 
      }
  
 } catch (error) {
-  dispatch(companyActionType.createCompanyDetailsError(error));
+  dispatch(companyActions.createCompanyDetailsError(error));
   dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
 }
 }

@@ -4,7 +4,7 @@ import { Container, Paper, LinearProgress } from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 import { createCompanyDetails } from '../../actions/api/companyDetailsApi';
-import { showSuccessSnackbar } from '../../actions/snackbarActions'
+import { showSuccessSnackbar } from '../../actions/uiActions/snackbarActions'
 import CompanyForm from './companySettings/CompanyForm';
 
 

@@ -1,4 +1,4 @@
-import * as companyActionTypes from '../actions/actionTypes/companyActionTypes'
+import * as companyActionTypes from '../actionTypes/companyActionTypes'
 
 export const loadCompanyDetailsRequest = () => {
 
@@ -17,14 +17,13 @@ export const loadCompanyDetailsSuccess = (results) => {
 
 export const loadCompanyDetailsError = (error) => {
   return {
-    type: companyActionTypes.CREATE_COMPANY_DETAILS_ERROR,
+    type: companyActionTypes.GET_COMPANY_DETAILS_ERROR,
     payload: { loading: false, error: error }
   }
 }
 
 
 export const createCompanyDetailsRequest = () => {
-
   return {
     type: companyActionTypes.CREATE_COMPANY_DETAILS_REQUEST,
     payload: { onSubmiting: true }

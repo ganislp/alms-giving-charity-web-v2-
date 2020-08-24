@@ -5,7 +5,7 @@ import { SwipeableDrawer, List, ListItem, ListItemText,Grid,Typography } from '@
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import { drawerOpenAct,headerMenutabAct } from '../../../../../actions/navigationAcions'
+import { drawerOpenAct,headerMenutabAct } from '../../../../../actions/uiActions/navigationAcions'
 import { routes } from '../../../../constants';
 
 
