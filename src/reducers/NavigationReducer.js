@@ -19,16 +19,3 @@ export const   drawerOpenReducer = (drawerOpen=false,action) => {
     }
 
 }
-
-
-
-
-// export const   fetchMediaQueryReducer = (state ={},action) => {
-//   switch (action.type) {
-//     case FETCH_MEDIA_QUERY:
-//       return action.payload;
-//       default:
-//         return state;
-//     }
-
-// }
