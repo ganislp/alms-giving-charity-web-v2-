@@ -17,10 +17,8 @@ class ConfimationDialog extends React.Component{
   render(){
     return(
 
-      <div>
-      <Button variant="outlined" color="primary">
-        Open alert dialog
-      </Button>
+    
+     
       <Dialog
         open={this.props.dialogOpen}
         onClose={this.handleClose}
@@ -35,20 +33,19 @@ class ConfimationDialog extends React.Component{
         </DialogContent>
         <DialogActions>
           <Button  color="secondary" onClick={this.handleClose}>
-            Disagree
+           No
           </Button>
           <Button  color="secondary" autoFocus onClick={this.props.dialogButtonClick}>
-            Agree
+            Yes
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+
     )
   }
 }
 
 const mapStateToProps = state => {
-  console.log("state", state.dialogOpen)
   return {
     dialogOpen: state.dialogOpen.dialogOpen,
     dialogClose: state.dialogClose,
