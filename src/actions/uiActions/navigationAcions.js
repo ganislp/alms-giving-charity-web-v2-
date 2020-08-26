@@ -21,9 +21,4 @@ export const confiDialogOpen = (dialogOpen,uid) => {
 }
 }
 
-export const confiDialogClose = (dialogOpen) => {
-  return {
-    type: ON_CONFI_DIALOG_CLOSE,
-    payload: dialogOpen
-}
-}
+

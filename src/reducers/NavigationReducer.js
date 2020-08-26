@@ -30,12 +30,3 @@ export const   confDialogOpenReducer = (state={dialogOpen:false,uid:{}},action) 
 
 };
 
-export const   confDialogCloseReducer = (dialogClose=false,action) => {
-  switch (action.type) {
-    case ON_CONFI_DIALOG_CLOSE:
-      return action.payload;      
-      default:
-        return dialogClose;
-    }
-
-};

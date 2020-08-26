@@ -48,7 +48,6 @@ class ConfimationDialog extends React.Component{
 const mapStateToProps = state => {
   return {
     dialogOpen: state.dialogOpen.dialogOpen,
-    dialogClose: state.dialogClose,
   };
 };
 
