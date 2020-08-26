@@ -11,7 +11,7 @@ export const getHeroRequest = () => {
 export const getHeroSuccess = (results) => {
   return {
     type: heroActionTypes.GET_HERO_SUCCESS,
-    payload: { loading: false, hero: { ...results } }
+    payload: { loading: false, heroDetails: { ...results } }
 
   }
 }

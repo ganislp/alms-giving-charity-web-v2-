@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import { Field, reduxForm } from 'redux-form';
 import {Grid, } from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import {selectdAppTabReducer,drawerOpenReducer} from './NavigationReducer';
+import {selectdAppTabReducer,drawerOpenReducer,confDialogOpenReducer,confDialogCloseReducer} from './NavigationReducer';
 import companyDetailsReducer from './CompanyDetailsReducer';
 import heroReducer from './Hero/HeroReducer';
 import uiReducer from './uiReducer';
@@ -10,8 +10,10 @@ import { reducer as formReducer } from 'redux-form';
 export default combineReducers({
   selectdTabValue:selectdAppTabReducer,
   drawerOpen:drawerOpenReducer,
+  dialogOpen:confDialogOpenReducer,
+  dialogClose:confDialogCloseReducer,
   companyDetails: companyDetailsReducer,
-  heroDetails: heroReducer,
+  heroSection: heroReducer,
   uiReducer : uiReducer,
   form: formReducer,
 

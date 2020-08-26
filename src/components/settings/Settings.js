@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Paper, LinearProgress } from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
 import { createCompanyDetails } from '../../actions/api/companyDetailsApi';
 import { showSuccessSnackbar } from '../../actions/uiActions/snackbarActions'
 import CompanyForm from './companySettings/CompanyForm';
+import SubmitProcess from '../ui/SubmitProcess'
 
 
 const useStyles = theme => ({
@@ -32,12 +32,7 @@ const useStyles = theme => ({
     color: theme.palette.common.white
   },
 
-  buttonSuccess: {
-    backgroundColor: green[500],
-    '&:hover': {
-      backgroundColor: green[500],
-    },
-  },
+
 });
 
 class Settings extends React.Component {
@@ -66,7 +61,7 @@ class Settings extends React.Component {
 
   renderSubmitProcess() {
     if (this.props.isSubmiting) {
-      return <LinearProgress className={this.props.classes.buttonSuccess} />
+      return <SubmitProcess/>
     }
 
   }

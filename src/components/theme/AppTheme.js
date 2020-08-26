@@ -118,8 +118,21 @@ overrides: {
      "&:hover:not($disabled):not($focused):not($error):before":{
        borderBottem:`2px solid ${arcGrey}`
      }
+   },
+
+   MuiTableSortLabel: {
+    root: {
+      '&:hover': {
+        color: `${appWhite}`,
+      },
+    },
+    active: {
+      color: `${appWhite}`,
+       '&:hover': {
+        color: `${appWhite}`,
+      },
+    },
    }
-  
 
 }
 });
