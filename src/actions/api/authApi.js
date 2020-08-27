@@ -1,6 +1,10 @@
 import {auth } from '../../firebase';
 import * as authActions  from '../authActions/authActions';
 import { Cookies } from 'react-cookie';
+import {showFaildSnackbar} from '../uiActions/snackbarActions';
+
+
+
 export const cookies = new Cookies();
 export const login = (formValues) => async dispatch => {
 
@@ -9,6 +13,7 @@ export const login = (formValues) => async dispatch => {
     dispatch(authActions.loginSuccess(auth.currentUser.toJSON()));
   } catch (error) {
     dispatch(authActions.loginError(error));
+    dispatch(showFaildSnackbar("Please Try agin!"));
   }
 }
 
@@ -18,6 +23,7 @@ export const register = (formValues) => async dispatch => {
     dispatch(authActions.registerSuccess(auth.currentUser.toJSON()))
   } catch (error) {
     dispatch(authActions.registerError(error));
+    dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
   }
 }
 
@@ -29,7 +35,7 @@ export const logout = () => async dispatch => {
   cookies.remove('isAuthenticated', { path: '/' });
     cookies.remove('userUid', { path: '/' });
   } catch (error) {
-    throw error
+    dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
   }
 }
 
@@ -47,5 +53,6 @@ export const fetchUser = () => async dispatch => {
     })
   } catch (error) {
     dispatch(authActions.fetchUserError(error));
+    dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
   }
 }
