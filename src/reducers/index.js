@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux';
 
-import {selectdAppTabReducer,drawerOpenReducer,confDialogOpenReducer} from './NavigationReducer';
+import {
+  selectdAppTabReducer,
+  drawerOpenReducer,
+  confDialogOpenReducer,
+popOverDialogOpenReducer} from './NavigationReducer';
 import companyDetailsReducer from './CompanyDetailsReducer';
 import heroReducer from './Hero/HeroReducer';
 import uiReducer from './uiReducer';
@@ -11,6 +15,7 @@ export default combineReducers({
   selectdTabValue:selectdAppTabReducer,
   drawerOpen:drawerOpenReducer,
   dialogOpen:confDialogOpenReducer,
+  popOverLogin:popOverDialogOpenReducer,
   companyDetails: companyDetailsReducer,
   heroSection: heroReducer,
   uiReducer : uiReducer,

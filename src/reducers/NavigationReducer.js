@@ -1,4 +1,7 @@
-import {ON_SELECT_APP_TAB,DRAWER_OPEN,ON_CONFI_DIALOG_OPEN,ON_CONFI_DIALOG_CLOSE} from '../actions/actionTypes/uiActionTypes'
+import {ON_SELECT_APP_TAB,
+  DRAWER_OPEN,
+  ON_CONFI_DIALOG_OPEN,
+  ON_POPOVER_DIALOG_OPEN} from '../actions/actionTypes/uiActionTypes'
 
 export const   selectdAppTabReducer = (selectdTabValue=0,action) => {
   switch (action.type) {
@@ -23,7 +26,18 @@ export const   drawerOpenReducer = (drawerOpen=false,action) => {
 export const   confDialogOpenReducer = (state={dialogOpen:false,uid:{}},action) => {
   switch (action.type) {
     case ON_CONFI_DIALOG_OPEN:
-      return { ...state,...action.payload };;      
+      return { ...state,...action.payload };     
+      default:
+        return state;
+    }
+
+};
+
+
+export const   popOverDialogOpenReducer = (state={popOverOpen:false,anchorEl:null},action) => {
+  switch (action.type) {
+    case ON_POPOVER_DIALOG_OPEN:
+      return { ...state,...action.payload };     
       default:
         return state;
     }

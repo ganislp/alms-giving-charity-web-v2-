@@ -1,13 +1,29 @@
 import React from 'react';
 import {  Grid, Paper, Typography, } from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles';
+import {makeStyles,useTheme} from '@material-ui/core/styles';
+import blue from '@material-ui/core/colors/blue';
 
 const useStyles = makeStyles(theme => ({
   paperHeader: {
     flexGrow: 1,
     width: '100%',
     backgroundColor: theme.palette.common.blue,
+  
+  },
 
+
+  loginpaperHeader: {
+    flexGrow: 1,
+    width: '100%',
+    backgroundColor: blue[500],
+   color: theme.palette.common.grey,
+   borderTop: 5, 
+   borderTopColor: theme.palette.common.white,
+   borderTopStyle: 'solid',
+   borderTopLeftRadius:0,
+   borderTopRightRadius:0,
+   borderRadius: 0,
+   
   },
 
   h6Heading: {
@@ -22,13 +38,14 @@ const useStyles = makeStyles(theme => ({
    }))
 
 
-const FormHeader = (props) => {
+   export const   FormHeader = (props) => {
   const classes = useStyles();
-  return <Paper className={classes.paperHeader}>
+
+  return <Paper className={classes.paperHeader} square={true} >
   <Grid container alignItems="center" justify="space-between">
     <Grid item>
       <Typography variant="h6" align="center"
-        className={classes.h6Heading}>{props.label}</Typography>
+        className={classes.h6Heading} >{props.label}</Typography>
     </Grid>
     <Grid item >
      {props.children}
@@ -37,4 +54,22 @@ const FormHeader = (props) => {
 </Paper>
 }
 
-export default FormHeader;
+export const   LoginHeader = (props) => {
+  const theme = useTheme();
+  const classes = useStyles();
+  return(
+<React.Fragment>
+
+  <Paper className={classes.loginpaperHeader} >
+  <Grid container alignItems="center" justify="space-between">
+    <Grid item>
+      <Typography variant="h6" align="center"
+        className={classes.h6Heading} >{props.label}</Typography>
+    </Grid>
+  </Grid>
+</Paper>
+</React.Fragment>
+)
+}
+
+// export default FormHeader;

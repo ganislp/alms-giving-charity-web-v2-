@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import { Grid,  Hidden } from '@material-ui/core';
 import { SubmitButton } from '../../ui/Buttons';
-import FormHeader  from '../../ui/form/FormHeader';
+import {FormHeader}  from '../../ui/form/FormHeader';
 import {renderTextField,renderSelectField,renderPhoneField}   from '../../ui/form/formFields';
 import {validateCompanyForm} from '../../ui/form/validateForm'
 

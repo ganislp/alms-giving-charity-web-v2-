@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import {Grid, } from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import FormHeader  from '../ui/form/FormHeader';
+import {FormHeader}  from '../ui/form/FormHeader';
 import { SubmitButton } from '../ui/Buttons';
 import {renderTextField,}   from '../ui/form/formFields';
 import {validateHeroForm} from '../ui/form/validateForm'
