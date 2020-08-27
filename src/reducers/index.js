@@ -8,6 +8,7 @@ popOverDialogOpenReducer} from './NavigationReducer';
 import companyDetailsReducer from './CompanyDetailsReducer';
 import heroReducer from './Hero/HeroReducer';
 import uiReducer from './uiReducer';
+import authReducer from './authReducer'
 import { reducer as formReducer } from 'redux-form';
 
 
@@ -19,6 +20,7 @@ export default combineReducers({
   companyDetails: companyDetailsReducer,
   heroSection: heroReducer,
   uiReducer : uiReducer,
+  currentUser:authReducer,
   form: formReducer,
 
 

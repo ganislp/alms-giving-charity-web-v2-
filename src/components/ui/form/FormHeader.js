@@ -1,6 +1,6 @@
 import React from 'react';
 import {  Grid, Paper, Typography, } from '@material-ui/core';
-import {makeStyles,useTheme} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
 
 const useStyles = makeStyles(theme => ({
@@ -55,7 +55,6 @@ const useStyles = makeStyles(theme => ({
 }
 
 export const   LoginHeader = (props) => {
-  const theme = useTheme();
   const classes = useStyles();
   return(
 <React.Fragment>

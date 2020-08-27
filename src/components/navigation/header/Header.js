@@ -8,17 +8,17 @@ import history from '../../../history';
 import Settings from '../../settings/Settings';
 import CreateHeroSection from '../../Hero/CreateHeroSection';
 import EditHeroSection from '../../Hero/EditHeroSection';
-import DeleteHeroSection from '../../Hero/DeleteHeroSection';
 import HeroSectionList from '../../Hero/HeroSectionList';
 import { fetchCompanyDetails } from '../../../actions/api/companyDetailsApi';
-
+import {fetchUser} from '../../../actions/api/authApi'
 
 
 
 class Header extends React.Component {
 
   componentDidMount(){
-  this.props.fetchCompanyDetails()
+  this.props.fetchCompanyDetails();
+  this.props.fetchUser();
   }
 
   renderComponents(){
@@ -34,7 +34,6 @@ return <Router history={history}>
           <Route exact path="/hero/heroList" render={props => <HeroSectionList {...this.props}/>}></Route>
           <Route exact path="/hero/heroCreate" component={() => <CreateHeroSection {...this.props}/>}></Route>
           <Route exact path="/hero/edit/:uid" component={props => <EditHeroSection {...props} {...this.props} />}></Route>
-          {/* <Route exact path="/hero/delete/:uid" component={props => <DeleteHeroSection {...props} {...this.props} />}></Route> */}
           <Route exact path="/aboutus" component={() => <div>About Us</div>}></Route>
           <Route exact path="/causes" component={() => <div>Causes</div>}></Route>
           <Route exact path="/news" component={() => <div>News</div>}></Route>
@@ -56,8 +55,9 @@ return <Router history={history}>
 const mapStateToProps = state => {
   return {
     companyDetails: state.companyDetails,
-    isLoading: state.companyDetails.loading
+    isLoading: state.companyDetails.loading,
+    currentUser:state.currentUser
   };
 };
 
-export default  connect(mapStateToProps,{fetchCompanyDetails})(Header);
+export default  connect(mapStateToProps,{fetchCompanyDetails,fetchUser})(Header);

@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Grid, Typography, Container, Hidden } from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import { DonateButtonHeader } from '../../../ui/Buttons';
-import LoginPopOver from '../../../login/LoginPopOver'
-import LoginForm from '../../../login/LoginForm'
+import { DonateButtonHeader,TextButton } from '../../../ui/Buttons';
+import LoginPopOver from '../../../login/LoginPopOver';
+import LoginForm from '../../../login/LoginForm';
+import { cookies,logout } from '../../../../actions/api/authApi';
+import {popOverDialogOpen} from '../../../../actions/uiActions/navigationAcions';
 
 const useStyles = theme => ({
   mainContainer: {
@@ -15,11 +17,31 @@ const useStyles = theme => ({
 });
 
 class TopAppBar extends React.Component {
+ 
+
+  logout = () => {
+    console.log("logout")
+    this.props.logout();
+    this.props.popOverDialogOpen(false,null)
+  }
+
+renderLoginButton(){
+  const isAuthenticated =  cookies.get('isAuthenticated');
+ if(isAuthenticated === 'true'){
+  
+  return <TextButton buttonLabel="Logout" click={this.logout}></TextButton>
+  
+ }
+ else{
+ return <LoginPopOver buttonLabel="LogIn">
+   <LoginForm />
+ </LoginPopOver>
+ }
+}
 
 
   render() {
-
-
+    
     const { contactDetails } = { ...this.props.companyDetails };
     const { email, phone } = { ...contactDetails };
     const { classes, theme } = this.props;
@@ -52,9 +74,7 @@ class TopAppBar extends React.Component {
 
                   </Grid>
                   <Grid item>
-                    <LoginPopOver buttonLabel="LogIn">
-                      <LoginForm />
-                    </LoginPopOver>
+                    {this.renderLoginButton()}
                   </Grid>
                 </Grid>
               </Grid>
@@ -65,9 +85,7 @@ class TopAppBar extends React.Component {
                   <DonateButtonHeader />
                 </Grid>
                 <Grid item  >
-                  <LoginPopOver buttonLabel="LogIn">
-                    <LoginForm />
-                  </LoginPopOver>
+                {this.renderLoginButton()}
                 </Grid>
               </Grid>
 
@@ -84,9 +102,9 @@ class TopAppBar extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    companyDetails: Object.assign({}, ...Object.values(state.companyDetails)),
+    companyDetails: Object.assign({}, ...Object.values(state.companyDetails))
   };
 
 };
 
-export default connect(mapStateToProps, {})(withTheme(withStyles(useStyles)(TopAppBar)));
+export default connect(mapStateToProps, {logout,popOverDialogOpen})(withTheme(withStyles(useStyles)(TopAppBar)));

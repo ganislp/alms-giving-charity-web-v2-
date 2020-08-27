@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { Popover, LinearProgress,Grid ,Button,Typography} from '@material-ui/core';
+import { Popover,Grid} from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import {popOverDialogOpen} from '../../actions/uiActions/navigationAcions';
 import {LoginButton } from '../ui/Buttons';
@@ -14,9 +14,6 @@ const useStyles = theme => ({
 
 class LoginPopOver extends React.Component{
 
-
-
-
  handleClick = (event) => {
    this.props.popOverDialogOpen(true,event.currentTarget)
   };
@@ -26,15 +23,11 @@ class LoginPopOver extends React.Component{
   };
 
   render(){
-    const { classes,theme } = this.props;
     const id = this.props.popOverLogin.popOverOpen ? 'simple-popover' : undefined;
     return(
       <Grid container>
         <Grid  item>
-      {/* <Button aria-describedby={id} variant="contained" color="primary" onClick={this.handleClick}> */}
-        <LoginButton onLoginPopClick={this.handleClick} id={id} buttonLabel={this.props.buttonLabel}/>
-    
-      {/* </Button> */}
+        <LoginButton onLoginPopClick={this.handleClick} id={id} buttonLabel={this.props.buttonLabel}/>   
       </Grid >
       <Grid  item>
       <Popover  disablePortal

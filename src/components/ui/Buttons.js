@@ -108,10 +108,19 @@ export const LoginButton = (props) => {
 
 };
 
+export const TextButton = (props) => {
+  const classes = useStyles();
+  return (
+    <Button variant="text"
+      className={classes.loginButton} onClick={ props.click}>{props.buttonLabel}</Button>
+  )
+
+};
+
 export const SubmitContainedButton = (props) => {
   const classes = useStyles();
   return (
-    <Button className={classes.submitConButton} variant="outlined" color="primary" >
+    <Button className={classes.submitConButton} variant="outlined" color="primary" type="submit" onClick={props.onSubmitClick}>
       <span className={classes.submitConButtonSpan}>{props.lable}{props.label}</span>
     </Button>
   )
