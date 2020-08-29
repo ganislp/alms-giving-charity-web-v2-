@@ -52,7 +52,6 @@ class LoginPopOver extends React.Component{
   }
 }
 const mapStateToProps = state => {
- // console.log("popOverLogin",state.popOverLogin)
   return {
     popOverLogin: state.popOverLogin,
   };

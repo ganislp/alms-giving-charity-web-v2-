@@ -1,10 +1,11 @@
 import { db,createdAt } from '../../firebase';
 import moment from 'moment';
 import * as heroActions from '../HeroActions/heroActions';
-import {showFaildSnackbar,showSuccessSnackbar} from '../uiActions/snackbarActions';
+import {showFaildSnackbar,showSuccessSnackbar,showWarningSnackbar} from '../uiActions/snackbarActions';
 import history from '../../history';
+import { cookies } from '../api/authApi';
 
-
+const userUid =  cookies.get('userUid');
 export const getHero = () => async dispatch => {
   dispatch(heroActions.getHeroRequest());
   try{
@@ -90,5 +91,112 @@ export const deleteHero = (uid) => async dispatch => {
    } catch (error) {
     dispatch(heroActions.deleteHeroError(error));
     dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
+  }
+};
+
+export const uploadHeroFailed = () =>  dispatch => {
+  dispatch(showFaildSnackbar("Image Uplaod Failed! some thing went wrong!"));
+};
+
+
+
+export const uploadHeroImages = (imagesPayload) => async (dispatch,getState) => {
+  dispatch(heroActions.uploadHeroImagesRequest());
+  try { 
+    
+    let imagesRef = await db.collection("heroImages");
+    let imageExist = await imagesRef.get().then(snap => snap.size)
+    let active = false;
+   
+    let fileNameLength = await imagesRef.where("fileName", "==",`${imagesPayload.fileName}`).get().then(snap => snap.size);
+    if(fileNameLength === 0){
+      if(imageExist === 0){
+        active = true;
+      }
+    await  db.collection('heroImages').add({...imagesPayload, createdAt: createdAt, active: active, userId:userUid });
+    dispatch(showSuccessSnackbar("Images Uploaded Sucessfully!"));
+    dispatch(heroActions.uploadHeroImagesSuccess());
+    }
+    else{
+    
+      dispatch(showWarningSnackbar(`This image ${imagesPayload.fileName} already exists`));
+      dispatch(heroActions.uploadHeroImagesSuccess());
+    }
+
+} catch (error) {
+  dispatch(heroActions.uploadHeroImagesError(error));
+  dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
+
+}
+};
+
+export const getHeroImages = () => async dispatch => {
+  dispatch(heroActions.getHeroImagesRequest());
+  try{
+    
+  await db.collection('heroImages').onSnapshot(snap => {
+    const data = snap.docs.map(doc => (
+      {
+        ...doc.data(),
+        createdAt: moment(new Date(doc.data().createdAt.seconds * 1000 + doc.data().createdAt.nanoseconds / 1000000)).format('LLL'),
+        uid: doc.id,
+        //userId:userUid
+      }
+    ));
+    // if(data.length === 0){
+    //   history.push('/hero/heroCreate');
+    // }
+    dispatch(heroActions.getHeroImagesSuccess(data));
+   
+  });
+} catch (error) {
+  dispatch(heroActions.getHeroImagesError(error));
+}
+};
+
+export const getHeroImageByImageName = (imageName) => async dispatch => {
+  dispatch(heroActions.getHeroImagesRequest());
+  try{
+  await (await db.collection('heroImages').where('fileName','==', imageName).get()).empty
+} catch (error) {
+  dispatch(heroActions.getHeroImagesError(error));
+}
+};
+
+export const deleteHeroImage = (uid) => async dispatch => {
+  dispatch(heroActions.deleteHeroImageRequest());
+  try { 
+  await db.collection('heroImages').doc(`${uid}`).delete();
+  dispatch(heroActions.deleteHeroImageSuccess(uid));
+ dispatch(showSuccessSnackbar("Hero Section Image deleted Sucessfully!")); 
+   } catch (error) {
+    dispatch(heroActions.deleteHeroImageError(error));
+    dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
+  }
+};
+
+
+export const updateImageActive = (uid) => async dispatch => {
+ 
+  try { 
+  await db.collection('heroImages').doc(`${uid}`).update({ active: true, createdAt: createdAt });
+ // dispatch(heroActions.activeHeroSuccess(uid));
+  dispatch(showSuccessSnackbar("Active Record Sucessfully Updated!")); 
+   } catch (error) {
+  //  dispatch(heroActions.activeHeroError(error));
+    dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
+  }
+};
+
+
+export const updateImageInActive = (uid) => async dispatch => {
+  try { 
+   dispatch(heroActions.inActiveHeroImageRequest());
+  await db.collection('heroImages').doc(`${uid}`).update({ active: false, createdAt: createdAt });
+  dispatch(heroActions.inActiveHeroImageSuccess(uid));
+ dispatch(showSuccessSnackbar("inActive Record Sucessfully Updated!")); 
+   } catch (error) {
+    dispatch(heroActions.inActiveHeroImageError(error));
+  dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
   }
 };

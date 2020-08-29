@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Container, LinearProgress,Grid } from '@material-ui/core';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import {  LinearProgress } from '@material-ui/core';
  import MaterialTable from 'material-table';
+ import {  withTheme } from '@material-ui/core/styles';
 import {getHero,updateActive,updateInActive,deleteHero} from '../../actions/api/heroApi';
 import {confiDialogOpen} from '../../actions/uiActions/navigationAcions';
 import history from '../../history';
@@ -10,23 +10,9 @@ import SubmitProcess from '../ui/SubmitProcess';
 import ConfimationDialog from '../model/ConfimationDialog';
 
 
-const useStyles = theme => ({
-  mainContainer: {
-    paddingTop: "1em",
-    [theme.breakpoints.down("md")]: {
-      paddingTop: "0em"
-    }
-  },
- // Fully visible for active icons
- activeSortIcon: {
-  opacity: 1,
-},
-// Half visible for inactive icons
-inactiveSortIcon: {
-  opacity: 0.4,
-},
 
-});
+
+
 class HeroSectionList extends React.Component {
 
   componentDidMount(){
@@ -59,10 +45,10 @@ dialogButtonClick = () => {
 }
 
   renderDataTable(){
-      if (this.props.isLoading ) {
-        return <LinearProgress color="secondary" />
-      }
-      else{
+      // if (this.props.isLoading ) {
+      //   return <LinearProgress color="secondary" />
+      // }
+      // else{
    return  <MaterialTable 
 
      columns={[
@@ -95,7 +81,7 @@ dialogButtonClick = () => {
       onClick: (event, rowData) => history.push(`/hero/edit/${rowData.uid}`)  
       }),
       rowData => ({
-        icon: 'clear',
+        icon: 'deleteForeverIcon',
         tooltip: 'Delete Section',
         onClick: (event, rowData) => this.deleteHeroSection(rowData), 
         disabled: rowData.active 
@@ -111,17 +97,15 @@ dialogButtonClick = () => {
       },
       
     ]}
-    title="Hero Section"    />
+    title="Hero Section"/>
  
   }
-  }
+ // }
 
 render(){
-  const { classes } = this.props;
+
   return(
-    <Container maxWidth="lg" className={classes.mainContainer}>
-    <Grid  container>
-      <Grid item sm={12}>
+   <React.Fragment>
       {this.renderSubmitProcess()}
         {this.renderDataTable()}
         {this.renderSubmitProcess()}
@@ -129,9 +113,7 @@ render(){
         title="Delete Hero Section"
         content="Are you sure you want to delete this Hero Section ?"
         dialogButtonClick={this.dialogButtonClick}/>
-      </Grid>
-        </Grid>   
-      </Container>
+   </React.Fragment>
   )
 }
 }
@@ -144,4 +126,5 @@ const mapStateToProps = state => {
   confirmationUid: state.dialogOpen.uid,
   };
 };
-export  default  connect(mapStateToProps,{getHero,updateActive,updateInActive,confiDialogOpen,deleteHero})(withTheme(withStyles(useStyles)(HeroSectionList)));
+export  default  connect(mapStateToProps,{getHero,updateActive,updateInActive,confiDialogOpen,deleteHero})
+(withTheme((HeroSectionList)));

@@ -26,11 +26,10 @@ class TopAppBar extends React.Component {
   }
 
 renderLoginButton(){
+
   const isAuthenticated =  cookies.get('isAuthenticated');
  if(isAuthenticated === 'true'){
-  
   return <TextButton buttonLabel="Logout" click={this.logout}></TextButton>
-  
  }
  else{
  return <LoginPopOver buttonLabel="LogIn">

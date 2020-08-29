@@ -8,7 +8,7 @@ import history from '../../../history';
 import Settings from '../../settings/Settings';
 import CreateHeroSection from '../../Hero/CreateHeroSection';
 import EditHeroSection from '../../Hero/EditHeroSection';
-import HeroSectionList from '../../Hero/HeroSectionList';
+import HeroSectionSettings from '../../Hero/HeroSectionSettings';
 import { fetchCompanyDetails } from '../../../actions/api/companyDetailsApi';
 import {fetchUser} from '../../../actions/api/authApi'
 
@@ -31,7 +31,7 @@ return <Router history={history}>
         <AppHeader />
         <Switch>
           <Route exact path="/" component={() => <div>Home</div>}></Route>
-          <Route exact path="/hero/heroList" render={props => <HeroSectionList {...this.props}/>}></Route>
+          <Route exact path="/hero/heroSettings" render={props => <HeroSectionSettings {...this.props}/>}></Route>
           <Route exact path="/hero/heroCreate" component={() => <CreateHeroSection {...this.props}/>}></Route>
           <Route exact path="/hero/edit/:uid" component={props => <EditHeroSection {...props} {...this.props} />}></Route>
           <Route exact path="/aboutus" component={() => <div>About Us</div>}></Route>
@@ -56,7 +56,6 @@ const mapStateToProps = state => {
   return {
     companyDetails: state.companyDetails,
     isLoading: state.companyDetails.loading,
-    currentUser:state.currentUser
   };
 };
 

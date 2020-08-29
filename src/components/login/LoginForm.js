@@ -8,6 +8,7 @@ import {renderTextField,}   from '../ui/form/formFields';
 import {validateLoginForm} from '../ui/form/validateForm';
 import {LoginHeader}  from '../ui/form/FormHeader';
 import {SubmitContainedButton} from '../ui/Buttons';
+import { CircularProgress  } from '@material-ui/core';
 
 const useStyles = theme => ({
 
@@ -32,7 +33,14 @@ class LoginForm extends React.Component{
    this.props.login(formValues)
   };
  
-
+renderButtonLable(){
+if(this.props.onSubmiting){
+  return <CircularProgress size={25} color="primary"/>
+}
+else{
+  return "SingIn "
+}
+}
 
 
   render(){
@@ -61,7 +69,7 @@ class LoginForm extends React.Component{
         </Grid>
         
         <Grid item container justify="center" style={{margin:"1em"}}>
-        <SubmitContainedButton label="SingIn" onSubmitClick={this.onSubmit}/>
+        <SubmitContainedButton label={this.renderButtonLable()} />
 </Grid>
         </Grid>
       </form>
@@ -69,8 +77,9 @@ class LoginForm extends React.Component{
   }
 }
 const mapStateToProps = (state, ownProps) => {
+  console.log("state", state)
   return {
-    currentUser: state.currentUser
+    onSubmiting: state.userDetails.onSubmiting
   }
  
 }

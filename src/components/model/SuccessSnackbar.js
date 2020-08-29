@@ -4,7 +4,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import { Icon } from "@material-ui/core";
 import MuiAlert from '@material-ui/lab/Alert';
-import { clearSnackbar,showSnackbar } from "../../actions/uiActions/snackbarActions";
+import { clearSnackbar,showSnackbar, } from "../../actions/uiActions/snackbarActions";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -21,6 +21,16 @@ class SuccessSnackbar extends React.Component {
    if(this.props.success && !this.props.failed){
     return  <Alert severity="success">{this.props.successSnackbarMessage}</Alert>
   }
+
+  if(this.props.warning && !this.props.failed){
+    return  <Alert severity="warning">{this.props.successSnackbarMessage}</Alert>
+  }
+
+  if(this.props.info && !this.props.failed){
+    return  <Alert severity="info">{this.props.successSnackbarMessage}</Alert>
+  }
+
+
  }
 
 

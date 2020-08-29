@@ -1,17 +1,24 @@
 import * as authActionTypes from '../actionTypes/authActionTypes';
 
+export const loginRequest = () => {
+  return {
+    type: authActionTypes.LOGIN_REQUEST,
+    payload: { onSubmiting: true }
+  }
+}
+
 
 export const loginSuccess = (results) => {
   return {
     type: authActionTypes.LOGIN_SUCCESS,
-    currentUser: results,
+    payload: { onSubmiting: false,  results, }
   }
 }
 
 export const loginError = (results) => {
   return {
     type: authActionTypes.LOGIN_ERROR,
-    currentUser: results,
+    payload: { onSubmiting: false,  results, }
   }
 }
 
@@ -32,20 +39,20 @@ export const registerError = (results) => {
 export const fetchUser = (results) => {
   return {
     type: authActionTypes.FETCH_USER,
-    currentUser: results
+    payload: {   results, }
   }
 }
 
 export const fetchUserError = (results) => {
   return {
     type: authActionTypes.FETCH_USER,
-    currentUser: results
+    payload: { results, }
   }
 }
 
 export const logOut = (results) => {
   return {
     type: authActionTypes.LOGOUT,
-     currentUser: results
+    payload: {   results, }
   }
 }

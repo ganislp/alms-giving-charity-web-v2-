@@ -11,6 +11,18 @@ export const showSuccessSnackbar = message => {
   };
 };
 
+export const showWarningSnackbar = message => {
+  return dispatch => {
+    dispatch({ type: "WARNING_SNACKBAR", message });
+  };
+};
+
+export const showInfoSnackbar = message => {
+  return dispatch => {
+    dispatch({ type: "INFO_SNACKBAR", message });
+  };
+};
+
 export const showFaildSnackbar = message => {
   return dispatch => {
     dispatch({ type: "FAILED_SNACKBAR", message });

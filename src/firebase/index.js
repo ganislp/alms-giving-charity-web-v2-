@@ -3,7 +3,7 @@ import * as firebase from "firebase";
 // import { FireSQL } from 'firesql';
 const config = {
   apiKey: "AIzaSyBA2BoFv2IXHJZWb13tvwdEBlAk2klAS-s", 
-  authDomain: "your-project.firebaseapp.com", 
+  authDomain: "alms-giving-global-charity.firebaseapp.com", 
   databaseURL: "https://alms-giving-global-charity.firebaseio.com/", 
   projectId: "alms-giving-global-charity", 
   storageBucket: "gs://alms-giving-global-charity.appspot.com", 

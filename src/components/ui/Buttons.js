@@ -120,7 +120,7 @@ export const TextButton = (props) => {
 export const SubmitContainedButton = (props) => {
   const classes = useStyles();
   return (
-    <Button className={classes.submitConButton} variant="outlined" color="primary" type="submit" onClick={props.onSubmitClick}>
+    <Button className={classes.submitConButton} variant="outlined" color="primary" type="submit" >
       <span className={classes.submitConButtonSpan}>{props.lable}{props.label}</span>
     </Button>
   )

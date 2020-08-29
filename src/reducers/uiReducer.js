@@ -16,6 +16,24 @@ const uiReducer = (state = {}, action) => {
         failed: false,
         successSnackbarMessage: action.message
       };
+
+      case "WARNING_SNACKBAR":
+        return {
+          ...state,
+          snackbarOpen:true,
+          success: true,
+          failed: false,
+          successSnackbarMessage: action.message
+        };
+
+        case "INFO_SNACKBAR":
+          return {
+            ...state,
+            snackbarOpen:true,
+            success: true,
+            failed: false,
+            successSnackbarMessage: action.message
+          };
       case "FAILED_SNACKBAR":
         return {
           ...state,

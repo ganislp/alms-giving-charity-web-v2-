@@ -30,7 +30,7 @@ export const popOverDialogOpen = (popOverOpen,anchorEl,) => {
     type: ON_POPOVER_DIALOG_OPEN,
     payload: {popOverOpen,anchorEl}
 }
-}
+};
 
 
 
