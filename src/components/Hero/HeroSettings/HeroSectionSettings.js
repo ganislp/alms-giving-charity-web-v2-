@@ -15,19 +15,13 @@ const useStyles = theme => ({
 
 });
 class HeroSectionSettings extends React.Component{
-
-
   rednderHeroSectionList(){
       return <HeroSectionList/>
   }
-
   rednderHeroImageList(){
       return <HeroImagesList/>
   
   }
-
- 
-
   render(){
     const { classes } = this.props;
     return (

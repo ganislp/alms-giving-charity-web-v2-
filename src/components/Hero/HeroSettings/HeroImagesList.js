@@ -2,18 +2,22 @@ import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { withTheme,withStyles } from '@material-ui/core/styles';
- import MaterialTable from 'material-table';
- import {Grid,Paper,MTableToolbar }  from '@material-ui/core'
+import MaterialTable, { MTableToolbar } from "material-table";
+
+
  import {
    getHeroImages,
   deleteHeroImage,
   updateImageActive,
   updateImageInActive
-} from '../../actions/api/heroApi';
-import UploadImages from '../ui/UploadImages';
-import SubmitProcess from '../ui/SubmitProcess';
-import {confiDialogOpen} from '../../actions/uiActions/navigationAcions';
-import ConfimationDialog from '../model/ConfimationDialog';
+} from '../../../actions/api/heroApi';
+import UploadImages from '../../ui/UploadImages';
+import SubmitProcess from '../../ui/SubmitProcess';
+import {confiDialogOpen} from '../../../actions/uiActions/navigationAcions';
+import ConfimationDialog from '../../model/ConfimationDialog';
+import HeroSectionContent from '../HeroSectionContent';
+
+
 
 const useStyles = theme => ({
   background: {
@@ -35,7 +39,10 @@ const useStyles = theme => ({
     flexGrow: 1,
     width: '100%',
     backgroundColor: theme.palette.background.paper,
+    paddingRight: "0"
   },
+
+ 
 });
 
 class HeroImagesList extends React.Component{
@@ -77,7 +84,6 @@ this.props.updateImageInActive(inActiveUid);
 }
 
   renderDataTable(){
-    const { classes } = this.props;
   return  <MaterialTable 
   
    columns={[
@@ -88,7 +94,9 @@ this.props.updateImageInActive(inActiveUid);
   ]}
    data = {this.props.heroImages}
   options={{actionsColumnIndex: -1,exportButton: true,
+    paging: false,
   draggable: true,
+  emptyRowsWhenPaging:true,
   headerStyle: {
    backgroundColor:this.props.theme.palette.common.blue,
     color: this.props.theme.palette.common.white,
@@ -110,25 +118,32 @@ this.props.updateImageInActive(inActiveUid);
       onClick: (event, rowData) => this.deleteHeroSection(rowData), 
       disabled: rowData.active 
     }),
+    
   ]}
+  
   detailPanel={[
     {
-      tooltip: 'Show Name',
+      tooltip: 'Show Preview ',
       render: rowData => {
         return (
-          <Grid container justify="center">
-            <Paper className={classes.root} >
-            <img src={rowData.imageUrl} alt={rowData.imageUrl} height="100%" width="100%"/>
-        </Paper>
-        
-          </Grid>
+          <HeroSectionContent
+  imageUrl={rowData.imageUrl} 
+  imgname={rowData.fileName}
+  />
         )
       },
     },
    
    
   ]}
-  
+  components={{
+
+    Toolbar: props => (
+      <div style={{padding: 0}} >
+         <MTableToolbar {...props}  disableGutters={true}/>
+      </div>  
+    )
+  }}
   title= {<UploadImages uploadRef="hero"/>}
   />
   

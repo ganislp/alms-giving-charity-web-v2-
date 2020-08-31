@@ -6,12 +6,13 @@ import { LinearProgress } from '@material-ui/core';
 import AppHeader from './appBar/AppHeader';
 import history from '../../../history';
 import Settings from '../../settings/Settings';
-import CreateHeroSection from '../../Hero/CreateHeroSection';
-import EditHeroSection from '../../Hero/EditHeroSection';
-import HeroSectionSettings from '../../Hero/HeroSectionSettings';
+import CreateHeroSection from '../../Hero/HeroSettings/CreateHeroSection';
+import EditHeroSection from '../../Hero/HeroSettings/EditHeroSection';
+import HeroSectionSettings from '../../Hero/HeroSettings/HeroSectionSettings';
+import Home from '../../Home/Home'
 import { fetchCompanyDetails } from '../../../actions/api/companyDetailsApi';
 import {fetchUser} from '../../../actions/api/authApi'
-
+import { getHero,getHeroImages } from '../../../actions/api/heroApi';
 
 
 class Header extends React.Component {
@@ -19,6 +20,8 @@ class Header extends React.Component {
   componentDidMount(){
   this.props.fetchCompanyDetails();
   this.props.fetchUser();
+  this.props.getHero();
+  this.props.getHeroImages();
   }
 
   renderComponents(){
@@ -30,7 +33,7 @@ class Header extends React.Component {
 return <Router history={history}>
         <AppHeader />
         <Switch>
-          <Route exact path="/" component={() => <div>Home</div>}></Route>
+          <Route exact path="/" render={props => <Home {...this.props}/>}></Route>
           <Route exact path="/hero/heroSettings" render={props => <HeroSectionSettings {...this.props}/>}></Route>
           <Route exact path="/hero/heroCreate" component={() => <CreateHeroSection {...this.props}/>}></Route>
           <Route exact path="/hero/edit/:uid" component={props => <EditHeroSection {...props} {...this.props} />}></Route>
@@ -59,4 +62,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default  connect(mapStateToProps,{fetchCompanyDetails,fetchUser})(Header);
+export default  connect(mapStateToProps,{fetchCompanyDetails,fetchUser,getHero,getHeroImages})(Header);

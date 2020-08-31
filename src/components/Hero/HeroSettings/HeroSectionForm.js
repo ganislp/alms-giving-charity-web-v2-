@@ -2,10 +2,10 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import {Grid, } from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import {FormHeader}  from '../ui/form/FormHeader';
-import { SubmitButton } from '../ui/Buttons';
-import {renderTextField,}   from '../ui/form/formFields';
-import {validateHeroForm} from '../ui/form/validateForm'
+import {FormHeader}  from '../../ui/form/FormHeader';
+import { SubmitButton} from '../../ui/Buttons';
+import {renderTextField,}   from '../../ui/form/formFields';
+import {validateHeroForm} from '../../ui/form/validateForm'
 
 const useStyles = theme => ({
   mainContainer: {
@@ -30,6 +30,7 @@ class HeroSectionForm extends React.Component {
         onSubmit={this.props.handleSubmit(this.onSubmit)} >
          <FormHeader label="Create Hero Content">
         <SubmitButton />
+       
         </FormHeader>
         <Grid container className={classes.mainContainer} spacing={2}>
           <Grid item  className={classes.itemTextField} xs={12} >

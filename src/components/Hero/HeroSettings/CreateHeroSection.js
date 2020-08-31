@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import { createHero,getHero } from '../../actions/api/heroApi';
+import { createHero,getHero } from '../../../actions/api/heroApi';
 import HeroSectionForm from './HeroSectionForm';
-import ContentBuilder from '../ui/ContentBuilder';
+import ContentBuilder from '../../ui/ContentBuilder';
 
 const useStyles = theme => ({
  

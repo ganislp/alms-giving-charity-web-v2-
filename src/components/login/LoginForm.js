@@ -77,7 +77,6 @@ else{
   }
 }
 const mapStateToProps = (state, ownProps) => {
-  console.log("state", state)
   return {
     onSubmiting: state.userDetails.onSubmiting
   }

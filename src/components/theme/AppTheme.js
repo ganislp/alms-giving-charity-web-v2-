@@ -39,7 +39,19 @@ export default  createMuiTheme({
       fontSize: "1.2rem",
     },
 
-    
+    h1:{
+      fontFamily: "Raleway",
+      fontWeight: 600,
+      lineHeight: 1,    
+    },
+
+    h3:{
+      fontFamily: "Raleway",
+      fontWeight: 600,
+      fontSize: "1.2rem",
+      lineHeight: 1,    
+    },
+
     h6Grey : {
       fontFamily: "Open Sans sans-serif",
       textTransform: "none",
@@ -94,8 +106,7 @@ overrides: {
 
   // },
 
- 
-  
+
   MuiInputLabel:{
     root:{
      color:arcGrey,
@@ -132,7 +143,15 @@ overrides: {
         color: `${appWhite}`,
       },
     },
-   }
+   },
+
+   toolbarWrapper: {
+    '& .MuiToolbar-gutters': {
+        paddingLeft: 0,
+        paddingRight: 0,
+    }
+    
+},
 
 }
 });

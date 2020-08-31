@@ -20,7 +20,6 @@ class TopAppBar extends React.Component {
  
 
   logout = () => {
-    console.log("logout")
     this.props.logout();
     this.props.popOverDialogOpen(false,null)
   }

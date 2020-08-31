@@ -1,9 +1,9 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import _ from 'lodash';
-import { EditHero,getHero} from '../../actions/api/heroApi';
+import { EditHero,getHero} from '../../../actions/api/heroApi';
 import HeroSectionForm from './HeroSectionForm';
-import ContentBuilder from '../ui/ContentBuilder';
+import ContentBuilder from '../../ui/ContentBuilder';
 
 class EditHeroSection extends Component{
 

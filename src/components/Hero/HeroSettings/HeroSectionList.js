@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {  LinearProgress } from '@material-ui/core';
  import MaterialTable from 'material-table';
  import {  withTheme } from '@material-ui/core/styles';
-import {getHero,updateActive,updateInActive,deleteHero} from '../../actions/api/heroApi';
-import {confiDialogOpen} from '../../actions/uiActions/navigationAcions';
-import history from '../../history';
-import SubmitProcess from '../ui/SubmitProcess';
-import ConfimationDialog from '../model/ConfimationDialog';
+import {updateActive,updateInActive,deleteHero} from '../../../actions/api/heroApi';
+import {confiDialogOpen} from '../../../actions/uiActions/navigationAcions';
+import history from '../../../history';
+import SubmitProcess from '../../ui/SubmitProcess';
+import ConfimationDialog from '../../model/ConfimationDialog';
+import {TableHeaderButton} from '../../ui/Buttons'
 
 
 
@@ -15,9 +15,7 @@ import ConfimationDialog from '../model/ConfimationDialog';
 
 class HeroSectionList extends React.Component {
 
-  componentDidMount(){
-    this.props.getHero();
-  }
+
 
   updateActive = (rowData) => {
     if(!rowData.active){
@@ -97,7 +95,7 @@ dialogButtonClick = () => {
       },
       
     ]}
-    title="Hero Section"/>
+    title={<TableHeaderButton label="Hero Section Settings"></TableHeaderButton>}/>
  
   }
  // }
@@ -126,5 +124,5 @@ const mapStateToProps = state => {
   confirmationUid: state.dialogOpen.uid,
   };
 };
-export  default  connect(mapStateToProps,{getHero,updateActive,updateInActive,confiDialogOpen,deleteHero})
+export  default  connect(mapStateToProps,{updateActive,updateInActive,confiDialogOpen,deleteHero})
 (withTheme((HeroSectionList)));

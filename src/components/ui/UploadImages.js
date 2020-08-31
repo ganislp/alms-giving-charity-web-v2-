@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { CircularProgress , Button } from '@material-ui/core';
+import { CircularProgress , Button, Grid } from '@material-ui/core';
 import {storage} from '../../firebase';
 import CustomUploadButton from 'react-firebase-file-uploader/lib/CustomUploadButton';
 import PublishIcon from '@material-ui/icons/CloudUpload';
@@ -8,7 +8,7 @@ import SubmitProcess from './SubmitProcess';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 import {uploadHeroImages,uploadHeroFailed} from '../../actions/api/heroApi';
-
+import {TableHeaderButton} from '../ui/Buttons'
 
 
 const useStyles = theme => ({
@@ -64,10 +64,16 @@ handleUploadSuccess = filename => {
   render(){
     return(  
    <form>
+     <Grid container alignItems="center" >
+       <Grid item>
+     <TableHeaderButton/>
+     </Grid>
+     <Grid item>
    <Button variant="contained" component="label" color="secondary" startIcon={<PublishIcon />}
    disabled={this.state.isUploading}>
+    
    {this.state.isUploading ?  <CircularProgress size={30} color="secondary"/> : "Upload"}
-    <CustomUploadButton
+    <CustomUploadButton 
       accept={this.props.uploadRef}
       name="avatar"
       storageRef={storage.ref(this.props.uploadRef)}
@@ -77,6 +83,8 @@ handleUploadSuccess = filename => {
       onProgress={this.handleProgress}
     />
 </Button>
+</Grid>
+</Grid>
   </form>
 
     )

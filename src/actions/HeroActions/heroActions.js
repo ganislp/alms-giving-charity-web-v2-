@@ -23,8 +23,6 @@ export const getHeroError = (error) => {
   }
 };
 
-
-
 export const createHeroRequest = () => {
   return {
     type: heroActionTypes.CREATE_HERO_REQUEST,

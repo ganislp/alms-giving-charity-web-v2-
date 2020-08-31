@@ -1,12 +1,16 @@
 import React from 'react';
-
-import { Button, IconButton } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { Button, IconButton,Typography, Grid } from '@material-ui/core';
 import Tooltip from '@material-ui/core/Tooltip';
 import { useTheme } from '@material-ui/core/styles';
 import SaveIcon from '@material-ui/icons/Save';
 import Edit from '@material-ui/icons/Edit';
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import HomeIcon from '@material-ui/icons/Home';
+import history from '../../history';
+
+
 
 const useStyles = makeStyles(theme => ({
   submitButton: {
@@ -95,6 +99,38 @@ export const DonateButtonHeader = (props) => {
   const classes = useStyles();
   return (
     <Button variant="text" className={classes.headerButton}>Donate Now</Button>
+  )
+
+};
+
+export const FormBackButton = (props) => {
+  const theme = useTheme();
+  return (
+    <IconButton aria-label="Back"  onClick={history.goBack}
+    size="medium" color="primary" style={{ ...theme.palette.typography.IconButton }}>
+ <ArrowBackIcon fontSize="inherit" />
+  </IconButton>
+  )
+
+};
+
+export const TableHeaderButton = (props) => {
+  const theme = useTheme();
+  return (
+  
+      <Grid container justify="center" alignItems="center" style={{paddingLeft:0}}>
+          <Grid item>
+    <IconButton aria-label="Back"  onClick={history.goBack}
+    size="medium" color="secondary" style={{ ...theme.palette.typography.IconButton }}>
+ <HomeIcon fontSize="inherit" />
+  </IconButton>
+  </Grid>
+        <Grid item>
+     <Typography variant="h6" color="secondary"> {props.label}</Typography>
+     </Grid>
+   
+  </Grid>
+
   )
 
 };
