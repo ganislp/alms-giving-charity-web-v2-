@@ -56,7 +56,7 @@ class AppHeader extends Component {
               <Container maxWidth="lg" >
                 <Toolbar disableGutters >
                   <Grid container direction="row" justify="space-between" alignItems="center" >
-                    <Grid item>
+                    <Grid item >
                      {this.renderLogo()}
                     </Grid>
                 

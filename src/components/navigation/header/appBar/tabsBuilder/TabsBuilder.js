@@ -12,8 +12,11 @@ const useStyles = theme => ({
   tab:{
     ...theme.typography.tab,
     minWidth:10,
-    marginLeft:"1.8em",
-    paddingRight:"0px"
+    marginLeft:"1.5em",
+    paddingRight:"0px",
+    [theme.breakpoints.down("md")]: {
+      marginLeft:"0em",
+   } ,
      }
 });
 
