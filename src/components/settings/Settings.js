@@ -90,7 +90,7 @@ class Settings extends React.Component {
   render() {
     const { classes, theme } = this.props;
     return (
-      <Container maxWidth="lg" className={classes.mainContainer}>
+      <Container maxWidth="lg" className={classes.mainContainer}  disableGutters>
         <Paper className={classes.root} >
           {this.renderCompantForm(classes, theme)}
         </Paper>

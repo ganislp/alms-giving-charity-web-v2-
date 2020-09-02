@@ -10,8 +10,14 @@ const useStyles = theme => ({
   toolbarMargin: {
     ...theme.mixins.toolbar,
     marginBottom: "4em",
-    [theme.breakpoints.down("sm")]: {
-      marginBottom: "2.4em"
+    [theme.breakpoints.down("md")]: {
+      marginBottom: "2.2em"
+    },
+    // [theme.breakpoints.down("sm")]: {
+    //   marginBottom: "4em"
+    // },
+    [theme.breakpoints.down("xs")]: {
+      marginBottom: "2.3em"
     }
   },
 
@@ -24,17 +30,18 @@ class AppHeader extends Component {
   rednderDrawer() {
     return (
       <React.Fragment>    
-        <Hidden xsDown>   
+        <Hidden smDown>   
           <TabsBuilder /> 
           </Hidden>  
-          <Hidden smUp>   
+          
+          <Hidden mdUp>   
           <DrawerBuilder  />
-          </Hidden>      
+          </Hidden>     
       </React.Fragment>
     )
   }
   renderLogo(){
-   return <Hidden smDown>   <Logo /> </Hidden>
+   return    <Logo /> 
   }
   render() {
     const { classes } = this.props;
@@ -52,16 +59,16 @@ class AppHeader extends Component {
                     <Grid item>
                      {this.renderLogo()}
                     </Grid>
-                    <Hidden smDown>
+                
                     <Grid item >
                       {this.rednderDrawer()}
                     </Grid>
-                    </Hidden>
-                    <Hidden smUp>
+            
+                    {/* <Hidden smUp>
                     <Grid item container>
                       {this.rednderDrawer()}
                     </Grid>
-                    </Hidden>
+                    </Hidden> */}
                   </Grid>
                 </Toolbar>
               </Container>

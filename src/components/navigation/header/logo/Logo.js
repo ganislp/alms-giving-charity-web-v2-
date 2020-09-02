@@ -4,8 +4,18 @@ import companyLogo from '../../../../assets/Logo/output-onlinepngtools.png';
 
 const useStyles = theme => ({
   logoContainer:{
-    height: "6em"
+    height: "6em",
+    // [theme.breakpoints.down("md")]: {
+    //   height: "3em",
+    // },
+    [theme.breakpoints.down("md")]: {
+      height: "3.5em",
+    },
+    [theme.breakpoints.down("xs")]: {
+      height: "3em",
+    },
   },
+ 
 });
  
 

@@ -56,8 +56,45 @@ const useStyles = makeStyles(theme => ({
   submitConButtonSpan: {
     marginRight: 5,
     marginLeft: 5,
-  }
+  },
 
+  contentButton: {
+    ...theme.palette.typography.contentButtonMain,
+     fontSize: "1.2rem",
+     padding: "0.5em",
+     marginRight:"2em",
+     "&:hover": {
+       backgroundColor: theme.palette.common.blue
+     },
+
+     [theme.breakpoints.down("md")]: {
+      fontSize: "1rem",
+     marginRight:"0.5em",
+      padding: "0.5em",
+    },
+     [theme.breakpoints.down("sm")]: {
+      fontSize: "0.6rem",
+     marginRight:"0.5em",
+      padding: "0.5em",
+    }
+   },
+
+
+   contentButtonSpan:{
+    marginRight: 20, 
+    marginLeft: 20,
+
+  //   [theme.breakpoints.down("md")]: {
+  //     marginRight: 15, 
+  //     marginLeft: 15,
+  //  } ,
+ 
+    [theme.breakpoints.down("sm")]: {
+      marginRight: 5, 
+      marginLeft: 5,
+   } ,
+ 
+   },
 
 }))
 
@@ -157,10 +194,19 @@ export const SubmitContainedButton = (props) => {
   const classes = useStyles();
   return (
     <Button className={classes.submitConButton} variant="outlined" color="primary" type="submit" >
-      <span className={classes.submitConButtonSpan}>{props.lable}{props.label}</span>
+      <span className={classes.submitConButtonSpan}>{props.lable}</span>
     </Button>
   )
+};
 
+
+export const HeaderButton = (props) => {
+  const classes = useStyles();
+  return (
+    <Button className={classes.contentButton} variant="outlined" color="secondary" disableRipple disableFocusRipple>
+      <span className={classes.contentButtonSpan}>{props.label}</span>
+    </Button>
+  )
 };
 
 

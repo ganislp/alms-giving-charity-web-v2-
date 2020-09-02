@@ -25,7 +25,7 @@ class HeroSectionSettings extends React.Component{
   render(){
     const { classes } = this.props;
     return (
-      <Container maxWidth="lg" className={classes.mainContainer} >
+      <Container maxWidth="lg" className={classes.mainContainer} disableGutters>
 <Grid  container spacing={6}>
   <Grid item sm={12}>
 {this.rednderHeroSectionList()}

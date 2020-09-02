@@ -1,112 +1,142 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Grid, Container, Typography, IconButton } from '@material-ui/core';
+import { Grid, Container, Typography, IconButton,Hidden } from '@material-ui/core';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import history from '../../history';
+import {HeaderButton} from '../ui/Buttons'
 
 const useStyles = theme => ({
-  paper: {
+
+  imageConatiner:{
+    backgroundImage: (props) => `url(${props.imageUrl})`,
+    width:"100%",
+    height: "100vh",
+    backgroundPosition: "center center",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",   
+   [theme.breakpoints.down("md")]: {
+    height: "auto",
+  },
+  },
+
+
+   paper: {
+    flexGrow: 1,
     width: "100%",
-    height: "45em",
+    height: "100vh",
     backgroundColor: "rgba(0,0,0, 0.5)",
     position: "relative",
+    alignItems:"center",
+    [theme.breakpoints.down("md")]: {
+      height: "auto",
+      alignItems:"flex-start",
+    },   
+  },
+  
+  settingsContainer:{
+    backgroundColor:theme.palette.common.blue
+  },
+
+
+  itemContainer:{
+   paddingLeft:"16px",
+    paddingTop:"1em",
+    paddingBottom:"2em",
   },
 
   heading: {
-    marginBottom: "0.2em",
+    marginBottom: "0.1em",
     ...theme.palette.typography.h1,
     fontSize: "6rem",
+    [theme.breakpoints.down("sm")]: {
+      fontSize:"3rem",
+   }, 
+ 
   },
 
   subHeading: {
-    marginBottom: "0.5em",
+   marginBottom: "0.5em",
     ...theme.palette.typography.h1,
     fontSize: "2rem",
+    [theme.breakpoints.down("sm")]: {
+      fontSize:"1rem",
+  marginBottom:"1em",
+   } ,
   },
 
   body: {
     ...theme.palette.typography.h1,
     fontSize: "1rem",
-    fontWeight: 400,
+    fontWeight: 500,
     maxWidth:"40em",
-    lineHeight: 1.5,    
-  },
-
-  h4Contaner: {
-    marginBottom: "0.5em",
-    fontSize: "10rem",
+    lineHeight: 1.5, 
+  marginBottom:"2em",    
     [theme.breakpoints.down("md")]: {
-      fontSize: "1.5rem",
-      paddingLeft: "1.2em",
-      marginBottom: "1em",
-    },
-
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "1.5rem",
-      paddingLeft: "0.8em",
-      marginBottom: "1.5em",
-    }
+     maxWidth:"30em",
+    marginBottom:"1em",    
+   } ,  
   },
+
+  
 })
 
 class HeroSectionContent extends React.Component {
 
 
-  renderHeroContent(classes, imageUrl, theme) {
-
-    const styles = {
-      backgroundImage: `url(${imageUrl})`,
-      height: "45em",
-      width: "100%",
-      backgroundPosition: "center center",
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      overflow: "hidden",
-      [theme.breakpoints.down("md")]: {
-        height: "10em",
-      },
-      [theme.breakpoints.down("xs")]: {
-        height: "10em",
-      },
-
-    }
+  renderHeroContent() {  
+    const { classes } = this.props;   
     const activeHeroDetails = Object.assign({}, ...Object.values((this.props.heroDetails.filter(hero => hero.active === true))));
     return (
-      <Grid container style={styles} >
-        <Grid item className={classes.paper} container >
-          <Grid item container justify="flex-end" alignItems="flex-start">
-            <IconButton aria-label="delete" onClick={() => history.push("/hero/heroSettings")}>
-              <SettingsIcon fontSize="large" color="primary" />
-            </IconButton>
-          </Grid>
-          <Container maxWidth="lg" >
-            <Grid item container justify="flex-start" alignItems="center" style={{ position: "relative" }}>
-              <Grid item container >
+      <Grid container  className={classes.imageConatiner} >
+        <Grid item className={classes.paper}   container justify="flex-end" >                      
+          <Container maxWidth="lg"  disableGutters>
+            <Grid container  justify="space-between" alignItems="center">
+              <Grid item  className={classes.itemContainer}>
                 <Typography variant="h1" color="primary" className={classes.heading}>
                   {activeHeroDetails.heading}
                 </Typography>
-              </Grid>
-              <Grid item container>
+
                 <Typography variant="h1" color="primary" className={classes.subHeading} >
                   {activeHeroDetails.subHeading}
                 </Typography>
-              </Grid>
-              <Grid item container>
-                <Typography variant="h1" color="primary" className={classes.body}>
+
+                <Hidden xsDown>           
+                <Typography variant="body1" color="primary" className={classes.body}>
                   {activeHeroDetails.body}
                 </Typography>
-              </Grid>
-            </Grid>
+              </Hidden>
+              <HeaderButton label="Donate Now"/>
+                <HeaderButton  label="Read More"/>
+              </Grid> 
+                           
+              <Hidden  lgUp>
+          <Grid item  className= {classes.settingsContainer}  >
+            <IconButton aria-label="delete" onClick={() => history.push("/hero/heroSettings")}>             
+              <SettingsIcon fontSize="small" color="primary" />         
+            </IconButton>
+          </Grid>
+          </Hidden>
+</Grid>
           </Container>
+          <Hidden mdDown>
+          <Grid item   className= {classes.settingsContainer}  >
+            <IconButton aria-label="delete" onClick={() => history.push("/hero/heroSettings")}>             
+              <SettingsIcon fontSize="large" color="primary" />         
+            </IconButton>
+          </Grid>
+          </Hidden>
+          </Grid>
+         
         </Grid>
-      </Grid>
+     
     )
   }
 
   render() {
-    const { classes, imageUrl, theme } = this.props;
-    return this.renderHeroContent(classes, imageUrl, theme)
+
+   
+    return this.renderHeroContent()
   }
 }
 

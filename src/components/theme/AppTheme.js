@@ -84,6 +84,23 @@ export default  createMuiTheme({
       },
     },
 
+    contentButtonMain: {
+      // borderColor: appWhite,
+      border:"none",
+      borderWidth: 0,
+      textTransform: "none",
+      color: appWhite,
+      borderRadius: 50,
+      fontFamily: "Roboto",
+      fontWeight: "bold",
+      backgroundColor: appBlue,
+      "&:hover": {
+        backgroundColor: appBlue,
+        color: appWhite,
+      },
+    
+    },
+
     donateButton: {
       fontFamily: "Roboto",
       fontSize: "1rem",

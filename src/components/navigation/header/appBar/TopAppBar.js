@@ -14,6 +14,15 @@ const useStyles = theme => ({
     backgroundColor: theme.palette.common.blue,
   },
 
+  // itemContainer:{
+  //   paddingLeft:"16px",
+  //    paddingTop:"16px",
+  //  },
+  //  [theme.breakpoints.down("xs")]: {
+  //   paddingLeft:"0px",
+  //    paddingTop:"0px",
+  // }
+
 });
 
 class TopAppBar extends React.Component {
@@ -57,7 +66,7 @@ renderLoginButton(){
       <Grid container className={classes.mainContainer}>
         <Container maxWidth="lg" >
           <Grid container justify="space-between" alignItems="center">
-            <Hidden smDown>
+            <Hidden xsDown>
               <Grid item  >
                 <Typography variant="h6" style={{ ...theme.palette.typography.caption }}>MAIL: {email}</Typography>
               </Grid>

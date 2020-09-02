@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { SwipeableDrawer, List, ListItem, ListItemText,Grid,Typography } from '@material-ui/core';
+import { SwipeableDrawer, List, ListItem, ListItemText,Grid } from '@material-ui/core';
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { withStyles, withTheme } from '@material-ui/core/styles';
@@ -31,7 +31,9 @@ const useStyles = theme => ({
   toolbarMargin: {
     ...theme.mixins.toolbar,
     marginBottom: "3em",
-
+    [theme.breakpoints.down("md")]: {
+      marginBottom: "2.3em"
+    },
   },
 });
 
@@ -88,15 +90,16 @@ class DrawerBuilder extends React.Component {
   }
 
   renderIconButton() {
-    const {companyName} = this.props.companyDetails;
+   // const {companyName} = this.props.companyDetails;
     return (
-      <Grid container justify="space-between" alignItems="center">        
-         <Grid item>
+      <Grid container justify="space-between" alignItems="center">    
+      {/* <Hidden smUp>   
+         <Grid item >
        <Typography variant="h6" style={{...this.props.theme.palette.typography.h6Grey}}>
        {companyName}
        </Typography>
       </Grid>
-
+      </Hidden>  */}
         <Grid item>
       <IconButton className={this.props.classes.drawerIconContainer}
         disableRipple
@@ -123,7 +126,7 @@ const mapStateToProps = (state) => {
 
     drawerOpen: state.drawerOpen,
     seletedValue: state.selectdTabValue,
-    companyDetails: Object.assign({}, ...Object.values(state.companyDetails)),
+   // companyDetails: Object.assign({}, ...Object.values(state.companyDetails)),
   }
 }
 

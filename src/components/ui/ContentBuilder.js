@@ -27,7 +27,7 @@ const ContentBuilder = (props) => {
   }
   const classes = useStyles();
   return(
-    <Container maxWidth="lg" className={classes.mainContainer}>
+    <Container maxWidth="lg" className={classes.mainContainer} disableGutters>
         <Paper className={classes.root} >
         {renderSubmitProcess()}
           {props.children}
