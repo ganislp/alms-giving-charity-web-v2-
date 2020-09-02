@@ -68,9 +68,10 @@ const useStyles = theme => ({
   body: {
     ...theme.palette.typography.h1,
     fontSize: "1rem",
-    fontWeight: 500,
+    fontWeight: 400,
     maxWidth:"40em",
     lineHeight: 1.5, 
+   
   marginBottom:"2em",    
     [theme.breakpoints.down("md")]: {
      maxWidth:"30em",
