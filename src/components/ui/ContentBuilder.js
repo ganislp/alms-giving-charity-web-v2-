@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Paper, Grid } from '@material-ui/core';
+import { Container, Paper, } from '@material-ui/core';
 import SubmitProcess from './SubmitProcess';
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,7 +27,6 @@ const ContentBuilder = (props) => {
   }
   const classes = useStyles();
   return(
-    
     <Container maxWidth="lg" className={classes.mainContainer} >
       
         <Paper className={classes.root} >

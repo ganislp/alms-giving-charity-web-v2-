@@ -11,7 +11,7 @@ const useStyles = theme => ({
   imageConatiner:{
     backgroundImage: (props) => `url(${props.imageUrl})`,
     width:"100%",
-    height: "100vh",
+    height: "80vh",
     backgroundPosition: "center center",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",   
@@ -24,7 +24,7 @@ const useStyles = theme => ({
    paper: {
     flexGrow: 1,
     width: "100%",
-    height: "100vh",
+    height: "80vh",
     backgroundColor: "rgba(0,0,0, 0.5)",
     position: "relative",
     alignItems:"center",
@@ -48,6 +48,7 @@ const useStyles = theme => ({
   heading: {
     marginBottom: "0.1em",
     ...theme.palette.typography.h1,
+   // fontWeight: 700,
     fontSize: "6rem",
     [theme.breakpoints.down("sm")]: {
       fontSize:"3rem",
@@ -66,11 +67,9 @@ const useStyles = theme => ({
   },
 
   body: {
-    ...theme.palette.typography.h1,
-    fontSize: "1rem",
-    fontWeight: 400,
+    ...theme.palette.typography.body,
     maxWidth:"40em",
-    lineHeight: 1.5, 
+ 
    
   marginBottom:"2em",    
     [theme.breakpoints.down("md")]: {
