@@ -153,9 +153,11 @@ export const FormBackButton = (props) => {
 
 export const TableHeaderButton = (props) => {
   const theme = useTheme();
+
+  const matchesXSD = useMediaQuery(theme.breakpoints.down("xs"));
   return (
   
-      <Grid container justify="center" alignItems="center" style={{paddingLeft:0}}>
+      <Grid container justify={matchesXSD ? "flex-start" : "flex-start"} alignItems="center" style={{paddingLeft:0}}>
           <Grid item>
     <IconButton aria-label="Back"  onClick={history.goBack}
     size="medium" color="secondary" style={{ ...theme.palette.typography.IconButton }}>
@@ -194,7 +196,7 @@ export const SubmitContainedButton = (props) => {
   const classes = useStyles();
   return (
     <Button className={classes.submitConButton} variant="outlined" color="primary" type="submit" >
-      <span className={classes.submitConButtonSpan}>{props.lable}</span>
+      <span className={classes.submitConButtonSpan}>{props.label}</span>
     </Button>
   )
 };

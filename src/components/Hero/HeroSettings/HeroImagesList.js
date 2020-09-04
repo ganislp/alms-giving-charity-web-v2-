@@ -2,9 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { withTheme,withStyles } from '@material-ui/core/styles';
-import MaterialTable, { MTableToolbar } from "material-table";
-
-
  import {
    getHeroImages,
   deleteHeroImage,
@@ -15,7 +12,8 @@ import UploadImages from '../../ui/UploadImages';
 import SubmitProcess from '../../ui/SubmitProcess';
 import {confiDialogOpen} from '../../../actions/uiActions/navigationAcions';
 import ConfimationDialog from '../../model/ConfimationDialog';
-import HeroSectionContent from '../HeroSectionContent';
+import MUIDataTable from "mui-datatables";
+import {TableRowContent,ActiveButtonContent,ActionButtonsContent,} from '../../ui/DataTableContentBuild';
 
 
 
@@ -64,101 +62,99 @@ class HeroImagesList extends React.Component{
     }
   }
 
-  deleteHeroSection = (rowData) => {
-    this.props.confiDialogOpen(true,rowData.uid);
+  deleteHeroImage = (uid) => {
+    this.props.confiDialogOpen(true,uid);
   }
 
-  dialogButtonClick = () => {
+  dialogImgeButtonClick = () => {
     this.props.deleteHeroImage(this.props.confirmationUid);
     this.props.confiDialogOpen(false);
    }
 
-   updateActive = (rowData) => {
-    if(!rowData.active){
+   updateActive = (stauts, uid) => {
+    if(!stauts){
  const inActiveUid =  (this.props.heroImages.filter(image => image.active === true).map((value, key) => {
   return value.uid
  }));
-this.props.updateImageActive(rowData.uid)
+this.props.updateImageActive(uid)
 this.props.updateImageInActive(inActiveUid);
 }
 }
 
-  renderDataTable(){
-  return  <MaterialTable 
-  
-   columns={[
-    { title: 'Image Name', field: 'fileName',  },
-    { title: 'CreatedAt', field: 'createdAt',  },
-    { title: 'Image', field: 'imageUrl',  
-    render: rowData => <img src={rowData.imageUrl} alt={rowData.imageUrl} style={{width: 50, borderRadius: '50%'}}/> },
-  ]}
-   data = {this.props.heroImages}
-  options={{actionsColumnIndex: -1,exportButton: true,
-    paging: false,
-  draggable: true,
-  emptyRowsWhenPaging:true,
-  headerStyle: {
-   backgroundColor:this.props.theme.palette.common.blue,
-    color: this.props.theme.palette.common.white,
-    '&:hover': {
-      color: this.props.theme.palette.common.white,
-    }
-  },
-  }}
-   actions={[      
-      rowData => ( {
-        icon: rowData.active ? 'check' : 'clear',
-        tooltip: rowData.active ? 'Active' : 'inActive',
-        onClick: (event, rowData) => this.updateActive(rowData),
-       disabled: rowData.active 
-      }),
-    rowData => ({
-      icon: 'deleteForeverIcon',
-      tooltip: 'Delete Section',
-      onClick: (event, rowData) => this.deleteHeroSection(rowData), 
-      disabled: rowData.active 
-    }),
-    
-  ]}
-  
-  detailPanel={[
+renderDataTableResponsive() {
+  const columns = [
     {
-      tooltip: 'Show Preview ',
-      render: rowData => {
-        return (
-          <HeroSectionContent
-  imageUrl={rowData.imageUrl} 
-  imgname={rowData.fileName}
-  />
-        )
-      },
+      name: 'fileName', label: 'Image Name',
+      options: {
+        customBodyRender: value => <TableRowContent value={value} />
+      }
     },
    
-   
-  ]}
-  components={{
+    {
+      name: 'createdAt', label: 'CreatedAt', options: {
+        customBodyRender: value => <TableRowContent value={value} />
+      }
+    },
 
-    Toolbar: props => (
-      <div style={{padding: 0}} >
-         <MTableToolbar {...props}  disableGutters={true}/>
-      </div>  
-    )
-  }}
-  title= {<UploadImages uploadRef="hero"/>}
-  />
-  
+    {
+      name: 'active', label: 'Active', options: {
+        customBodyRender: (value, dataIndex) => <ActiveButtonContent 
+        value={value} dataIndex={dataIndex.rowData[3]}
+        click={this.updateActive} />,
+        filter: true,
+        empty: true,
+        // display: 'excluded',
+      }
+    },
+    {
+      name: 'uid', label: 'Actions', filter: false,
+      options: {
+        customBodyRender: (value, dataIndex) => <ActionButtonsContent 
+        value={value} 
+        dataIndex={dataIndex.rowData[2]} 
+        edit="/hero/edit/"
+        click={this.deleteHeroImage}
+        hiddendEdit={true}
+        />,
+        filter: false, sort: false,// empty: true,
+      },
+    }
+  ]
+
+  const options = {
+    //resizableColumns: true,
+    filter: true,
+    filterType: 'dropdown',
+    rowsPerPage: 5,
+    pagination: false,
+    selectableRows: "none",
+    responsive: 'vertical',
+ 
+  };
+
+  return <MUIDataTable
+    title={ <UploadImages  uploadRef="hero"/>}
+    columns={columns}
+    data={this.props.heroImages}
+    options={options}/>
+}
+
+renderConfimationDialog(){
+  if(this.props.confirmationUid != null){
+return <ConfimationDialog 
+       title="Delete Hero Section Image"
+        content="Are you sure you want to delete this Hero Section Image?"
+        dialogButtonClick={this.dialogButtonClick} />
   }
- // }
+}
+
   render(){
     return(
       <React.Fragment>
          {this.renderSubmitProcess()}
-      {this.renderDataTable()}
+      {this.renderDataTableResponsive()}
       {this.renderSubmitProcess()}
-      <ConfimationDialog 
-        title="Delete Hero Section Image"
-        content="Are you sure you want to delete this Hero Section Image?"
-        dialogButtonClick={this.dialogButtonClick}/>
+      {this.renderConfimationDialog()}
       </React.Fragment>
     )
   }

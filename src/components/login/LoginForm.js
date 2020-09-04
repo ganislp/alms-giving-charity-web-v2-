@@ -33,7 +33,7 @@ class LoginForm extends React.Component{
    this.props.login(formValues)
   };
  
-renderButtonLable(){
+renderButtonLabel(){
 if(this.props.onSubmiting){
   return <CircularProgress size={25} color="primary"/>
 }
@@ -69,7 +69,7 @@ else{
         </Grid>
         
         <Grid item container justify="center" style={{margin:"1em"}}>
-        <SubmitContainedButton label={this.renderButtonLable()} />
+        <SubmitContainedButton label={this.renderButtonLabel()} />
 </Grid>
         </Grid>
       </form>

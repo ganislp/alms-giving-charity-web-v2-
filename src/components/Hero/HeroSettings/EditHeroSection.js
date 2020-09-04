@@ -13,12 +13,11 @@ class EditHeroSection extends Component{
 
   onSubmit = formValues => {
     this.props.EditHero(this.props.match.params.uid,formValues);
-    console.log("this.props.match",this.props)
+
   };
 
 
   render(){
-    console.log("this.props.match",this.props)
     return(
      <ContentBuilder isSubmiting ={this.props.isSubmiting}>
        <HeroSectionForm initialValues={_.pick(this.props.heroDetails,'heading','subHeading','body')} onSubmit={this.onSubmit}/>

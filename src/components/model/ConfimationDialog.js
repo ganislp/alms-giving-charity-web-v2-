@@ -35,7 +35,7 @@ class ConfimationDialog extends React.Component{
           <Button  color="secondary" onClick={this.handleClose}>
            No
           </Button>
-          <Button  color="secondary" autoFocus onClick={this.props.dialogButtonClick}>
+          <Button  color="secondary" autoFocus onClick={() => this.props.dialogButtonClick}>
             Yes
           </Button>
         </DialogActions>
@@ -48,6 +48,7 @@ class ConfimationDialog extends React.Component{
 const mapStateToProps = state => {
   return {
     dialogOpen: state.dialogOpen.dialogOpen,
+    confirmationUid: state.dialogOpen.uid,
   };
 };
 

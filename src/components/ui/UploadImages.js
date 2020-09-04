@@ -64,7 +64,7 @@ handleUploadSuccess = filename => {
   render(){
     return(  
    <form>
-     <Grid container alignItems="center" >
+     <Grid container alignItems="center" justify="flex-start">
        <Grid item>
      <TableHeaderButton/>
      </Grid>

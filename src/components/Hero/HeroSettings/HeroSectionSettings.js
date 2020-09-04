@@ -6,6 +6,7 @@ import HeroImagesList from './HeroImagesList'
 
 const useStyles = theme => ({
   mainContainer: {
+
     paddingTop: "1em",
     [theme.breakpoints.down("md")]: {
       paddingTop: "0em"
@@ -25,9 +26,9 @@ class HeroSectionSettings extends React.Component{
   render(){
     const { classes } = this.props;
     return (
-      <Container maxWidth="lg" className={classes.mainContainer} disableGutters>
-<Grid  container spacing={6}>
-  <Grid item sm={12}>
+      <Container maxWidth="lg" className={classes.mainContainer} >
+<Grid  container >
+  <Grid item sm={12} style={{marginBottom:"2em",marginTop:"2em"}}>
 {this.rednderHeroSectionList()}
   </Grid>
   <Grid item sm={12}>

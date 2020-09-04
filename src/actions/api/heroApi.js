@@ -113,7 +113,8 @@ export const uploadHeroImages = (imagesPayload) => async (dispatch, getState) =>
       if (imageExist <= 2) {
         active = true;
       }
-      await db.collection('heroImages').add({ ...imagesPayload, createdAt: createdAt, active: active, userId: userUid });
+      await db.collection('heroImages').add({ ...imagesPayload, createdAt: createdAt, active: active,  });
+      //userId: userUid
       dispatch(showSuccessSnackbar("Images Uploaded Sucessfully!"));
       dispatch(heroActions.uploadHeroImagesSuccess());
     }

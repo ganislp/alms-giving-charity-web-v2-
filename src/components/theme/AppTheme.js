@@ -53,7 +53,7 @@ export default  createMuiTheme({
     },
 
     h6Grey : {
-      fontFamily: "Open Sans sans-serif",
+      fontFamily: "Raleway",
       textTransform: "none",
       fontWeight: 600,
       color: arcGrey,
@@ -61,7 +61,7 @@ export default  createMuiTheme({
     },
 
     caption:{
-      fontFamily: "Open Sans sans-serif",
+      fontFamily: "Raleway",
       color: appWhite,
       fontSize: "1.2rem",
     },
@@ -123,7 +123,25 @@ overrides: {
 
   // },
 
-
+  // MUIDataTable: {
+  //   root: {
+  //   },
+  //   responsiveScroll: {
+  //     maxHeight: 'unset',
+  //     overflowX: 'unset',
+  //     overflowY: 'unset',
+  //   },
+  //   paper: {
+  //     boxShadow: '0px',
+  //   },
+  // },
+  // MuiTable: {
+  //   root: {
+  //     position: 'sticky',
+  //     bottom: 0,
+  //     background: 'white',
+  //   },
+  // },
   MuiInputLabel:{
     root:{
      color:arcGrey,
