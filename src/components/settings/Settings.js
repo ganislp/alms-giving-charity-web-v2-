@@ -16,9 +16,9 @@ const useStyles = theme => ({
   },
 
   mainContainer: {
-    paddingTop: "1em",
+    paddingTop: "2em",
     [theme.breakpoints.down("md")]: {
-      paddingTop: "0em"
+      paddingTop: "1em"
     }
   },
 
@@ -90,7 +90,7 @@ class Settings extends React.Component {
   render() {
     const { classes, theme } = this.props;
     return (
-      <Container maxWidth="lg" className={classes.mainContainer}  disableGutters>
+      <Container maxWidth="lg" className={classes.mainContainer}  >
         <Paper className={classes.root} >
           {this.renderCompantForm(classes, theme)}
         </Paper>

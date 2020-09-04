@@ -2,7 +2,7 @@ import React from 'react';
 import {  Grid, Paper, Typography, } from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
-import { FormBackButton } from '../../ui/Buttons';
+import { HomeHeaderButtonPrimary } from '../../ui/Buttons';
 
 const useStyles = makeStyles(theme => ({
   paperHeader: {
@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
   return <Paper className={classes.paperHeader} square={true} >
   <Grid container alignItems="center" justify="space-between">
   <Grid item >
-    <FormBackButton/>
+    <HomeHeaderButtonPrimary/>
     </Grid>
     <Grid item>
       <Typography variant="h6" align="center"

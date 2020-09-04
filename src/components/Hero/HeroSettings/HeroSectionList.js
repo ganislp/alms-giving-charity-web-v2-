@@ -7,12 +7,13 @@ import { updateActive, updateInActive, deleteHero } from '../../../actions/api/h
 import { confiDialogOpen } from '../../../actions/uiActions/navigationAcions';
 import SubmitProcess from '../../ui/SubmitProcess';
 import ConfimationDialog from '../../model/ConfimationDialog';
-import {TableHeaderButton} from '../../ui/Buttons';
+import {TableHeaderButton,HomeHeaderButton} from '../../ui/Buttons';
 import {
    TableRowContent,
     ActiveButtonContent,
      ActionButtonsContent,
      CreateButtonContent } from '../../ui/DataTableContentBuild'
+
 
 
 const useStyles = theme => ({
@@ -113,9 +114,14 @@ class HeroSectionList extends React.Component {
       responsive: 'vertical',
       customToolbar: () => {
         return (
+         <React.Fragment>
           <CreateButtonContent create="/hero/heroCreate"/>
+          <HomeHeaderButton/>
+          </React.Fragment>
+          
         );
-      }
+      },
+      
     };
 
     return <MUIDataTable

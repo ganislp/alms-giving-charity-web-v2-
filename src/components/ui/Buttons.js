@@ -151,19 +151,30 @@ export const FormBackButton = (props) => {
 
 };
 
+export const FormBackHomeButton = (props) => {
+  const theme = useTheme();
+  return (
+    <IconButton aria-label="Back"  onClick={() => history.push("/")}
+    size="medium" color="primary" style={{ ...theme.palette.typography.IconButton }}>
+ <ArrowBackIcon fontSize="inherit" />
+  </IconButton>
+  )
+
+};
+
 export const TableHeaderButton = (props) => {
   const theme = useTheme();
 
   const matchesXSD = useMediaQuery(theme.breakpoints.down("xs"));
   return (
   
-      <Grid container justify={matchesXSD ? "flex-start" : "flex-start"} alignItems="center" style={{paddingLeft:0}}>
-          <Grid item>
+      <Grid container justify={matchesXSD ? "center" : "flex-start"} alignItems="center" >
+          {/* <Grid item>
     <IconButton aria-label="Back"  onClick={history.goBack}
     size="medium" color="secondary" style={{ ...theme.palette.typography.IconButton }}>
  <HomeIcon fontSize="inherit" />
   </IconButton>
-  </Grid>
+  </Grid> */}
         <Grid item>
      <Typography variant="h6" color="secondary"> {props.label}</Typography>
      </Grid>
@@ -173,6 +184,29 @@ export const TableHeaderButton = (props) => {
   )
 
 };
+
+export const HomeHeaderButton = (props) => {
+  const theme = useTheme();
+  return (
+    <IconButton aria-label="Back"  onClick={() => history.push("/")}
+    size="medium" color="secondary" style={{ ...theme.palette.typography.IconButton }}>
+ <HomeIcon fontSize="inherit" />
+  </IconButton>
+  )
+
+};
+
+export const HomeHeaderButtonPrimary = (props) => {
+  const theme = useTheme();
+  return (
+    <IconButton aria-label="Back"  onClick={() => history.push("/")}
+    size="medium" color="primary" style={{ ...theme.palette.typography.IconButton }}>
+ <HomeIcon fontSize="inherit" />
+  </IconButton>
+  )
+
+};
+
 
 export const LoginButton = (props) => {
   const classes = useStyles();

@@ -14,7 +14,7 @@ import {confiDialogOpen} from '../../../actions/uiActions/navigationAcions';
 import ConfimationDialog from '../../model/ConfimationDialog';
 import MUIDataTable from "mui-datatables";
 import {TableRowContent,ActiveButtonContent,ActionButtonsContent,} from '../../ui/DataTableContentBuild';
-
+import {HomeHeaderButton} from '../../ui/Buttons';
 
 
 const useStyles = theme => ({
@@ -130,7 +130,11 @@ renderDataTableResponsive() {
     pagination: false,
     selectableRows: "none",
     responsive: 'vertical',
- 
+    customToolbar: () => {
+      return (
+        <HomeHeaderButton/>    
+      );
+    },
   };
 
   return <MUIDataTable

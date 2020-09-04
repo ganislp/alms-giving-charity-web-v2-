@@ -36,7 +36,7 @@ class CompanyForm extends React.Component {
     const { classes } = this.props;
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)} >
-        <FormHeader label="Create Company">
+        <FormHeader label="Create Company" >
         <SubmitButton isEdit={_.isEmpty(this.props.initialValues.companyName)}/>
         </FormHeader>
         <Grid container justify="center" className={classes.mainContainer} spacing={2}>

@@ -55,7 +55,7 @@ export const ActiveButtonContent = (props) => {
 
     export const CreateButtonContent = (props) => {
       return    <Tooltip title={"custom icon"}>
-      <IconButton  onClick={() => history.push(`${props.create}`)}>
+      <IconButton  onClick={() => history.push(`${props.create}`)} style={{padding:"0"}}>
         <AddIcon fontSize="inherit"  />
       </IconButton>
     </Tooltip>
