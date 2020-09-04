@@ -19,7 +19,7 @@ return <Typography variant="body1" >{props.value}</Typography>
 }
 
 export const ActiveButtonContent = (props) => {
-  return  <IconButton aria-label="Active" disabled={props.value} size="medium" disableRipple 
+  return  <IconButton aria-label="Active" disabled={props.disabled} size="medium" disableRipple 
   onClick={() =>props.click(props.value,props.dataIndex)}>
     {props.value ?  <Tooltip title="Active"><Check fontSize="inherit" /></Tooltip> : <Tooltip title="inActive">
       <Clear fontSize="inherit" /></Tooltip>}

@@ -18,10 +18,10 @@ export const drawerOpenAct = (drawerOpen) => {
 }
 };
 
-export const confiDialogOpen = (dialogOpen,uid) => {
+export const confiDialogOpen = (dialogContent) => {
   return {
     type: ON_CONFI_DIALOG_OPEN,
-    payload: {dialogOpen,uid:uid}
+    payload: {...dialogContent}
 }
 };
 

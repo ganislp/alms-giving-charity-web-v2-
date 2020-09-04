@@ -12,7 +12,7 @@ import {confiDialogOpen} from '../../actions/uiActions/navigationAcions';
 class ConfimationDialog extends React.Component{
 
   handleClose = () => {
-    this.props.confiDialogOpen(false)
+    this.props.confiDialogOpen({open:false,heroListSeletedUid:{},heroImageSeletedUid:{}})
   };
   render(){
     return(
@@ -35,7 +35,7 @@ class ConfimationDialog extends React.Component{
           <Button  color="secondary" onClick={this.handleClose}>
            No
           </Button>
-          <Button  color="secondary" autoFocus onClick={() => this.props.dialogButtonClick}>
+          <Button  color="secondary" autoFocus onClick={this.props.dialogButtonClick}>
             Yes
           </Button>
         </DialogActions>
@@ -47,8 +47,7 @@ class ConfimationDialog extends React.Component{
 
 const mapStateToProps = state => {
   return {
-    dialogOpen: state.dialogOpen.dialogOpen,
-    confirmationUid: state.dialogOpen.uid,
+    dialogOpen: state.dialogOpen.open,
   };
 };
 

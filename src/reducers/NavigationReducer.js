@@ -23,7 +23,7 @@ export const   drawerOpenReducer = (drawerOpen=false,action) => {
 
 };
 
-export const   confDialogOpenReducer = (state={dialogOpen:false,uid:{}},action) => {
+export const   confDialogOpenReducer = (state={open:false,heroListSeletedUid:{},heroImageSeletedUid:{}},action) => {
   switch (action.type) {
     case ON_CONFI_DIALOG_OPEN:
       return { ...state,...action.payload };     

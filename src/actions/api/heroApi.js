@@ -35,7 +35,7 @@ export const createHero = (formValues, isActive) => async (dispatch) => {
     const response = await db.collection('heroSection').add({ ...formValues, createdAt: createdAt, active: isActive },);
     dispatch(heroActions.createHeroSuccess(response.id));
     dispatch(showSuccessSnackbar("Data Saved Sucessfully!"));
-    history.push('/hero/heroList');
+    history.push('/hero/heroSettings');
   } catch (error) {
     dispatch(heroActions.createHeroError(error));
     dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
@@ -49,7 +49,7 @@ export const EditHero = (uid, formValues) => async dispatch => {
     await db.collection('heroSection').doc(`${uid}`).update({ ...formValues, createdAt: createdAt });
     dispatch(heroActions.editHeroSuccess(uid));
     dispatch(showSuccessSnackbar("Hero Section Sucessfully Updated!"));
-    history.push('/hero/heroList');
+    history.push('/hero/heroSettings');
   } catch (error) {
     dispatch(heroActions.editHeroError(error));
     dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));

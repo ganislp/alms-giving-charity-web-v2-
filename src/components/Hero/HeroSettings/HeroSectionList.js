@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import MUIDataTable from "mui-datatables";
 import { withTheme, withStyles } from '@material-ui/core/styles';
 import { updateActive, updateInActive, deleteHero } from '../../../actions/api/heroApi';
@@ -42,12 +43,13 @@ class HeroSectionList extends React.Component {
   }
 
   deleteHeroSection = (uid) => {
-    this.props.confiDialogOpen(true, uid);
+    this.props.confiDialogOpen({open:true,heroListSeletedUid:uid});
   }
 
   dialogButtonClick = () => {
+     console.log("dialogButtonClick....", this.props.confirmationUid)
     this.props.deleteHero(this.props.confirmationUid);
-    this.props.confiDialogOpen(false);
+    this.props.confiDialogOpen({open:true,heroListSeletedUid:{}});
   }
 
   renderDataTableResponsive() {
@@ -79,6 +81,7 @@ class HeroSectionList extends React.Component {
         name: 'active', label: 'Active', options: {
           customBodyRender: (value, dataIndex) => <ActiveButtonContent 
           value={value} dataIndex={dataIndex.rowData[5]} 
+          disabled={value}
           click={this.updateActive} />,
           filter: true,
           empty: true,
@@ -90,7 +93,7 @@ class HeroSectionList extends React.Component {
         options: {
           customBodyRender: (value, dataIndex) => <ActionButtonsContent 
           value={value} 
-          dataIndex={dataIndex.rowData[4]} 
+          dataIndex={dataIndex.rowData[4]}          
           edit="/hero/edit/"
           click={this.deleteHeroSection}
           hiddendEdit={false}
@@ -123,7 +126,7 @@ class HeroSectionList extends React.Component {
   }
 
   renderConfimationDialog(){
-    if(this.props.confirmationUid != null){
+    if(!_.isEmpty(this.props.confirmationUid)){
 return <ConfimationDialog 
           title="Delete Hero Section"
           content="Are you sure you want to delete this Hero Section ?"
@@ -144,11 +147,12 @@ return <ConfimationDialog
 }
 
 const mapStateToProps = state => {
+  console.log("state.dialogOpen",state)
   return {
     heroDetails: Object.values(state.heroSection.heroDetails),
     isLoading: state.heroSection.loading,
     isSubmiting: state.heroSection.onSubmiting,
-    confirmationUid: state.dialogOpen.uid,
+    confirmationUid: state.dialogOpen.heroListSeletedUid,
   };
 };
 export default connect(mapStateToProps, { updateActive, updateInActive, confiDialogOpen, deleteHero })

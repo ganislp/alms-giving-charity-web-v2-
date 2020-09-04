@@ -63,12 +63,12 @@ class HeroImagesList extends React.Component{
   }
 
   deleteHeroImage = (uid) => {
-    this.props.confiDialogOpen(true,uid);
+    this.props.confiDialogOpen({open:true,heroImageSeletedUid:uid});
   }
 
   dialogImgeButtonClick = () => {
     this.props.deleteHeroImage(this.props.confirmationUid);
-    this.props.confiDialogOpen(false);
+    this.props.confiDialogOpen({open:false,heroImageSeletedUid:{}});
    }
 
    updateActive = (stauts, uid) => {
@@ -99,10 +99,11 @@ renderDataTableResponsive() {
     {
       name: 'active', label: 'Active', options: {
         customBodyRender: (value, dataIndex) => <ActiveButtonContent 
-        value={value} dataIndex={dataIndex.rowData[3]}
+        value={value} dataIndex={dataIndex.rowData[3]}  disabled={false}
         click={this.updateActive} />,
         filter: true,
         empty: true,
+       
         // display: 'excluded',
       }
     },
@@ -140,11 +141,11 @@ renderDataTableResponsive() {
 }
 
 renderConfimationDialog(){
-  if(this.props.confirmationUid != null){
+  if(!_.isEmpty(this.props.confirmationUid)){
 return <ConfimationDialog 
        title="Delete Hero Section Image"
         content="Are you sure you want to delete this Hero Section Image?"
-        dialogButtonClick={this.dialogButtonClick} />
+        dialogButtonClick={this.dialogImgeButtonClick} />
   }
 }
 
@@ -161,10 +162,11 @@ return <ConfimationDialog
 }
 
 const mapStateToProps = state => {
+  
   return {
     heroImages:  Object.values(state.heroSection.heroImages),
     pendingStates: state.pendingStates,
-    confirmationUid: state.dialogOpen.uid,
+    confirmationUid: state.dialogOpen.heroImageSeletedUid,
   };
 };
 
