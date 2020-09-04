@@ -28,10 +28,10 @@ class HeroSectionSettings extends React.Component{
     return (
       <Container maxWidth="lg" className={classes.mainContainer} >
 <Grid  container >
-  <Grid item sm={12} style={{marginBottom:"2em",marginTop:"2em"}}>
+  <Grid item sm={12} style={{marginBottom:"1em",marginTop:"1em"}}>
 {this.rednderHeroSectionList()}
   </Grid>
-  <Grid item sm={12}>
+  <Grid item sm={12} style={{marginBottom:"1em",marginTop:"1em"}}>
   {this.rednderHeroImageList()}
   </Grid>
     </Grid>   
