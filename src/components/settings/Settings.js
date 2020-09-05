@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Container, Paper, LinearProgress } from '@material-ui/core';
+import _ from 'lodash';
+import { Container, Paper,} from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import { createCompanyDetails } from '../../actions/api/companyDetailsApi';
 import { showSuccessSnackbar } from '../../actions/uiActions/snackbarActions'
 import CompanyForm from './companySettings/CompanyForm';
-import SubmitProcess from '../ui/SubmitProcess'
+import {LoadingProcess,SubmitProcess} from '../ui/ProgressBars'
 
 
 const useStyles = theme => ({
@@ -57,34 +58,19 @@ class Settings extends React.Component {
     this.props.createCompanyDetails(convertedFormValues, uid);
   };
 
-
-
-  renderSubmitProcess() {
-    if (this.props.isSubmiting) {
-      return <SubmitProcess/>
-    }
-
-  }
-
-
   renderCompantForm() {
     const { addresses, contactDetails, companyName } = Object.assign({}, ...Object.values(this.props.companyDetails));
-    if (this.props.isLoading) {
-      return <LinearProgress color="secondary" />
-    }
-    else {
-
       return (
         <React.Fragment>
-          {this.renderSubmitProcess()}
+          <LoadingProcess isLoading={this.props.isLoading}/>
+          <SubmitProcess  isSubmiting={this.props.isSubmiting}/>
           <CompanyForm onSubmit={this.onSubmit}
             initialValues={{ ...addresses, ...contactDetails, companyName }}
           />
-          {this.renderSubmitProcess()}
+            <SubmitProcess  isSubmiting={this.props.isSubmiting}/>
         </React.Fragment>
 
       )
-    }
   }
 
   render() {
@@ -102,9 +88,8 @@ class Settings extends React.Component {
 const mapStateToProps = state => {
   return {
     companyDetails: state.companyDetails,
-    isSubmiting: state.companyDetails.onSubmiting,
-    errorSubmit: state.companyDetails.error,
-    isLoading: state.companyDetails.loading
+    isSubmiting: _.some(_.values(state.pendingStates.CREATE_COMPANY_DETAILS)),
+    isLoading: _.some(_.values(state.pendingStates.GET_COMPANY_DETAILS)),
   };
 };
 

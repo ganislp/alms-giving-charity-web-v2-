@@ -26,13 +26,13 @@ export const getHeroError = (error) => {
 export const createHeroRequest = () => {
   return {
     type: heroActionTypes.CREATE_HERO_REQUEST,
-    payload: {onSubmiting: true }
+    payload: { }
   }
 };
 export const createHeroSuccess = (uid) => {
   return {
     type: heroActionTypes.CREATE_HERO_SUCCESS,
-    payload: { onSubmiting: false, uid: uid, }
+    payload: {  uid: uid, }
 
   }
 };
@@ -40,7 +40,7 @@ export const createHeroSuccess = (uid) => {
 export const createHeroError = (error) => {
   return {
     type: heroActionTypes.CREATE_HERO_ERROR,
-    payload: { onSubmiting: false, error: error }
+    payload: {  error: error }
   }
 };
 
@@ -49,13 +49,13 @@ export const editHeroRequest = () => {
 
   return {
     type: heroActionTypes.EDIT_HERO_REQUEST,
-    payload: { onSubmiting: true }
+    payload: { }
   }
 };
 export const editHeroSuccess = (uid) => {
   return {
     type: heroActionTypes.EDIT_HERO_SUCCESS,
-    payload: { onSubmiting: false, uid: uid, }
+    payload: {  uid: uid, }
 
   }
 };
@@ -63,7 +63,7 @@ export const editHeroSuccess = (uid) => {
 export const editHeroError = (error) => {
   return {
     type: heroActionTypes.EDIT_HERO_ERROR,
-    payload: { onSubmiting: false, error: error }
+    payload: { error: error }
   }
 };
 
@@ -72,13 +72,13 @@ export const activeHeroRequest = () => {
 
   return {
     type: heroActionTypes.ACTIVE_HERO_REQUEST,
-    payload: { onSubmiting: true }
+    payload: {  }
   }
 };
 export const activeHeroSuccess = (uid) => {
   return {
     type: heroActionTypes.ACTIVE_HERO_SUCCESS,
-    payload: { onSubmiting: false, uid: uid, }
+    payload: { uid: uid, }
 
   }
 };
@@ -86,7 +86,7 @@ export const activeHeroSuccess = (uid) => {
 export const activeHeroError = (error) => {
   return {
     type: heroActionTypes.ACTIVE_HERO_ERROR,
-    payload: { onSubmiting: false, error: error }
+    payload: {  error: error }
   } 
 };
 
@@ -95,13 +95,13 @@ export const inActiveHeroRequest = () => {
 
   return {
     type: heroActionTypes.INACTIVE_HERO_REQUEST,
-    payload: { onSubmiting: true }
+    payload: { }
   }
 };
 export const inActiveHeroSuccess = (uid) => {
   return {
     type: heroActionTypes.INACTIVE_HERO_SUCCESS,
-    payload: { onSubmiting: false, uid: uid, }
+    payload: {  uid: uid, }
 
   }
 };
@@ -118,13 +118,13 @@ export const deleteHeroRequest = () => {
 
   return {
     type: heroActionTypes.DELETE_HERO_REQUEST,
-    payload: { onSubmiting: true }
+    payload: { }
   }
 };
 export const deleteHeroSuccess = (uid) => {
   return {
     type: heroActionTypes.DELETE_HERO_SUCCESS,
-    payload: { onSubmiting: false, uid: uid, }
+    payload: {  uid: uid, }
 
   }
 };
@@ -132,7 +132,7 @@ export const deleteHeroSuccess = (uid) => {
 export const deleteHeroError = (error) => {
   return {
     type: heroActionTypes.DELETE_HERO_ERROR,
-    payload: { onSubmiting: false, error: error }
+    payload: {  error: error }
   }
 };
 

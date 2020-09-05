@@ -29,7 +29,7 @@ class EditHeroSection extends Component{
 const mapStateToProps = (state, ownProps) => {
   return {
     heroDetails: state.heroSection.heroDetails[ownProps.match.params.uid],
-    isSubmiting: state.heroSection.onSubmiting,
+    isSubmiting: _.some(_.values(state.pendingStates.EDIT_HERO)),
   }
  
 }

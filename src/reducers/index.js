@@ -7,6 +7,7 @@ import {
 popOverDialogOpenReducer} from './NavigationReducer';
 import companyDetailsReducer from './CompanyDetailsReducer';
 import heroReducer from './Hero/HeroReducer';
+import heroCardReducer from './HeroCard/HeroCardReducer';
 import uiReducer from './uiReducer';
 import authReducer from './authReducer';
 import pendingReducer from './pendingReducer'
@@ -20,6 +21,7 @@ export default combineReducers({
   popOverLogin:popOverDialogOpenReducer,
   companyDetails: companyDetailsReducer,
   heroSection: heroReducer,
+  heroCardSection: heroCardReducer,
   uiReducer : uiReducer,
   userDetails:authReducer,
   form: formReducer,

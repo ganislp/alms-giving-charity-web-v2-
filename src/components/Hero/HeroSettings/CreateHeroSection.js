@@ -31,7 +31,7 @@ class CreateHeroSection extends Component {
 const mapStateToProps = state => {
   return {
     heroDetails:  Object.values(state.heroSection.heroDetails),
-    isSubmiting: state.heroSection.onSubmiting,
+    isSubmiting: _.some(_.values(state.pendingStates.CREATE_HERO)),
   };
 };
 export default connect(mapStateToProps, { createHero,getHero })(withTheme(withStyles(useStyles)(CreateHeroSection)));

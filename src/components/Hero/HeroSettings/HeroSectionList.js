@@ -5,14 +5,14 @@ import MUIDataTable from "mui-datatables";
 import { withTheme, withStyles } from '@material-ui/core/styles';
 import { updateActive, updateInActive, deleteHero } from '../../../actions/api/heroApi';
 import { confiDialogOpen } from '../../../actions/uiActions/navigationAcions';
-import SubmitProcess from '../../ui/SubmitProcess';
+// import SubmitProcess from '../../ui/SubmitProcess';
 import ConfimationDialog from '../../model/ConfimationDialog';
 import {TableHeaderButton,HomeHeaderButton} from '../../ui/Buttons';
-import {
-   TableRowContent,
+import {TableRowContent,
     ActiveButtonContent,
      ActionButtonsContent,
-     CreateButtonContent } from '../../ui/DataTableContentBuild'
+     CreateButtonContent } from '../../ui/DataTableContentBuild';
+import {LoadingProcess,SubmitProcess} from '../../ui/ProgressBars'
 
 
 
@@ -24,9 +24,6 @@ const useStyles = theme => ({
 
 
 class HeroSectionList extends React.Component {
-
-
-
   updateActive = (stauts, uid) => {
     if (!stauts) {
       const inActiveUid = (this.props.heroDetails.filter(hero => hero.active === true).map((value, key) => {
@@ -48,7 +45,6 @@ class HeroSectionList extends React.Component {
   }
 
   dialogButtonClick = () => {
-     console.log("dialogButtonClick....", this.props.confirmationUid)
     this.props.deleteHero(this.props.confirmationUid);
     this.props.confiDialogOpen({open:true,heroListSeletedUid:{}});
   }
@@ -143,9 +139,10 @@ return <ConfimationDialog
   render() {
     return (
       <React.Fragment>
-        {this.renderSubmitProcess()}
+         <LoadingProcess isLoading={this.props.isLoading}/>
+         <SubmitProcess  isSubmiting={this.props.isSubmiting}/>
         {this.renderDataTableResponsive()}
-        {this.renderSubmitProcess()}    
+        <SubmitProcess  isSubmiting={this.props.isSubmiting}/>    
         {this.renderConfimationDialog()}
       </React.Fragment>
     )
@@ -153,11 +150,12 @@ return <ConfimationDialog
 }
 
 const mapStateToProps = state => {
-  console.log("state.dialogOpen",state)
+ 
   return {
     heroDetails: Object.values(state.heroSection.heroDetails),
-    isLoading: state.heroSection.loading,
-    isSubmiting: state.heroSection.onSubmiting,
+    isLoading: _.some(_.values(state.pendingStates.GET_HERO)),
+    isSubmiting: _.some(_.values(state.pendingStates.DELETE_HERO)) 
+    || _.some(_.values(state.pendingStates.ACTIVE_HERO)) || _.some(_.values(state.pendingStates.INACTIVE_HERO)),
     confirmationUid: state.dialogOpen.heroListSeletedUid,
   };
 };

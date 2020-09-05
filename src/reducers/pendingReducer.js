@@ -3,7 +3,8 @@ import {getActionName} from '../actions/actionsHelper'
 export default  (state = {}, action) => {
   const { type } = action;
   const actionName = getActionName(type);
-
+// console.log("actionName.....",actionName);
+//  console.log("pendingReducer.....",getActionName(type))
   if (!actionName) {
     return {
       ...state
@@ -11,6 +12,7 @@ export default  (state = {}, action) => {
   }
 
   if (type.endsWith('_REQUEST')) {
+ 
     return {
       ...state,
       [actionName]: {

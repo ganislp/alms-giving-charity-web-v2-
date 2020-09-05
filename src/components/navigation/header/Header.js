@@ -9,6 +9,8 @@ import Settings from '../../settings/Settings';
 import CreateHeroSection from '../../Hero/HeroSettings/CreateHeroSection';
 import EditHeroSection from '../../Hero/HeroSettings/EditHeroSection';
 import HeroSectionSettings from '../../Hero/HeroSettings/HeroSectionSettings';
+import HeroCardSectionSettings from '../../HeroCard/HeroCardSettings/HeroCardSectionSettings';
+import CreateHeroCardSection from '../../HeroCard/HeroCardSettings/CreateHeroCardSection';
 import Home from '../../Home/Home'
 import { fetchCompanyDetails } from '../../../actions/api/companyDetailsApi';
 import {fetchUser} from '../../../actions/api/authApi'
@@ -25,7 +27,6 @@ class Header extends React.Component {
   }
 
   renderComponents(){
-    
     if(!_.isEmpty(this.props.companyDetails) && this.props.isLoading){
       return <LinearProgress color="secondary"/>
      }
@@ -37,6 +38,9 @@ return <Router history={history}>
           <Route exact path="/hero/heroSettings" render={props => <HeroSectionSettings {...this.props}/>}></Route>
           <Route exact path="/hero/heroCreate" component={() => <CreateHeroSection {...this.props}/>}></Route>
           <Route exact path="/hero/edit/:uid" component={props => <EditHeroSection {...props} {...this.props} />}></Route>
+          <Route exact path="/heroCard/heroCardSettings" render={props => <HeroCardSectionSettings {...this.props}/>}></Route>
+          <Route exact path="/heroCard/heroCardCreate" component={() => <CreateHeroCardSection {...this.props}/>}></Route>
+          <Route exact path="/heroCard/edit/:uid" component={props => <EditHeroSection {...props} {...this.props} />}></Route>
           <Route exact path="/aboutus" component={() => <div>About Us</div>}></Route>
           <Route exact path="/causes" component={() => <div>Causes</div>}></Route>
           <Route exact path="/news" component={() => <div>News</div>}></Route>
@@ -58,7 +62,7 @@ return <Router history={history}>
 const mapStateToProps = state => {
   return {
     companyDetails: state.companyDetails,
-    isLoading: state.companyDetails.loading,
+    isLoading: _.some(_.values(state.pendingStates.GET_COMPANY_DETAILS)),
   };
 };
 

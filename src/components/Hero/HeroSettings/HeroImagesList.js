@@ -9,12 +9,13 @@ import { withTheme,withStyles } from '@material-ui/core/styles';
   updateImageInActive
 } from '../../../actions/api/heroApi';
 import UploadImages from '../../ui/UploadImages';
-import SubmitProcess from '../../ui/SubmitProcess';
+//import SubmitProcess from '../../ui/SubmitProcess';
 import {confiDialogOpen} from '../../../actions/uiActions/navigationAcions';
 import ConfimationDialog from '../../model/ConfimationDialog';
 import MUIDataTable from "mui-datatables";
 import {TableRowContent,ActiveButtonContent,ActionButtonsContent,} from '../../ui/DataTableContentBuild';
 import {HomeHeaderButton} from '../../ui/Buttons';
+import {LoadingProcess,SubmitProcess} from '../../ui/ProgressBars'
 
 
 const useStyles = theme => ({
@@ -50,17 +51,17 @@ class HeroImagesList extends React.Component{
   }
  
 
-  renderSubmitProcess() {
-    const path = 'INACTIVE_HERO_IMAGE.pending'
-    const isSubmitting = _.get(this.props.pendingStates, path);
-    const uploadHeroImages = 'UPLOAD_HERO_IMAGES.pending'
-    const isSubmittingUpload = _.get(this.props.pendingStates, uploadHeroImages);
-    const deleteHeroImages = 'DELETE_HERO_IMAGE.pending'
-    const isSubmittingDelete = _.get(this.props.pendingStates, deleteHeroImages);
-    if (isSubmitting || isSubmittingUpload || isSubmittingDelete) {
-      return <SubmitProcess/>
-    }
-  }
+  // renderSubmitProcess() {
+  //   const path = 'INACTIVE_HERO_IMAGE.pending'
+  //   const isSubmitting = _.get(this.props.pendingStates, path);
+  //   const uploadHeroImages = 'UPLOAD_HERO_IMAGES.pending'
+  //   const isSubmittingUpload = _.get(this.props.pendingStates, uploadHeroImages);
+  //   const deleteHeroImages = 'DELETE_HERO_IMAGE.pending'
+  //   const isSubmittingDelete = _.get(this.props.pendingStates, deleteHeroImages);
+  //   if (isSubmitting || isSubmittingUpload || isSubmittingDelete) {
+  //     return <SubmitProcess/>
+  //   }
+  // }
 
   deleteHeroImage = (uid) => {
     this.props.confiDialogOpen({open:true,heroImageSeletedUid:uid});
@@ -156,9 +157,10 @@ return <ConfimationDialog
   render(){
     return(
       <React.Fragment>
-         {this.renderSubmitProcess()}
+      <LoadingProcess isLoading={this.props.isLoading}/>
+      <SubmitProcess  isSubmiting={this.props.isSubmiting}/>
       {this.renderDataTableResponsive()}
-      {this.renderSubmitProcess()}
+      <SubmitProcess  isSubmiting={this.props.isSubmiting}/>
       {this.renderConfimationDialog()}
       </React.Fragment>
     )
@@ -169,7 +171,10 @@ const mapStateToProps = state => {
   
   return {
     heroImages:  Object.values(state.heroSection.heroImages),
-    pendingStates: state.pendingStates,
+    isLoading: _.some(_.values(state.pendingStates.FETCH_HERO_IMAGES)),
+    isSubmiting: _.some(_.values(state.pendingStates.INACTIVE_HERO_IMAGE)) 
+    || _.some(_.values(state.pendingStates.DELETE_HERO_IMAGE ))
+      || _.some(_.values(state.pendingStates.UPLOAD_HERO_IMAGES)),
     confirmationUid: state.dialogOpen.heroImageSeletedUid,
   };
 };
