@@ -28,8 +28,8 @@ class HeroSectionForm extends React.Component {
     return (
       <form
         onSubmit={this.props.handleSubmit(this.onSubmit)} >
-         <FormHeader label="Create Hero Content">
-        <SubmitButton />
+         <FormHeader label="Create Hero Content" >
+        <SubmitButton isEdit={this.props.isEdit}/>
        
         </FormHeader>
         <Grid container className={classes.mainContainer} spacing={2}>

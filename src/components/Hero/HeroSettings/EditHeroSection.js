@@ -20,7 +20,8 @@ class EditHeroSection extends Component{
   render(){
     return(
      <ContentBuilder isSubmiting ={this.props.isSubmiting}>
-       <HeroSectionForm initialValues={_.pick(this.props.heroDetails,'heading','subHeading','body')} onSubmit={this.onSubmit}/>
+       <HeroSectionForm initialValues={_.pick(this.props.heroDetails,'heading','subHeading','body')}
+        onSubmit={this.onSubmit} isEdit={true}/>
      </ContentBuilder>
     )
   }

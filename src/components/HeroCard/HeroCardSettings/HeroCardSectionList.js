@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import MUIDataTable from "mui-datatables";
 import { withTheme, withStyles } from '@material-ui/core/styles';
-import { updateActive, updateInActive, deleteHero } from '../../../actions/api/heroApi';
+import { updateHeroCardActive,updateHeroCardInActive, deleteHeroCard, } from '../../../actions/api/heroCardApi';
 import { confiDialogOpen } from '../../../actions/uiActions/navigationAcions';
 // import SubmitProcess from '../../ui/SubmitProcess';
 import ConfimationDialog from '../../model/ConfimationDialog';
@@ -23,14 +23,16 @@ const useStyles = theme => ({
 });
 
 
-class HeroSectionList extends React.Component {
+class HeroCardSectionList extends React.Component {
   updateActive = (stauts, uid) => {
+    console.log("stauts",stauts);
+    console.log("uid",uid);
     if (!stauts) {
-      const inActiveUid = (this.props.heroDetails.filter(hero => hero.active === true).map((value, key) => {
+      const inActiveUid = (this.props.heroCardDetails.filter(heroCard => heroCard.active === true).map((value, key) => {
         return value.uid
       }));
-      this.props.updateActive(uid)
-      this.props.updateInActive(inActiveUid);
+      this.props.updateHeroCardActive(uid)
+      this.props.updateHeroCardInActive(inActiveUid);
     }
   }
 
@@ -41,12 +43,12 @@ class HeroSectionList extends React.Component {
   }
 
   deleteHeroSection = (uid) => {
-    this.props.confiDialogOpen({open:true,heroListSeletedUid:uid});
+    this.props.confiDialogOpen({open:true,heroListCardSeletedUid:uid});
   }
 
   dialogButtonClick = () => {
-    this.props.deleteHero(this.props.confirmationUid);
-    this.props.confiDialogOpen({open:false,heroListSeletedUid:{}});
+    this.props.deleteHeroCard(this.props.confirmationUid);
+    this.props.confiDialogOpen({open:false,heroListCardSeletedUid:{}});
   }
 
   renderDataTableResponsive() {
@@ -54,11 +56,6 @@ class HeroSectionList extends React.Component {
       {
         name: 'heading', label: 'Heading',
         options: {
-          customBodyRender: value => <TableRowContent value={value} />
-        }
-      },
-      {
-        name: 'subHeading', label: 'SubHeading', options: {
           customBodyRender: value => <TableRowContent value={value} />
         }
       },
@@ -77,7 +74,7 @@ class HeroSectionList extends React.Component {
       {
         name: 'active', label: 'Active', options: {
           customBodyRender: (value, dataIndex) => <ActiveButtonContent 
-          value={value} dataIndex={dataIndex.rowData[5]} 
+          value={value} dataIndex={dataIndex.rowData[4]} 
           disabled={value}
           click={this.updateActive} />,
           filter: true,
@@ -90,8 +87,8 @@ class HeroSectionList extends React.Component {
         options: {
           customBodyRender: (value, dataIndex) => <ActionButtonsContent 
           value={value} 
-          dataIndex={dataIndex.rowData[4]}          
-          edit="/hero/edit/"
+          dataIndex={dataIndex.rowData[3]}          
+          edit="/heroCard/edit/"
           click={this.deleteHeroSection}
           hiddendEdit={false}
           />,
@@ -111,7 +108,7 @@ class HeroSectionList extends React.Component {
       customToolbar: () => {
         return (
          <React.Fragment>
-          <CreateButtonContent create="/hero/heroCreate"/>
+          <CreateButtonContent create="/heroCard/heroCardCreate"/>
           <HomeHeaderButton/>
           </React.Fragment>
           
@@ -121,17 +118,17 @@ class HeroSectionList extends React.Component {
     };
 
     return <MUIDataTable
-    title={<TableHeaderButton label="Hero Section Settings"></TableHeaderButton>}
+    title={<TableHeaderButton label="Hero Section Card Settings"></TableHeaderButton>}
       columns={columns}
-      data={this.props.heroDetails}
+      data={this.props.heroCardDetails}
       options={options}/>
   }
 
   renderConfimationDialog(){
     if(!_.isEmpty(this.props.confirmationUid)){
 return <ConfimationDialog 
-          title="Delete Hero Section"
-          content="Are you sure you want to delete this Hero Section ?"
+          title="Delete Hero Card Section"
+          content="Are you sure you want to delete this Hero Card Section ?"
           dialogButtonClick={this.dialogButtonClick} />
     }
   }
@@ -152,12 +149,12 @@ return <ConfimationDialog
 const mapStateToProps = state => {
  
   return {
-    heroDetails: Object.values(state.heroSection.heroDetails),
-    isLoading: _.some(_.values(state.pendingStates.GET_HERO)),
-    isSubmiting: _.some(_.values(state.pendingStates.DELETE_HERO)) 
-    || _.some(_.values(state.pendingStates.ACTIVE_HERO)) || _.some(_.values(state.pendingStates.INACTIVE_HERO)),
-    confirmationUid: state.dialogOpen.heroListSeletedUid,
+    heroCardDetails: Object.values(state.heroCardSection.heroCardDetails),
+    isLoading: _.some(_.values(state.pendingStates.GET_HERO_CARD)),
+    isSubmiting: _.some(_.values(state.pendingStates.DELETE_HERO_CARD)) 
+    || _.some(_.values(state.pendingStates.ACTIVE_HERO_CARD)) || _.some(_.values(state.pendingStates.INACTIVE_HERO_CARD)),
+    confirmationUid: state.dialogOpen.heroListCardSeletedUid,
   };
 };
-export default connect(mapStateToProps, { updateActive, updateInActive, confiDialogOpen, deleteHero })
-  (withTheme(withStyles(useStyles)(HeroSectionList)));
+export default connect(mapStateToProps, { updateHeroCardActive, updateHeroCardInActive, confiDialogOpen, deleteHeroCard })
+  (withTheme(withStyles(useStyles)(HeroCardSectionList)));

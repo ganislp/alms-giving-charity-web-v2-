@@ -103,10 +103,11 @@ export const SubmitButton = (props) => {
   const classes = useStyles();
   const matchesXSD = useMediaQuery(theme.breakpoints.down("xs"));
   const renderButton = () => {
+    console.log("props.isEdit"+ props.isEdit)
     if (matchesXSD) {
       return <IconButton aria-label="Submit"
         size="small" color="primary" type="submit" style={{ ...theme.palette.typography.IconButton }}>
-        {props.isEdit ?
+        {!props.isEdit ?
           <Tooltip title="Add Company Details" arrow><SaveIcon fontSize="inherit" /></Tooltip> :
           <Tooltip title="Edit Company Details" arrow><Edit fontSize="inherit" /></Tooltip>
         }
@@ -115,7 +116,7 @@ export const SubmitButton = (props) => {
     else {
       return <Button variant="text" type="submit" color="primary"
         className={classes.submitButton}
-        startIcon={props.isEdit ?
+        startIcon={!props.isEdit ?
           <Tooltip title="Add Company Details" interactive><SaveIcon /></Tooltip> :
           <Tooltip title="Edit Company Details" interactive><Edit /></Tooltip>
         } size="medium" >Submit

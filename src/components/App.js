@@ -3,7 +3,7 @@ import Header from './navigation/header/Header';
 import { ThemeProvider} from '@material-ui/core/styles';
 import appTheme from '../components/theme/AppTheme';
 import SuccessSnackbar from './model/SuccessSnackbar';
-import { fetchCompanyDetails } from '../actions/api/companyDetailsApi';
+
 
 class App extends Component{
 

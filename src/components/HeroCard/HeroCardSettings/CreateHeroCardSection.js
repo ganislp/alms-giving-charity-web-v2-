@@ -17,23 +17,23 @@ class CreateHeroCardSection extends Component {
     if(_.isEmpty(this.props.heroCardDetails)){
        isActive = true;
     }
-    //this.props.createHero(formValues,isActive);
+ this.props.createCardHero(formValues,isActive);
   };
 
   render() {
     return (
     
       <ContentBuilder  isSubmiting ={this.props.isSubmiting}>
-          <HeroCardSectionForm onSubmit={this.onSubmit} />
+          <HeroCardSectionForm onSubmit={this.onSubmit} isEdit={false}/>
       </ContentBuilder>
     )
   }
 }
 const mapStateToProps = state => {
-  console.log("heroSettingsSection", state);
+  console.log("heroSettingsSection", state.pendingStates);
   return {
     heroCardDetails:  Object.values(state.heroCardSection.heroCardDetails),
-    isSubmiting: state.heroCardSection.onSubmiting,
+    isSubmiting: _.some(_.values(state.pendingStates.CREATE_HERO_CARD)),
   };
 };
 export default connect(mapStateToProps, { createCardHero,getHeroCards })(withTheme(withStyles(useStyles)(CreateHeroCardSection)));
