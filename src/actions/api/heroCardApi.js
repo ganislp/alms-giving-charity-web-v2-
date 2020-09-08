@@ -11,7 +11,7 @@ const userUid = cookies.get('userUid');
 export const getHeroCards = () => async dispatch => {
   dispatch(heroCardActions.getHeroCardRequest());
   try {
-    await db.collection('heroCardSection').onSnapshot(snap => {
+    await db.collection('heroCardSection').orderBy("createdAt","desc").onSnapshot(snap => {
       const data = snap.docs.map(doc => (
         {
           ...doc.data(),
@@ -34,7 +34,13 @@ export const getHeroCards = () => async dispatch => {
 export const createCardHero = (formValues, isActive) => async (dispatch) => {
   dispatch(heroCardActions.createHeroCardRequest());
   try {
-    const response = await db.collection('heroCardSection').add({ ...formValues, createdAt: createdAt, active: isActive },);
+    let cardHeroRef = await db.collection("heroCardSection");
+    let cardCount = await cardHeroRef.get().then(snap => snap.size);
+    let active = false;
+    if (cardCount <= 2) {
+      active = true;
+    }
+    const response = cardHeroRef.add({ ...formValues, createdAt: createdAt, active: active },);
     dispatch(heroCardActions.createHeroCardSuccess(response.id));
     dispatch(showSuccessSnackbar("Data Saved Sucessfully!"));
     history.push('/heroCard/heroCardSettings');

@@ -43,7 +43,7 @@ export const ActiveButtonContent = (props) => {
    <IconButton aria-label="delete" 
     disabled={props.dataIndex}  
    size="medium" disableRipple style={{padding:"0"}} 
-   onClick={() =>props.click(props.value)}>
+   onClick={() =>props.click(props.value,props.fileName)}>
    <Tooltip title="Delete"><DeleteIcon fontSize="inherit" /></Tooltip>
  </IconButton>
 

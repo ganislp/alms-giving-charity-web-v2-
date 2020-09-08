@@ -1,5 +1,6 @@
 import { db, createdAt } from '../../firebase';
 import moment from 'moment';
+import {storage} from '../../firebase';
 import * as heroActions from '../HeroActions/heroActions';
 import { showFaildSnackbar, showSuccessSnackbar, showWarningSnackbar } from '../uiActions/snackbarActions';
 import history from '../../history';
@@ -161,14 +162,19 @@ export const getHeroImageByImageName = (imageName) => async dispatch => {
   }
 };
 
-export const deleteHeroImage = (uid) => async dispatch => {
+export const deleteHeroImage = (uid,filename) => async dispatch => {
   dispatch(heroActions.deleteHeroImageRequest());
   try {
-    await db.collection('heroImages').doc(`${uid}`).delete();
-    dispatch(heroActions.deleteHeroImageSuccess(uid));
-    dispatch(showSuccessSnackbar("Hero Section Image deleted Sucessfully!"));
+    let desertRef = storage.ref(`hero/${filename}`)
+    await desertRef.delete().then(() => {
+       db.collection('heroImages').doc(`${uid}`).delete();
+      dispatch(heroActions.deleteHeroImageSuccess(uid));
+      dispatch(showSuccessSnackbar("Hero Section Image deleted Sucessfully!"));
+    });;
+   
   } catch (error) {
     dispatch(heroActions.deleteHeroImageError(error));
+    console.log("error",error)
     dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
   }
 };

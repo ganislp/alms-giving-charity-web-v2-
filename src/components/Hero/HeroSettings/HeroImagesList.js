@@ -56,24 +56,14 @@ class HeroImagesList extends React.Component {
   }
 
 
-  // renderSubmitProcess() {
-  //   const path = 'INACTIVE_HERO_IMAGE.pending'
-  //   const isSubmitting = _.get(this.props.pendingStates, path);
-  //   const uploadHeroImages = 'UPLOAD_HERO_IMAGES.pending'
-  //   const isSubmittingUpload = _.get(this.props.pendingStates, uploadHeroImages);
-  //   const deleteHeroImages = 'DELETE_HERO_IMAGE.pending'
-  //   const isSubmittingDelete = _.get(this.props.pendingStates, deleteHeroImages);
-  //   if (isSubmitting || isSubmittingUpload || isSubmittingDelete) {
-  //     return <SubmitProcess/>
-  //   }
-  // }
 
   deleteHeroImage = (uid) => {
     this.props.confiDialogOpen({ open: true, heroImageSeletedUid: uid });
   }
 
   dialogImgeButtonClick = () => {
-    this.props.deleteHeroImage(this.props.confirmationUid);
+    const {fileName} = Object.assign({}, ...Object.values((this.props.heroImages.filter(image => image.uid === this.props.confirmationUid))));
+    this.props.deleteHeroImage(this.props.confirmationUid,fileName);
     this.props.confiDialogOpen({ open: false, heroImageSeletedUid: {} });
   }
 
@@ -132,7 +122,6 @@ class HeroImagesList extends React.Component {
           customBodyRender: (value, dataIndex) => <ActionButtonsContent
             value={value}
             dataIndex={dataIndex.rowData[3]}
-            edit="/hero/edit/"
             click={this.deleteHeroImage}
             hiddendEdit={true}
             
