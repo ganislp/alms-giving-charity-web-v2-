@@ -64,7 +64,7 @@ const HeroSectionView = (props) => {
   imageUrl={image.imageUrl} 
   imgname={image.fileName}
   key={`${image.fileName} ${index}`} 
-  {...props}
+
   />
 ))}
 
@@ -73,7 +73,7 @@ const HeroSectionView = (props) => {
  }
  const mapStateToProps = state => {
    return {
-     heroImages:  Object.values(state.heroSection.heroImages),
+     heroImages:  Object.values(state.heroSection.heroImages).filter(image => image.active === true),
    };
  };
  export default connect(mapStateToProps)(HeroSectionView);

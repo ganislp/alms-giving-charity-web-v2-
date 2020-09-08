@@ -135,7 +135,7 @@ export const getHeroImages = () => async dispatch => {
   dispatch(heroActions.getHeroImagesRequest());
   try {
 
-    await db.collection('heroImages').onSnapshot(snap => {
+    await db.collection('heroImages').orderBy("createdAt","desc").onSnapshot(snap => {
       const data = snap.docs.map(doc => (
         {
           ...doc.data(),
@@ -180,12 +180,13 @@ export const updateImageActive = (uid) => async dispatch => {
     await db.collection('heroImages').doc(`${uid}`).update({ active: true, createdAt: createdAt });
     dispatch(showSuccessSnackbar("Active Record Sucessfully Updated!"));
   } catch (error) {
+    console.log("error",error)
     dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
   }
 };
 
 
-export const updateImageInActive = (uid) => async dispatch => {
+export const updateImageInActive = () => async dispatch => {
   try {
     dispatch(heroActions.inActiveHeroImageRequest());
     let imagesRef = await db.collection("heroImages");
@@ -202,6 +203,7 @@ export const updateImageInActive = (uid) => async dispatch => {
     }
   } catch (error) {
     dispatch(heroActions.inActiveHeroImageError(error));
+    console.log("error",error)
     dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
   }
 };

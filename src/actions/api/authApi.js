@@ -45,7 +45,6 @@ export const logout = () => async dispatch => {
 export const fetchUser = () => async dispatch => {
   try {
     await auth.onAuthStateChanged(currentUser => {
-    //  console.log("..........currentUser", currentUser);
       if (currentUser) {  
        cookies.set('isAuthenticated', true, { path: '/' });  
        cookies.set('userUid', currentUser.uid, { path: '/' });   

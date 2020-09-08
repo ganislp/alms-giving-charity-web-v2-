@@ -1,7 +1,7 @@
 import {ON_SELECT_APP_TAB,
   DRAWER_OPEN,
   ON_CONFI_DIALOG_OPEN,
-  ON_POPOVER_DIALOG_OPEN} from '../actions/actionTypes/uiActionTypes'
+  ON_POPOVER_DIALOG_OPEN,ON_PREVIEW_DIALOG_OPEN} from '../actions/actionTypes/uiActionTypes'
 
 export const   selectdAppTabReducer = (selectdTabValue=0,action) => {
   switch (action.type) {
@@ -37,6 +37,16 @@ export const   confDialogOpenReducer = (state={open:false,heroListSeletedUid:{},
 export const   popOverDialogOpenReducer = (state={popOverOpen:false,anchorEl:null},action) => {
   switch (action.type) {
     case ON_POPOVER_DIALOG_OPEN:
+      return { ...state,...action.payload };     
+      default:
+        return state;
+    }
+
+};
+
+export const   previewDialogOpenReducer = (state={previewOpen:false,uid:null},action) => {
+  switch (action.type) {
+    case ON_PREVIEW_DIALOG_OPEN:
       return { ...state,...action.payload };     
       default:
         return state;

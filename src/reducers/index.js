@@ -4,7 +4,7 @@ import {
   selectdAppTabReducer,
   drawerOpenReducer,
   confDialogOpenReducer,
-popOverDialogOpenReducer} from './NavigationReducer';
+popOverDialogOpenReducer,previewDialogOpenReducer} from './NavigationReducer';
 import companyDetailsReducer from './CompanyDetailsReducer';
 import heroReducer from './Hero/HeroReducer';
 import heroCardReducer from './HeroCard/HeroCardReducer';
@@ -18,6 +18,7 @@ export default combineReducers({
   selectdTabValue:selectdAppTabReducer,
   drawerOpen:drawerOpenReducer,
   dialogOpen:confDialogOpenReducer,
+  previewOpen:previewDialogOpenReducer,
   popOverLogin:popOverDialogOpenReducer,
   companyDetails: companyDetailsReducer,
   heroSection: heroReducer,

@@ -30,7 +30,6 @@ class CreateHeroCardSection extends Component {
   }
 }
 const mapStateToProps = state => {
-  console.log("heroSettingsSection", state.pendingStates);
   return {
     heroCardDetails:  Object.values(state.heroCardSection.heroCardDetails),
     isSubmiting: _.some(_.values(state.pendingStates.CREATE_HERO_CARD)),

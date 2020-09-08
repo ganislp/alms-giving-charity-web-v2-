@@ -1,5 +1,5 @@
 import React from 'react';
-import {IconButton,Typography, Grid } from '@material-ui/core';
+import {IconButton,Typography, Grid,Avatar } from '@material-ui/core';
 import Tooltip from '@material-ui/core/Tooltip';
 import Edit from '@material-ui/icons/Edit';
 import Check from '@material-ui/icons/Check';
@@ -7,7 +7,7 @@ import Clear from '@material-ui/icons/Clear';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
 import history from '../../history';
-import UploadImages from '../ui/UploadImages'
+import UploadImages from '../ui/UploadImages';
 
 // const useStyles = makeStyles(theme => ({
 
@@ -68,3 +68,5 @@ export const ActiveButtonContent = (props) => {
         </IconButton>
       </Tooltip>
         }  
+
+            

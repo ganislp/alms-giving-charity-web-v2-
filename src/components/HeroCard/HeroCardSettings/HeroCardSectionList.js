@@ -25,8 +25,6 @@ const useStyles = theme => ({
 
 class HeroCardSectionList extends React.Component {
   updateActive = (stauts, uid) => {
-    console.log("stauts",stauts);
-    console.log("uid",uid);
     if (!stauts) {
       const inActiveUid = (this.props.heroCardDetails.filter(heroCard => heroCard.active === true).map((value, key) => {
         return value.uid

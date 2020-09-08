@@ -103,7 +103,6 @@ export const SubmitButton = (props) => {
   const classes = useStyles();
   const matchesXSD = useMediaQuery(theme.breakpoints.down("xs"));
   const renderButton = () => {
-    console.log("props.isEdit"+ props.isEdit)
     if (matchesXSD) {
       return <IconButton aria-label="Submit"
         size="small" color="primary" type="submit" style={{ ...theme.palette.typography.IconButton }}>
