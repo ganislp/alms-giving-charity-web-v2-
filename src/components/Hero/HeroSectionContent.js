@@ -4,14 +4,14 @@ import { Grid, Container, Typography, IconButton,Hidden } from '@material-ui/cor
 import SettingsIcon from '@material-ui/icons/Settings';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import history from '../../history';
-import {HeaderButton} from '../ui/Buttons'
+import {HeaderButton,SettingButton} from '../ui/Buttons'
 
 const useStyles = theme => ({
 
   imageConatiner:{
     backgroundImage: (props) => `url(${props.imageUrl})`,
     width:"100%",
-    height: "80vh",
+    height: "100vh",
     backgroundPosition: "center center",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",   
@@ -24,7 +24,7 @@ const useStyles = theme => ({
    paper: {
     flexGrow: 1,
     width: "100%",
-    height: "80vh",
+    height: "100vh",
     backgroundColor: "rgba(0,0,0, 0.5)",
     position: "relative",
     alignItems:"center",
@@ -88,6 +88,7 @@ class HeroSectionContent extends React.Component {
     const { classes } = this.props;   
     const activeHeroDetails = Object.assign({}, ...Object.values((this.props.heroDetails.filter(hero => hero.active === true))));
     return (
+   
       <Grid container  className={classes.imageConatiner} >
         <Grid item className={classes.paper}   container justify="flex-end" >                      
           <Container maxWidth="lg"  disableGutters>
@@ -111,25 +112,21 @@ class HeroSectionContent extends React.Component {
               </Grid> 
                            
               <Hidden  lgUp>
-          <Grid item  className= {classes.settingsContainer}  >
-            <IconButton aria-label="delete" onClick={() => history.push("/hero/heroSettings")}>             
-              <SettingsIcon fontSize="small" color="primary" />         
-            </IconButton>
+          <Grid item  >
+          <SettingButton size = "small" click = {() => history.push("/hero/heroSettings")}></SettingButton>
           </Grid>
           </Hidden>
 </Grid>
           </Container>
           <Hidden mdDown>
-          <Grid item   className= {classes.settingsContainer}  >
-            <IconButton aria-label="delete" onClick={() => history.push("/hero/heroSettings")}>             
-              <SettingsIcon fontSize="large" color="primary" />         
-            </IconButton>
+          <Grid item     >
+          <SettingButton size = "large" click = {() => history.push("/hero/heroSettings")}></SettingButton>
           </Grid>
           </Hidden>
           </Grid>
          
         </Grid>
-     
+ 
     )
   }
 

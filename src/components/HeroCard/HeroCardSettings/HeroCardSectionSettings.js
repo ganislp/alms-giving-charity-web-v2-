@@ -2,7 +2,7 @@ import React from 'react';
 import { Container,Grid } from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import HeroCardSectionList from './HeroCardSectionList';
-
+import HeroCardImagesList from './HeroCardImagesList';
 
 const useStyles = theme => ({
   mainContainer: {
@@ -16,17 +16,18 @@ const useStyles = theme => ({
 
 });
 class HeroCardSectionSettings extends React.Component{
-  rednderHeroCardSectionList(){
-      return <HeroCardSectionList/>
-  }
  
+
   render(){
     const { classes } = this.props;
     return (
       <Container maxWidth="lg" className={classes.mainContainer} >
 <Grid  container >
   <Grid item sm={12} style={{marginBottom:"1em",marginTop:"1em"}}>
-{this.rednderHeroCardSectionList()}
+  <HeroCardSectionList/>
+  </Grid>
+  <Grid item sm={12} style={{marginBottom:"1em",marginTop:"1em"}}>
+  <HeroCardImagesList/>
   </Grid>
     </Grid>   
   </Container>

@@ -9,7 +9,7 @@ import Edit from '@material-ui/icons/Edit';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import HomeIcon from '@material-ui/icons/Home';
 import history from '../../history';
-
+import SettingsIcon from '@material-ui/icons/Settings';
 
 
 const useStyles = makeStyles(theme => ({
@@ -95,6 +95,11 @@ const useStyles = makeStyles(theme => ({
    } ,
  
    },
+
+   settingsContainer:{
+    backgroundColor:theme.palette.common.blue,
+    padding:"0.3em"
+  },
 
 }))
 
@@ -242,6 +247,15 @@ export const HeaderButton = (props) => {
     <Button className={classes.contentButton} variant="outlined" color="secondary" disableRipple disableFocusRipple>
       <span className={classes.contentButtonSpan}>{props.label}</span>
     </Button>
+  )
+};
+
+export const SettingButton = (props) => {
+  const classes = useStyles();
+  return (
+    <IconButton aria-label="settings" onClick={() => props.click()} style={{ padding:"0em"}}>             
+    <SettingsIcon fontSize={props.size} color="primary" className={classes.settingsContainer} />         
+  </IconButton>
   )
 };
 

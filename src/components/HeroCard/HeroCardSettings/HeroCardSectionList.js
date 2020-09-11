@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import MUIDataTable from "mui-datatables";
+import { Avatar } from '@material-ui/core';
 import { withTheme, withStyles } from '@material-ui/core/styles';
 import { updateHeroCardActive,updateHeroCardInActive, deleteHeroCard, } from '../../../actions/api/heroCardApi';
 import { confiDialogOpen } from '../../../actions/uiActions/navigationAcions';
-// import SubmitProcess from '../../ui/SubmitProcess';
 import ConfimationDialog from '../../model/ConfimationDialog';
 import {TableHeaderButton,HomeHeaderButton} from '../../ui/Buttons';
 import {TableRowContent,
@@ -64,6 +64,18 @@ class HeroCardSectionList extends React.Component {
 
       },
       {
+        name: 'cardImage', label: 'Image',
+        options: {
+          customBodyRender: (value, dataIndex) => <Avatar 
+            alt={dataIndex.rowData[5]} src={value} > </Avatar>,
+          filter: false,
+         empty: true,
+
+
+
+        }
+      },
+      {
         name: 'createdAt', label: 'CreatedAt', options: {
           customBodyRender: value => <TableRowContent value={value} />
         }
@@ -72,7 +84,7 @@ class HeroCardSectionList extends React.Component {
       {
         name: 'active', label: 'Active', options: {
           customBodyRender: (value, dataIndex) => <ActiveButtonContent 
-          value={value} dataIndex={dataIndex.rowData[4]} 
+          value={value} dataIndex={dataIndex.rowData[5]} 
           disabled={value}
           click={this.updateActive} />,
           filter: true,
@@ -85,7 +97,7 @@ class HeroCardSectionList extends React.Component {
         options: {
           customBodyRender: (value, dataIndex) => <ActionButtonsContent 
           value={value} 
-          dataIndex={dataIndex.rowData[3]}          
+          dataIndex={dataIndex.rowData[4]}          
           edit="/heroCard/edit/"
           click={this.deleteHeroSection}
           hiddendEdit={false}

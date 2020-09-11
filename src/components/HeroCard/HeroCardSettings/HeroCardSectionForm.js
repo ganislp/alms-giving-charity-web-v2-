@@ -1,11 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import {Grid, } from '@material-ui/core';
+import _ from 'lodash';
+import {Grid, Avatar, } from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import {FormHeader}  from '../../ui/form/FormHeader';
 import { SubmitButton} from '../../ui/Buttons';
-import {renderTextField,}   from '../../ui/form/formFields';
-import {validateHeroForm} from '../../ui/form/validateForm'
+import {renderTextField,renderSelectField}   from '../../ui/form/formFields';
+import {validateHeroCardForm} from '../../ui/form/validateForm'
 
 const useStyles = theme => ({
   mainContainer: {
@@ -17,18 +19,39 @@ const useStyles = theme => ({
 
 });
 class HeroCardSectionForm extends React.Component {
-
+ constructor(props) {
+   super(props);
+   if(this.props.isEdit ){
+   this.state = {
+    selectedImage: this.props.initialValues.cardImage
+    };
+  }
+  else{
+    this.state = {
+      selectedImage: ""
+      }
+  }
+ }
+ 
   onSubmit = formValues => {
     this.props.onSubmit(formValues);
-
   };
-
+ 
   render() {
     const { classes } = this.props;
+    let heroCardImagesList = this.props.heroCardImages.length > 0
+    	&& this.props.heroCardImages.map((item, i) => {
+      return (
+        <option key={i} value={item.imageUrl}>
+          {item.fileName}
+        </option>
+      )
+    }, this);
+
     return (
       <form
         onSubmit={this.props.handleSubmit(this.onSubmit)} >
-         <FormHeader label="Create Hero Crad Content">
+         <FormHeader label={this.props.label}>
         <SubmitButton isEdit={this.props.isEdit}/>
        
         </FormHeader>
@@ -52,7 +75,25 @@ class HeroCardSectionForm extends React.Component {
               margin="normal"
               fullWidth
             />
-          </Grid>        
+          </Grid>  
+          <Grid item className={classes.itemTextField} xs={12} sm={12} container justify="space-between">
+          <Grid item>
+            <Field
+              name="cardImage"
+              onChange={(event, index, value) => {          
+                this.setState({selectedImage:event.target.value})
+              }} 
+              component={renderSelectField}
+              label="select card icons"   >
+             <option value="" />
+              {heroCardImagesList}
+            </Field>
+            </Grid>
+            <Grid item>
+            <Avatar src={this.state.selectedImage}></Avatar> 
+            </Grid>  
+          </Grid> 
+            
         </Grid>
       </form>
     )
@@ -60,7 +101,17 @@ class HeroCardSectionForm extends React.Component {
 
 }
 
-export default reduxForm({
-  form: 'heroCardSectionForm', // a unique identifier for this form
-  validate:validateHeroForm,
-})(withTheme(withStyles(useStyles)(HeroCardSectionForm)));;
+const mapStateToProps = (state,ownProps) => {
+  return {
+      form:ownProps.FormName,
+      
+  };
+};
+
+const formWrapped=  reduxForm({
+   validate:validateHeroCardForm
+  }) (withTheme(withStyles(useStyles)(HeroCardSectionForm)))  
+    export default connect(
+      mapStateToProps,{}
+    )(formWrapped)
+

@@ -47,6 +47,7 @@ handleUploadStart = () => this.setState({ isUploading: true, progress: 0 });
 handleProgress = progress => this.setState({ progress });
 handleUploadError = error => {
   this.setState({ isUploading: false });
+  
  this.props.uploadHeroFailed();
 };
 handleUploadSuccess = filename => {
@@ -56,7 +57,7 @@ handleUploadSuccess = filename => {
     .child(filename)
     .getDownloadURL()
     .then(url => 
-    this.props.uploadHeroImages({imageUrl:url,fileName:filename})
+    this.props.upload(url,filename)
       );
   
 };

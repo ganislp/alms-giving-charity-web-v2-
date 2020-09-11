@@ -70,4 +70,6 @@ class HeroSectionForm extends React.Component {
 export default reduxForm({
   form: 'heroSectionForm', // a unique identifier for this form
   validate:validateHeroForm,
+  enableReinitialize: true,
+  destroyOnUnmount: true,
 })(withTheme(withStyles(useStyles)(HeroSectionForm)));;

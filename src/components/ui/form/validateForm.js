@@ -49,7 +49,21 @@ export const validateHeroForm = values => {
       errors[field] = 'Required'
     }
   })
+  return errors
+}
 
+
+export const validateHeroCardForm = values => {
+  const errors = {}
+  const requiredFields = [
+    'heading',
+    'body',
+  ]
+  requiredFields.forEach(field => {
+    if (!values[field]) {
+      errors[field] = 'Required'
+    }
+  })
 
 
   return errors

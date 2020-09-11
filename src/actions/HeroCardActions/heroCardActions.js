@@ -170,7 +170,7 @@ export const getHeroCardImagesRequest = () => {
 export const getHeroCardImagesSuccess = (results) => {
   return {
     type: heroCardActionTypes.FETCH_HERO_CARD_IMAGES_SUCCESS,
-    payload: {  heroImages: { ...results } }
+    payload: {  heroCardImages: { ...results } }
 
   }
 };

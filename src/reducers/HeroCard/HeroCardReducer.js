@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 const initialUserState = {
   heroCardDetails: {},
-  HeroCardImages: {},
+  heroCardImages: {},
 };
 
 export default (state = initialUserState, action) => {
@@ -64,7 +64,7 @@ export default (state = initialUserState, action) => {
     case HeroCardActionTypes.FETCH_HERO_CARD_IMAGES_REQUEST:
       return { ...state, ...action.payload }
     case HeroCardActionTypes.FETCH_HERO_CARD_IMAGES_SUCCESS:
-      return { ...state, HeroCardImages: { ..._.mapKeys(action.payload.HeroCardImages, 'uid') } }
+      return { ...state, heroCardImages: { ..._.mapKeys(action.payload.heroCardImages, 'uid') } }
     case HeroCardActionTypes.FETCH_HERO_CARD_IMAGES_ERROR:
       return { ...state, ...action.payload };
 

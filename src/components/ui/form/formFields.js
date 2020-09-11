@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextField} from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
-import NativeSelect from '@material-ui/core/NativeSelect';
+import {NativeSelect,Select ,InputLabel} from '@material-ui/core';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import MuiPhoneNumber from "material-ui-phone-number";
 
@@ -16,7 +16,7 @@ const renderFromHelper = ({ touched, error }) => {
 export const renderTextField    = ({ classes, label, input, meta: { touched, invalid, error }, ...custom }) => {
   return  <TextField
   label={label}
-  // required      
+  required      
   placeholder={label}
   error={touched && invalid}
   helperText={touched && error}
@@ -30,15 +30,11 @@ export const renderTextField    = ({ classes, label, input, meta: { touched, inv
 export const renderSelectField = ({ label, input, meta: { touched, error }, children, ...custom }) =>  {
   return (
     <FormControl error={touched && error}>
+      <InputLabel htmlFor="age-native-simple">{label}</InputLabel>
       <NativeSelect
         required
         {...input}
-        {...custom}
-        inputProps={{
-          name: 'country',
-          id: 'country-native-label-placeholder',
-        }}
-
+        {...custom} 
       >
         {children}
       </NativeSelect>
@@ -46,6 +42,8 @@ export const renderSelectField = ({ label, input, meta: { touched, error }, chil
     </FormControl>
   )
 }
+
+
 
 export const renderPhoneField = ({ label, classes, input, meta: { touched, invalid, error }, ...custom }) => {
   return (
