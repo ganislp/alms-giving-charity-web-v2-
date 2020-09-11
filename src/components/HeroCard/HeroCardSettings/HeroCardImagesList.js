@@ -130,9 +130,9 @@ class HeroCardImagesList extends React.Component {
       renderExpandableRow: (rowData, rowMeta) => {
         const colSpan = rowData.length;
         const cardIndex = Object.values(rowMeta).slice(0, 1);
-       const { heading,body,cardImage,createdAt } = this.props.heroCardDetails[cardIndex];
-
-  
+       
+       const { imageUrl } = this.props.heroCardImages[cardIndex];
+       const { heading,body,cardImage,createdAt } = Object.assign({}, ...Object.values((this.props.heroCardDetails.filter(card => card.cardImage === imageUrl))));
         return (
           
           <TableRow >
