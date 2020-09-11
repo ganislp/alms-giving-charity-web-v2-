@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import {Grid, } from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
@@ -67,9 +68,23 @@ class HeroSectionForm extends React.Component {
 
 }
 
-export default reduxForm({
-  form: 'heroSectionForm', // a unique identifier for this form
-  validate:validateHeroForm,
-  enableReinitialize: true,
-  destroyOnUnmount: true,
-})(withTheme(withStyles(useStyles)(HeroSectionForm)));;
+// export default reduxForm({
+//   form: 'heroSectionForm', // a unique identifier for this form
+//   validate:validateHeroForm,
+//   enableReinitialize: true,
+//   destroyOnUnmount: true,
+// })(withTheme(withStyles(useStyles)(HeroSectionForm)));;
+
+const mapStateToProps = (state,ownProps) => {
+  return {
+      form:ownProps.FormName,
+      
+  };
+};
+
+const formWrapped=  reduxForm({
+   validate:validateHeroForm
+  }) (withTheme(withStyles(useStyles)(HeroSectionForm)))  
+    export default connect(
+      mapStateToProps,{}
+    )(formWrapped)

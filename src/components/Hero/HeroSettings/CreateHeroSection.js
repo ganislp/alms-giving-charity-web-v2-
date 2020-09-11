@@ -23,7 +23,11 @@ class CreateHeroSection extends Component {
   render() {
     return (
       <ContentBuilder  isSubmiting ={this.props.isSubmiting}>
-          <HeroSectionForm onSubmit={this.onSubmit} isEdit={false}/>
+          <HeroSectionForm 
+          onSubmit={this.onSubmit} 
+          isEdit={false}
+          FormName="createHeroForm"
+          />
       </ContentBuilder>
     )
   }

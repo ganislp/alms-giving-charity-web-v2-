@@ -21,7 +21,12 @@ class EditHeroSection extends Component{
     return(
      <ContentBuilder isSubmiting ={this.props.isSubmiting}>
        <HeroSectionForm initialValues={_.pick(this.props.heroDetails,'heading','subHeading','body')}
-        onSubmit={this.onSubmit} isEdit={true}/>
+       enableReinitialize ={true}  
+       destroyOnUnmount={false}
+        onSubmit={this.onSubmit} 
+        FormName="editHeroForm"
+        isEdit={true}
+        />
      </ContentBuilder>
     )
   }

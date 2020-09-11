@@ -58,8 +58,9 @@ class HeroCardsView extends React.Component {
 
   render() {
     const { classes } = this.props;
+   
     return (
-
+     
       <Grid container justify="space-between" >
         <Grid item container justify="flex-end" style={{ marginBottom: "1em", marginTop: "1em" }}>
           <Hidden lgUp>
@@ -95,8 +96,9 @@ class HeroCardsView extends React.Component {
 }
 
 const mapStateToProps = state => {
+
   return {
-    heroCardDetails: Object.values(state.heroCardSection.heroCardDetails),
+    heroCardDetails: Object.values(state.heroCardSection.heroCardDetails).filter(card => card.active === true),
     isLoading: _.some(_.values(state.pendingStates.GET_HERO_CARD)),
   };
 };

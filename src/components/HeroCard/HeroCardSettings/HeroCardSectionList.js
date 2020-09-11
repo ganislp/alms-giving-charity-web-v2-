@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import MUIDataTable from "mui-datatables";
-import { Avatar } from '@material-ui/core';
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import { Avatar,Grid } from '@material-ui/core';
 import { withTheme, withStyles } from '@material-ui/core/styles';
 import { updateHeroCardActive,updateHeroCardInActive, deleteHeroCard, } from '../../../actions/api/heroCardApi';
 import { confiDialogOpen } from '../../../actions/uiActions/navigationAcions';
@@ -13,7 +15,7 @@ import {TableRowContent,
      ActionButtonsContent,
      CreateButtonContent } from '../../ui/DataTableContentBuild';
 import {LoadingProcess,SubmitProcess} from '../../ui/ProgressBars'
-
+import CardBuild from '../CardsBuild';
 
 
 const useStyles = theme => ({
@@ -115,6 +117,9 @@ class HeroCardSectionList extends React.Component {
       pagination: false,
       selectableRows: "none",
       responsive: 'vertical',
+      expandableRows: true,
+      expandableRowsHeader: false,
+      expandableRowsOnClick: true,
       customToolbar: () => {
         return (
          <React.Fragment>
@@ -122,6 +127,33 @@ class HeroCardSectionList extends React.Component {
           <HomeHeaderButton/>
           </React.Fragment>
           
+        );
+      },
+      renderExpandableRow: (rowData, rowMeta) => {
+        const colSpan = rowData.length;
+        const cardIndex = Object.values(rowMeta).slice(0, 1);
+       const { heading,body,cardImage,createdAt } = this.props.heroCardDetails[cardIndex];
+
+  
+        return (
+          
+          <TableRow >
+            
+            <TableCell colSpan={colSpan} align="center">
+             <Grid container justify="center" alignItems="center">
+               <Grid item xs={12} sm={4}>
+            <CardBuild
+                  heading={heading}
+                  subTitle={body}
+                  image={cardImage}
+                  imageName={createdAt}
+
+                />
+                </Grid>
+               </Grid>
+            </TableCell>
+          </TableRow>
+     
         );
       },
       

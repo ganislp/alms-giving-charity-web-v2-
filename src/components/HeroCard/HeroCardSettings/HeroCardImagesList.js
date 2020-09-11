@@ -5,6 +5,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import Avatar from '@material-ui/core/Avatar';
 import { withTheme, withStyles } from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core';
 import {
   getHeroCardImages,
   deleteHeroCardImage,
@@ -18,7 +19,7 @@ import MUIDataTable from "mui-datatables";
 import { TableRowContent, ActionButtonsContent, } from '../../ui/DataTableContentBuild';
 import { HomeHeaderButton } from '../../ui/Buttons';
 import { LoadingProcess, SubmitProcess } from '../../ui/ProgressBars'
-
+import CardBuild from '../CardsBuild';
 
 
 
@@ -127,19 +128,30 @@ class HeroCardImagesList extends React.Component {
         );
       },
       renderExpandableRow: (rowData, rowMeta) => {
-        const colSpan = rowData.length + 1;
+        const colSpan = rowData.length;
         const cardIndex = Object.values(rowMeta).slice(0, 1);
-        // const { imageUrl, fileName } = this.props.heroImages[cardIndex]
+       const { heading,body,cardImage,createdAt } = this.props.heroCardDetails[cardIndex];
+
+  
         return (
-          <TableRow>
-            <TableCell colSpan={colSpan}>
-              {/* <HeroSectionContent
-                imageUrl={imageUrl}
-                imgname={fileName}
-              /> */}
+          
+          <TableRow >
+            
+            <TableCell colSpan={colSpan} align="center">
+             <Grid container justify="center" alignItems="center">
+               <Grid item xs={12} sm={4}>
+            <CardBuild
+                  heading={heading}
+                  subTitle={body}
+                  image={cardImage}
+                  imageName={createdAt}
+
+                />
+                </Grid>
+               </Grid>
             </TableCell>
           </TableRow>
-
+     
         );
       },
 
@@ -182,6 +194,7 @@ class HeroCardImagesList extends React.Component {
 const mapStateToProps = state => {
   return {
     heroCardImages: Object.values(state.heroCardSection.heroCardImages),
+    heroCardDetails: Object.values(state.heroCardSection.heroCardDetails),
     isLoading: _.some(_.values(state.pendingStates.FETCH_HERO_CARD_IMAGES)),
     isSubmiting: _.some(_.values(state.pendingStates.DELETE_HERO_CARD_IMAGE)),
     confirmationUid: state.dialogOpen.heroImageSeletedUid,
