@@ -19,7 +19,11 @@ import CardBuild from '../CardsBuild';
 
 
 const useStyles = theme => ({
-
+  large: {
+    // width: theme.spacing(3),
+    // height: theme.spacing(3),
+    backgroundColor:"grey"
+  },
 
 
 });
@@ -28,11 +32,11 @@ const useStyles = theme => ({
 class HeroCardSectionList extends React.Component {
   updateActive = (stauts, uid) => {
     if (!stauts) {
-      const inActiveUid = (this.props.heroCardDetails.filter(heroCard => heroCard.active === true).map((value, key) => {
-        return value.uid
-      }));
-      this.props.updateHeroCardActive(uid)
-      this.props.updateHeroCardInActive(inActiveUid);
+      // const inActiveUid = (this.props.heroCardDetails.filter(heroCard => heroCard.active === true).map((value, key) => {
+      //   return value.uid
+      // }));
+     this.props.updateHeroCardActive(uid)
+     this.props.updateHeroCardInActive();
     }
   }
 
@@ -52,6 +56,7 @@ class HeroCardSectionList extends React.Component {
   }
 
   renderDataTableResponsive() {
+    const { classes } = this.props;
     const columns = [
       {
         name: 'heading', label: 'Heading',
@@ -69,9 +74,9 @@ class HeroCardSectionList extends React.Component {
         name: 'cardImage', label: 'Image',
         options: {
           customBodyRender: (value, dataIndex) => <Avatar 
-            alt={dataIndex.rowData[5]} src={value} > </Avatar>,
+            alt={dataIndex.rowData[5]} src={value} className={classes.large} > </Avatar>,
           filter: false,
-         empty: true,
+         empty: false,
 
 
 
@@ -147,7 +152,6 @@ class HeroCardSectionList extends React.Component {
                   subTitle={body}
                   image={cardImage}
                   imageName={createdAt}
-
                 />
                 </Grid>
                </Grid>
@@ -189,12 +193,11 @@ return <ConfimationDialog
 }
 
 const mapStateToProps = state => {
- 
   return {
     heroCardDetails: Object.values(state.heroCardSection.heroCardDetails),
     isLoading: _.some(_.values(state.pendingStates.GET_HERO_CARD)),
     isSubmiting: _.some(_.values(state.pendingStates.DELETE_HERO_CARD)) 
-    || _.some(_.values(state.pendingStates.ACTIVE_HERO_CARD)) || _.some(_.values(state.pendingStates.INACTIVE_HERO_CARD)),
+    || _.some(_.values(state.pendingStates.ACTIVE_HERO_CARD)) ,
     confirmationUid: state.dialogOpen.heroListCardSeletedUid,
   };
 };

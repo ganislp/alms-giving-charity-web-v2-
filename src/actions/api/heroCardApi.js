@@ -79,13 +79,23 @@ export const updateHeroCardActive = (uid) => async dispatch => {
   }
 };
 
-export const updateHeroCardInActive = (uid) => async dispatch => {
+export const updateHeroCardInActive = () => async dispatch => {
   dispatch(heroCardActions.inActiveHeroCardRequest());
   try {
-    await db.collection('heroCardSection').doc(`${uid}`).update({ active: false, createdAt: createdAt });
-    dispatch(heroCardActions.inActiveHeroCardSuccess(uid));
-    //dispatch(showSuccessSnackbar("inActive Record Sucessfully Updated!")); 
+    let imagesRef = await db.collection("heroCardSection");
+    let inActiveId = await imagesRef.where("active", "==", true).orderBy("createdAt").limit(1)
+    .get().then(snap => snap.docs.map(doc => doc.id));
+    if (inActiveId !== null) {
+      await db.collection('heroCardSection').doc(`${inActiveId}`).update({ active: false, createdAt: createdAt });
+      dispatch(heroCardActions.inActiveHeroCardImageSuccess(inActiveId));
+      dispatch(showSuccessSnackbar("inActive Record Sucessfully Updated!"));
+    }
+    else {
+      dispatch(heroCardActions.inActiveHeroCardImageSuccess(inActiveId));
+      dispatch(showFaildSnackbar("No Active Record found!"));
+    }
   } catch (error) {
+    console.log("error",error)
     dispatch(heroCardActions.inActiveHeroCardError(error));
     dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
   }
@@ -95,6 +105,7 @@ export const updateHeroCardInActive = (uid) => async dispatch => {
 export const deleteHeroCard = (uid) => async dispatch => {
   dispatch(heroCardActions.deleteHeroCardRequest());
   try {
+
     await db.collection('heroCardSection').doc(`${uid}`).delete();
     dispatch(heroCardActions.deleteHeroCardSuccess(uid));
     dispatch(showSuccessSnackbar("Hero Card Section deleted Sucessfully!"));
@@ -163,13 +174,20 @@ export const getHeroCardImages = () => async dispatch => {
 export const deleteHeroCardImage = (uid,filename) => async dispatch => {
   dispatch(heroCardActions.deleteHeroCardImageRequest());
   try {
+    let imagesRef = await db.collection("heroCardSection");
+    let fileNameLength = await imagesRef.where("fileName", "==", `${filename}`).where("active", "==", true).get().then(snap => snap.size);
+    if(fileNameLength === 0){
     let desertRef = storage.ref(`/heroCard/${filename}`)
     await desertRef.delete().then(() => {
        db.collection('heroCardImages').doc(`${uid}`).delete();
       dispatch(heroCardActions.deleteHeroCardImageSuccess(uid));
       dispatch(showSuccessSnackbar("Hero Section Image deleted Sucessfully!"));
     });;
-   
+  }
+  else{
+    dispatch(heroCardActions.deleteHeroCardImageSuccess(uid));
+      dispatch(showWarningSnackbar("Before Delete please inActive!"));
+  }
   } catch (error) {
     dispatch(heroCardActions.deleteHeroCardImageError(error));
     console.log("error",error)

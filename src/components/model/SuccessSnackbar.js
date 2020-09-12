@@ -23,7 +23,7 @@ class SuccessSnackbar extends React.Component {
   }
 
   if(this.props.warning && !this.props.failed){
-    return  <Alert severity="warning">{this.props.successSnackbarMessage}</Alert>
+    return  <Alert severity="warning" >{this.props.successSnackbarMessage}</Alert>
   }
 
   if(this.props.info && !this.props.failed){

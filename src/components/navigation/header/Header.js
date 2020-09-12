@@ -12,6 +12,7 @@ import HeroSectionSettings from '../../Hero/HeroSettings/HeroSectionSettings';
 import HeroCardSectionSettings from '../../HeroCard/HeroCardSettings/HeroCardSectionSettings';
 import CreateHeroCardSection from '../../HeroCard/HeroCardSettings/CreateHeroCardSection';
 import EditHeroCardSection from '../../HeroCard/HeroCardSettings/EditHeroCardSection';
+import AboutUsSectionSettings from '../../Aboutus/AboutusSetting/AboutUsSectionSettings';
 import Home from '../../Home/Home'
 import { fetchCompanyDetails } from '../../../actions/api/companyDetailsApi';
 import {fetchUser} from '../../../actions/api/authApi'
@@ -44,6 +45,7 @@ return <Router history={history}>
           <Route exact path="/heroCard/heroCardSettings" render={props => <HeroCardSectionSettings {...this.props}/>}></Route>
           <Route exact path="/heroCard/heroCardCreate" component={() => <CreateHeroCardSection {...this.props}/>}></Route>
           <Route exact path="/heroCard/edit/:uid" component={props => <EditHeroCardSection {...props} {...this.props} />}></Route>
+          <Route exact path="/Aboutus/aboutUsSectionSettings" render={props => <AboutUsSectionSettings {...this.props}/>}></Route>
           <Route exact path="/aboutus" component={() => <div>About Us</div>}></Route>
           <Route exact path="/causes" component={() => <div>Causes</div>}></Route>
           <Route exact path="/news" component={() => <div>News</div>}></Route>

@@ -3,25 +3,23 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-import Avatar from '@material-ui/core/Avatar';
 import { withTheme, withStyles } from '@material-ui/core/styles';
+import { Grid ,Avatar,Checkbox } from '@material-ui/core';
 import {
-  getHeroImages,
-  deleteHeroImage,
-  updateImageActive,
-  updateImageInActive,
-  uploadHeroImages
-} from '../../../actions/api/heroApi';
+  getAboutUsImages,
+  deleteAboutUsImage,
+  uploadAboutUsImages
+
+} from '../../../actions/api/aboutUsApi';
 import UploadImages from '../../ui/UploadImages';
-//import SubmitProcess from '../../ui/SubmitProcess';
 import { confiDialogOpen, previewDialogOpen } from '../../../actions/uiActions/navigationAcions';
 import ConfimationDialog from '../../model/ConfimationDialog';
 import MUIDataTable from "mui-datatables";
-import { TableRowContent, ActiveButtonContent, ActionButtonsContent, } from '../../ui/DataTableContentBuild';
+import { TableRowContent, ActionButtonsContent, } from '../../ui/DataTableContentBuild';
 import { HomeHeaderButton } from '../../ui/Buttons';
 import { LoadingProcess, SubmitProcess } from '../../ui/ProgressBars'
-import PreviewDialog from '../../model/PreviewDialog';
-import HeroSectionContent from '../HeroSectionContent';
+
+
 
 
 const useStyles = theme => ({
@@ -50,38 +48,35 @@ const useStyles = theme => ({
 
 });
 
-class HeroImagesList extends React.Component {
+class AboutUsImagesList extends React.Component {
 
   componentDidMount() {
-    this.props.getHeroImages();
+    this.props.getAboutUsImages();
   }
 
+addImageConfirmDialog = () => {
+  this.props.confiDialogOpen({ open: true });
+}
 
 
-  deleteHeroImage = (uid) => {
+  deleteAboutUsImage = (uid) => {
     this.props.confiDialogOpen({ open: true, heroImageSeletedUid: uid });
   }
 
   dialogImgeButtonClick = () => {
-    const {fileName} = Object.assign({}, ...Object.values((this.props.heroImages.filter(image => image.uid === this.props.confirmationUid))));
-    this.props.deleteHeroImage(this.props.confirmationUid,fileName);
+    const {fileName} = Object.assign({}, ...Object.values((this.props.aboutUsImages.filter(image => image.uid === this.props.confirmationUid))));
+    this.props.deleteAboutUsImage(this.props.confirmationUid,fileName);
     this.props.confiDialogOpen({ open: false, heroImageSeletedUid: {} });
   }
 
-  updateActive = (stauts, uid) => {
-    if (!stauts) {   
-   this.props.updateImageActive(uid)
-   this.props.updateImageInActive();
-    }
-  }
-
-  clickImagePreviewWithAvatar = () => {
-    // this.props.previewDialogOpen(true);
-  }
-
   uploadImage = (url,filename) => {
-    this.props.uploadHeroImages({imageUrl:url,fileName:filename})
+    this.props.uploadAboutUsImages({imageUrl:url,fileName:filename,backround:false})
   }
+
+  uploadBackroundImage = (url,filename) => {
+    this.props.uploadAboutUsImages({imageUrl:url,fileName:filename,backround:true})
+  }
+
 
   renderDataTableResponsive() {
     const columns = [
@@ -94,13 +89,9 @@ class HeroImagesList extends React.Component {
       {
         name: 'imageUrl', label: 'Image',
         options: {
-          customBodyRender: (value, dataIndex) => <Avatar style={{ cursor: "pointer" }}
-            alt={dataIndex.rowData[4]} src={value} > </Avatar>,
-          // filter: true,
-          // empty: true,
-
-
-
+          customBodyRender: (value, dataIndex) => <Avatar alt={dataIndex.rowData[4]} src={value} /> ,
+           filter: false,
+           empty: true,
         }
       },
 
@@ -109,27 +100,23 @@ class HeroImagesList extends React.Component {
           customBodyRender: value => <TableRowContent value={value} />
         }
       },
-
       {
-        name: 'active', label: 'Active', options: {
-          customBodyRender: (value, dataIndex) => <ActiveButtonContent
-            value={value} dataIndex={dataIndex.rowData[4]} disabled={value}
-            click={this.updateActive} />,
-          filter: true,
-          empty: true,
-
-          // display: 'excluded',
+        name: 'backround', label: 'isBackround',
+        options: {
+          customBodyRender: (value, dataIndex) => <Checkbox checked={value} disabled color="secondary"/> ,
+           filter: false,
+           empty: true,
         }
       },
+     
       {
         name: 'uid', label: 'Actions', filter: false,
         options: {
           customBodyRender: (value, dataIndex) => <ActionButtonsContent
             value={value}
-            dataIndex={dataIndex.rowData[3]}
-            click={this.deleteHeroImage}
-            hiddendEdit={true}
-            
+            dataIndex={false}
+            click={this.deleteAboutUsImage}
+            hiddendEdit={true}           
           />,
           filter: false, sort: false,// empty: true,
         },
@@ -153,19 +140,29 @@ class HeroImagesList extends React.Component {
         );
       },
       renderExpandableRow: (rowData, rowMeta) => {
-        const colSpan = rowData.length + 1;
+        const colSpan = rowData.length;
         const cardIndex = Object.values(rowMeta).slice(0, 1);
-        const { imageUrl, fileName } = this.props.heroImages[cardIndex]
+       
+       const { imageUrl } = this.props.aboutUsImages[cardIndex];
+       const { heading,body,cardImage,createdAt } = Object.assign({}, ...Object.values((this.props.aboutUsDetails.filter(card => card.cardImage === imageUrl))));
         return (
-          <TableRow>
-            <TableCell colSpan={colSpan}>
-              <HeroSectionContent
-                imageUrl={imageUrl}
-                imgname={fileName}
-              />
+          
+          <TableRow >
+            
+            <TableCell colSpan={colSpan} align="center">
+             <Grid container justify="center" alignItems="center">
+               <Grid item xs={12} sm={4}>
+            {/* <CardBuild
+                  heading={heading}
+                  subTitle={body}
+                  image={cardImage}
+                  imageName={createdAt}
+                /> */}
+                </Grid>
+               </Grid>
             </TableCell>
           </TableRow>
-
+     
         );
       },
 
@@ -174,9 +171,19 @@ class HeroImagesList extends React.Component {
 
 
     return <MUIDataTable
-      title={<UploadImages uploadRef="hero" upload={this.uploadImage} label="Upload Image"/>}
+      title={
+      <Grid container spacing={2}>
+        <Grid item>
+      <UploadImages uploadRef="aboutUs" upload={this.uploadBackroundImage}  label="Upload Backround Image" />
+      </Grid>
+      <Grid item>
+      <UploadImages uploadRef="aboutUs" upload={this.uploadImage}  label="Upload Image" />
+      </Grid>
+      </Grid>
+    
+    }
       columns={columns}
-      data={this.props.heroImages}
+      data={this.props.aboutUsImages}
       options={options}
     />
   }
@@ -184,21 +191,13 @@ class HeroImagesList extends React.Component {
   renderConfimationDialog() {
     if (!_.isEmpty(this.props.confirmationUid)) {
       return <ConfimationDialog
-        title="Delete Hero Section Image"
-        content="Are you sure you want to delete this Hero Section Image?"
+        title="Delete About Image"
+        content="Are you sure you want to delete this About us Image?"
         dialogButtonClick={this.dialogImgeButtonClick} />
     }
   }
 
-  renderPreviewDialog() {
-    if (!_.isEmpty(this.props.previewUid)) {
-      const seletedHeroImage = Object.assign({}, ...Object.values((this.props.heroImages.filter(image => image.uid === this.props.previewUid))));
-      return <PreviewDialog>
-        <HeroSectionContent imageUrl={seletedHeroImage.imageUrl}
-          imgname={seletedHeroImage.fileName} />
-      </PreviewDialog>
-    }
-  }
+
 
   render() {
     return (
@@ -208,20 +207,18 @@ class HeroImagesList extends React.Component {
         {this.renderDataTableResponsive()}
         <SubmitProcess isSubmiting={this.props.isSubmiting} />
         {this.renderConfimationDialog()}
-       
       </React.Fragment>
     )
   }
 }
 
 const mapStateToProps = state => {
-
+  console.log("state", state)
   return {
-    heroImages: Object.values(state.heroSection.heroImages),
-    isLoading: _.some(_.values(state.pendingStates.FETCH_HERO_IMAGES)),
-    isSubmiting: _.some(_.values(state.pendingStates.INACTIVE_HERO_IMAGE))
-      || _.some(_.values(state.pendingStates.DELETE_HERO_IMAGE))
-      || _.some(_.values(state.pendingStates.UPLOAD_HERO_IMAGES)),
+    aboutUsImages: Object.values(state.aboutUsSection.aboutUsImages),
+    aboutUsDetails: Object.values(state.aboutUsSection.aboutUsDetails),
+    isLoading: _.some(_.values(state.pendingStates.FETCH_ABOUT_US_IMAGES)),
+    isSubmiting: _.some(_.values(state.pendingStates.DELETE_ABOUT_US_IMAGE)),
     confirmationUid: state.dialogOpen.heroImageSeletedUid,
     previewUid: state.previewOpen.uid,
 
@@ -230,6 +227,6 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps, {
-    getHeroImages,
-  deleteHeroImage, confiDialogOpen,uploadHeroImages, updateImageActive, updateImageInActive, previewDialogOpen
-})(withTheme(withStyles(useStyles)(HeroImagesList)))
+    getAboutUsImages,
+    deleteAboutUsImage, confiDialogOpen , previewDialogOpen,uploadAboutUsImages
+})(withTheme(withStyles(useStyles)(AboutUsImagesList)))

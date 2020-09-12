@@ -2,35 +2,34 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import { createCardHero,getHeroCards,getHeroCardImages } from '../../../actions/api/heroCardApi';
-import HeroCardSectionForm from './HeroCardSectionForm';
+import { createAboutUs,getAboutUss,getAboutUsImages } from '../../../actions/api/heroCardApi';
+import AboutUsSectionForm from './AboutUsSectionForm';
 import ContentBuilder from '../../ui/ContentBuilder';
 
 const useStyles = theme => ({
  
 });
 
-class CreateHeroCardSection extends Component {
+class CreateAboutUsSection extends Component {
 
   onSubmit = formValues => {
     let isActive = false;
     if(_.isEmpty(this.props.heroCardDetails)){
        isActive = true;
     }
- const {fileName} = Object.assign({}, ...Object.values((this.props.heroCardImages.filter(image => image.imageUrl === formValues.cardImage))));
- this.props.createCardHero({...formValues,fileName:fileName},isActive);
+ this.props.createAboutUs(formValues,isActive);
   };
 
   componentDidMount() {
-    this.props.getHeroCardImages();
+    this.props.getAboutUsImages();
   }
 
   render() {
     return (
       <ContentBuilder  isSubmiting ={this.props.isSubmiting}>
-          <HeroCardSectionForm onSubmit={this.onSubmit} isEdit={false}
+          <AboutUsSectionForm onSubmit={this.onSubmit} isEdit={false}
            heroCardImages={this.props.heroCardImages}
-           FormName="CreateHeroCardForm"
+           FormName="CreateAboutUsForm"
            label="Create Hero Crad Content"
            />
       </ContentBuilder>
@@ -44,4 +43,4 @@ const mapStateToProps = state => {
     isSubmiting: _.some(_.values(state.pendingStates.CREATE_HERO_CARD)),
   };
 };
-export default connect(mapStateToProps, { createCardHero,getHeroCards,getHeroCardImages })(withTheme(withStyles(useStyles)(CreateHeroCardSection)));
+export default connect(mapStateToProps, { createAboutUs,getAboutUss,getAboutUsImages })(withTheme(withStyles(useStyles)(CreateAboutUsSection)));

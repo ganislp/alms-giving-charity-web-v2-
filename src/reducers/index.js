@@ -8,6 +8,7 @@ popOverDialogOpenReducer,previewDialogOpenReducer} from './NavigationReducer';
 import companyDetailsReducer from './CompanyDetailsReducer';
 import heroReducer from './Hero/HeroReducer';
 import heroCardReducer from './HeroCard/HeroCardReducer';
+import AboutUsReducer from './AboutUs/AboutUsReducer';
 import uiReducer from './uiReducer';
 import authReducer from './authReducer';
 import pendingReducer from './pendingReducer'
@@ -23,6 +24,7 @@ export default combineReducers({
   companyDetails: companyDetailsReducer,
   heroSection: heroReducer,
   heroCardSection: heroCardReducer,
+  aboutUsSection: AboutUsReducer,
   uiReducer : uiReducer,
   userDetails:authReducer,
   form: formReducer,

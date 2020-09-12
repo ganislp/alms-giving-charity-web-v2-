@@ -70,10 +70,10 @@ handleUploadSuccess = filename => {
      <TableHeaderButton/>
      </Grid>
      <Grid item>
-   <Button variant="contained" component="label" color="secondary" startIcon={<PublishIcon />}
-   disabled={this.state.isUploading}>
+   <Button variant="contained" component="label"  color="secondary" startIcon={<PublishIcon />}
+   disabled={this.state.isUploading} >
     
-   {this.state.isUploading ?  <CircularProgress size={30} color="secondary"/> : "Upload"}
+   {this.state.isUploading ?  <CircularProgress size={30} color="secondary"/> : this.props.label}
     <CustomUploadButton 
       accept={this.props.uploadRef}
       name="avatar"

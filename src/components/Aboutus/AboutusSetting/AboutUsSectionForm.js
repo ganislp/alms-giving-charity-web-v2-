@@ -6,7 +6,7 @@ import { withStyles, withTheme } from '@material-ui/core/styles';
 import {FormHeader}  from '../../ui/form/FormHeader';
 import { SubmitButton} from '../../ui/Buttons';
 import {renderTextField,renderSelectField}   from '../../ui/form/formFields';
-import {validateHeroCardForm} from '../../ui/form/validateForm'
+import {validateAboutUsForm} from '../../ui/form/validateForm'
 
 const useStyles = theme => ({
   mainContainer: {
@@ -17,7 +17,7 @@ const useStyles = theme => ({
   },
 
 });
-class HeroCardSectionForm extends React.Component {
+class AboutUsSectionForm extends React.Component {
  constructor(props) {
    super(props);
    if(this.props.isEdit ){
@@ -38,8 +38,8 @@ class HeroCardSectionForm extends React.Component {
  
   render() {
     const { classes } = this.props;
-    let heroCardImagesList = this.props.heroCardImages.length > 0
-    	&& this.props.heroCardImages.map((item, i) => {
+    let aboutUsImagesList = this.props.aboutUsImages.length > 0
+    	&& this.props.aboutUsImages.map((item, i) => {
       return (
         <option key={i} value={item.imageUrl}>
           {item.fileName}
@@ -79,18 +79,17 @@ class HeroCardSectionForm extends React.Component {
           <Grid item>
             <Field
               name="cardImage"
-            
-              onChange={(event, index, value) => {                     
+              onChange={(event, index, value) => {          
                 this.setState({selectedImage:event.target.value})
               }} 
               component={renderSelectField}
               label="select card icons"   >
              <option value="" />
-              {heroCardImagesList}
+              {aboutUsImagesList}
             </Field>
             </Grid>
             <Grid item>
-            <Avatar src={this.state.selectedImage} style={{  backgroundColor:"grey" }}></Avatar> 
+            <Avatar src={this.state.selectedImage}></Avatar> 
             </Grid>  
           </Grid> 
             
@@ -109,8 +108,8 @@ const mapStateToProps = (state,ownProps) => {
 };
 
 const formWrapped=  reduxForm({
-   validate:validateHeroCardForm
-  }) (withTheme(withStyles(useStyles)(HeroCardSectionForm)))  
+   validate:validateAboutUsForm
+  }) (withTheme(withStyles(useStyles)(AboutUsSectionForm)))  
     export default connect(
       mapStateToProps,{}
     )(formWrapped)

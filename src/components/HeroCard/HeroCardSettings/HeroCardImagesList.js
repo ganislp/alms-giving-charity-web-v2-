@@ -83,7 +83,7 @@ class HeroCardImagesList extends React.Component {
       {
         name: 'imageUrl', label: 'Image',
         options: {
-          customBodyRender: (value, dataIndex) => <Avatar style={{ cursor: "pointer" }}
+          customBodyRender: (value, dataIndex) => <Avatar style={{  backgroundColor:"grey" }}
             alt={dataIndex.rowData[4]} src={value} > </Avatar>,
            filter: false,
            empty: true,
@@ -160,7 +160,7 @@ class HeroCardImagesList extends React.Component {
 
 
     return <MUIDataTable
-      title={<UploadImages uploadRef="heroCard" upload={this.uploadImage}/>}
+      title={<UploadImages uploadRef="heroCard" upload={this.uploadImage} label="Upload Image"/>}
       columns={columns}
       data={this.props.heroCardImages}
       options={options}

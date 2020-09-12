@@ -13,8 +13,8 @@ class EditHeroCardSection extends Component{
   }
 
   onSubmit = formValues => {
-    this.props.EditHeroCard(this.props.match.params.uid,formValues);
-
+    const {fileName} = Object.assign({}, ...Object.values((this.props.heroCardImages.filter(image => image.imageUrl === formValues.cardImage))));
+    this.props.EditHeroCard(this.props.match.params.uid,{...formValues,fileName:fileName});
   };
 
 
