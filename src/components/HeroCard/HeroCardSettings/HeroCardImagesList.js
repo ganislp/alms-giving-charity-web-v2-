@@ -16,7 +16,7 @@ import UploadImages from '../../ui/UploadImages';
 import { confiDialogOpen, previewDialogOpen } from '../../../actions/uiActions/navigationAcions';
 import ConfimationDialog from '../../model/ConfimationDialog';
 import MUIDataTable from "mui-datatables";
-import { TableRowContent, ActionButtonsContent, } from '../../ui/DataTableContentBuild';
+import { TableRowContent, ActionButtonsContent,ActiveButtonContent } from '../../ui/DataTableContentBuild';
 import { HomeHeaderButton } from '../../ui/Buttons';
 import { LoadingProcess, SubmitProcess } from '../../ui/ProgressBars'
 import CardBuild from '../CardsBuild';
@@ -96,13 +96,26 @@ class HeroCardImagesList extends React.Component {
         }
       },
 
+      // {
+      //   name: 'active', label: 'Active', options: {
+      //     customBodyRender: (value, dataIndex) => <ActiveButtonContent 
+      //     value={value} 
+      //     dataIndex={dataIndex.rowData[4]} 
+      //     disabled={true}
+      //     click={this.updateActive} />,
+      //     filter: true,
+      //     empty: true,
+      //     // display: 'excluded',
+      //   }
+      // },
+
      
       {
         name: 'uid', label: 'Actions', filter: false,
         options: {
           customBodyRender: (value, dataIndex) => <ActionButtonsContent
             value={value}
-            dataIndex={false}
+            dataIndex={ _.some(this.props.heroCardDetails, function(item) {return item.fileName === dataIndex.rowData[0]})}
             click={this.deleteHeroCardImage}
             hiddendEdit={true}           
           />,
@@ -122,6 +135,13 @@ class HeroCardImagesList extends React.Component {
       expandableRows: true,
       expandableRowsHeader: false,
       expandableRowsOnClick: true,
+      isRowExpandable: (dataIndex, expandedRows) => {
+        if(!_.isEmpty(this.props.heroCardImages[dataIndex])){
+        const { fileName } = this.props.heroCardImages[dataIndex];
+        const newImagefileName =   _.some(this.props.heroCardDetails, function(card) {return card.fileName === fileName}) 
+        if (newImagefileName) return true;
+        }
+      },
       customToolbar: () => {
         return (
           <HomeHeaderButton />
@@ -129,14 +149,11 @@ class HeroCardImagesList extends React.Component {
       },
       renderExpandableRow: (rowData, rowMeta) => {
         const colSpan = rowData.length;
-        const cardIndex = Object.values(rowMeta).slice(0, 1);
-       
+        const cardIndex = Object.values(rowMeta).slice(0, 1);       
        const { imageUrl } = this.props.heroCardImages[cardIndex];
        const { heading,body,cardImage,createdAt } = Object.assign({}, ...Object.values((this.props.heroCardDetails.filter(card => card.cardImage === imageUrl))));
-        return (
-          
-          <TableRow >
-            
+        return (         
+          <TableRow >            
             <TableCell colSpan={colSpan} align="center">
              <Grid container justify="center" alignItems="center">
                <Grid item xs={12} sm={4}>
@@ -179,6 +196,7 @@ class HeroCardImagesList extends React.Component {
 
 
   render() {
+  
     return (
       <React.Fragment>
         <LoadingProcess isLoading={this.props.isLoading} />

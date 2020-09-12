@@ -206,6 +206,29 @@ export const deleteHeroCardImageError = (error) => {
   }
 };
 
+
+export const activeHeroCardImageRequest = () => {
+
+  return {
+    type: heroCardActionTypes.ACTIVE_HERO_CARD_IMAGE_REQUEST,
+    payload: { }
+  }
+};
+export const activeHeroCardImageSuccess = (uid) => {
+  return {
+    type: heroCardActionTypes.ACTIVE_HERO_CARD_IMAGE_SUCCESS,
+    payload: {  uid: uid, }
+
+  }
+};
+
+export const activeHeroCardImageError = (error) => {
+  return {
+    type: heroCardActionTypes.ACTIVE_HERO_CARD_IMAGE_ERROR,
+    payload: {  error: error }
+  }
+};
+
 export const inActiveHeroCardImageRequest = () => {
 
   return {

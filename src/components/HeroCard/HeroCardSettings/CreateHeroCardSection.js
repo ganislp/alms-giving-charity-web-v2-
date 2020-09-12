@@ -29,7 +29,7 @@ class CreateHeroCardSection extends Component {
     return (
       <ContentBuilder  isSubmiting ={this.props.isSubmiting}>
           <HeroCardSectionForm onSubmit={this.onSubmit} isEdit={false}
-           heroCardImages={this.props.heroCardImages}
+          //  heroCardImages={this.props.heroCardImages}
            FormName="CreateHeroCardForm"
            label="Create Hero Crad Content"
            />

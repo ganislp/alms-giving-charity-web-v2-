@@ -163,12 +163,19 @@ export const getAboutUsImages = () => async dispatch => {
 export const deleteAboutUsImage = (uid,filename) => async dispatch => {
   dispatch(aboutUsActions.deleteAboutUsImageRequest());
   try {
+    let imagesRef = await db.collection("aboutUsSection");
+    let fileNameLength = await imagesRef.where("fileName", "==", `${filename}`).where("active", "==", true).get().then(snap => snap.size);
+    if(fileNameLength === 0){
     let desertRef = storage.ref(`/aboutUs/${filename}`)
     await desertRef.delete().then(() => {
        db.collection('aboutUsImages').doc(`${uid}`).delete();
       dispatch(aboutUsActions.deleteAboutUsImageSuccess(uid));
       dispatch(showSuccessSnackbar("Hero Section Image deleted Sucessfully!"));
-    });;
+    });
+  }else{
+    dispatch(aboutUsActions.deleteAboutUsImageSuccess(uid));
+    dispatch(showWarningSnackbar("Before Delete please inActive!"));
+  }
    
   } catch (error) {
     dispatch(aboutUsActions.deleteAboutUsImageError(error));

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import { Field, reduxForm } from 'redux-form';
 import {Grid, Avatar, } from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
@@ -38,14 +39,34 @@ class HeroCardSectionForm extends React.Component {
  
   render() {
     const { classes } = this.props;
-    let heroCardImagesList = this.props.heroCardImages.length > 0
-    	&& this.props.heroCardImages.map((item, i) => {
-      return (
+    let heroCardImagesList = null;
+
+if(this.props.isEdit){
+ heroCardImagesList = this.props.heroCardImages.length > 0
+    	&& this.props.heroCardImages.map((item, i) => {      
+      return (       
         <option key={i} value={item.imageUrl}>
           {item.fileName}
         </option>
-      )
-    }, this);
+      )              
+    }, this); 
+    
+}
+else{
+  heroCardImagesList = this.props.heroCardImages.length > 0
+  && this.props.heroCardImages.map((item, i) => {
+  const fileNameAdded =   _.some(this.props.heroCardDetails, function(card) {return card.fileName === item.fileName})
+    if( !fileNameAdded){
+  return (       
+    <option key={i} value={item.imageUrl}>
+      {item.fileName}
+    </option>
+  )
+    } 
+}, this);
+}
+
+ 
 
     return (
       <form
@@ -104,7 +125,8 @@ class HeroCardSectionForm extends React.Component {
 const mapStateToProps = (state,ownProps) => {
   return {
       form:ownProps.FormName,
-      
+    heroCardImages: Object.values(state.heroCardSection.heroCardImages), 
+    heroCardDetails:  Object.values(state.heroCardSection.heroCardDetails),
   };
 };
 
