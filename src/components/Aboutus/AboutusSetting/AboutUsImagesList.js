@@ -6,16 +6,18 @@ import TableCell from "@material-ui/core/TableCell";
 import { withTheme, withStyles } from '@material-ui/core/styles';
 import { Grid ,Avatar,Checkbox } from '@material-ui/core';
 import {
-  getAboutUsImages,
+ 
   deleteAboutUsImage,
-  uploadAboutUsImages
+  uploadAboutUsImages,
+  updateImageActive,
+  updateImageInActive
 
 } from '../../../actions/api/aboutUsApi';
 import UploadImages from '../../ui/UploadImages';
 import { confiDialogOpen, previewDialogOpen } from '../../../actions/uiActions/navigationAcions';
 import ConfimationDialog from '../../model/ConfimationDialog';
 import MUIDataTable from "mui-datatables";
-import { TableRowContent, ActionButtonsContent, } from '../../ui/DataTableContentBuild';
+import { TableRowContent, ActionButtonsContent,ActiveButtonContent } from '../../ui/DataTableContentBuild';
 import { HomeHeaderButton } from '../../ui/Buttons';
 import { LoadingProcess, SubmitProcess } from '../../ui/ProgressBars'
 
@@ -50,12 +52,17 @@ const useStyles = theme => ({
 
 class AboutUsImagesList extends React.Component {
 
-  componentDidMount() {
-    this.props.getAboutUsImages();
-  }
+
 
 addImageConfirmDialog = () => {
   this.props.confiDialogOpen({ open: true });
+}
+
+updateActive = (stauts, uid) => {
+  if (!stauts) {  
+    const {backround} = Object.assign({}, ...Object.values((this.props.aboutUsImages.filter(image => image.uid === uid)))); 
+    this.props.updateImageInActive(backround,uid);
+  }
 }
 
 
@@ -89,7 +96,7 @@ addImageConfirmDialog = () => {
       {
         name: 'imageUrl', label: 'Image',
         options: {
-          customBodyRender: (value, dataIndex) => <Avatar alt={dataIndex.rowData[4]} src={value} /> ,
+          customBodyRender: (value, dataIndex) => <Avatar alt={dataIndex.rowData[0]} src={value} /> ,
            filter: false,
            empty: true,
         }
@@ -98,6 +105,19 @@ addImageConfirmDialog = () => {
       {
         name: 'createdAt', label: 'CreatedAt', options: {
           customBodyRender: value => <TableRowContent value={value} />
+        }
+      },
+      {
+        name: 'active', label: 'Active', options: {
+          customBodyRender: (value, dataIndex) => <ActiveButtonContent
+            value={value} 
+            dataIndex={dataIndex.rowData[5]} 
+            disabled={value}
+            click={this.updateActive} />,
+          filter: true,
+          empty: true,
+
+          // display: 'excluded',
         }
       },
       {
@@ -114,7 +134,7 @@ addImageConfirmDialog = () => {
         options: {
           customBodyRender: (value, dataIndex) => <ActionButtonsContent
             value={value}
-            dataIndex={false}
+            dataIndex={dataIndex.rowData[3]}
             click={this.deleteAboutUsImage}
             hiddendEdit={true}           
           />,
@@ -218,7 +238,8 @@ const mapStateToProps = state => {
     aboutUsImages: Object.values(state.aboutUsSection.aboutUsImages),
     aboutUsDetails: Object.values(state.aboutUsSection.aboutUsDetails),
     isLoading: _.some(_.values(state.pendingStates.FETCH_ABOUT_US_IMAGES)),
-    isSubmiting: _.some(_.values(state.pendingStates.DELETE_ABOUT_US_IMAGE)),
+    isSubmiting: _.some(_.values(state.pendingStates.DELETE_ABOUT_US_IMAGE) 
+    ||  _.some(_.values(state.pendingStates.INACTIVE_ABOUT_US_IMAGE))),
     confirmationUid: state.dialogOpen.heroImageSeletedUid,
     previewUid: state.previewOpen.uid,
 
@@ -227,6 +248,11 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps, {
-    getAboutUsImages,
-    deleteAboutUsImage, confiDialogOpen , previewDialogOpen,uploadAboutUsImages
+    deleteAboutUsImage, 
+    confiDialogOpen , 
+    previewDialogOpen,
+    uploadAboutUsImages,
+    updateImageActive,
+    updateImageInActive
+
 })(withTheme(withStyles(useStyles)(AboutUsImagesList)))

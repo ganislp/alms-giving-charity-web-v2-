@@ -13,11 +13,14 @@ import HeroCardSectionSettings from '../../HeroCard/HeroCardSettings/HeroCardSec
 import CreateHeroCardSection from '../../HeroCard/HeroCardSettings/CreateHeroCardSection';
 import EditHeroCardSection from '../../HeroCard/HeroCardSettings/EditHeroCardSection';
 import AboutUsSectionSettings from '../../Aboutus/AboutusSetting/AboutUsSectionSettings';
+import CreateAboutUsSection from '../../Aboutus/AboutusSetting/CreateAboutUsSection';
+import EditAboutUsSection from '../../Aboutus/AboutusSetting/EditAboutUsSection';
 import Home from '../../Home/Home'
 import { fetchCompanyDetails } from '../../../actions/api/companyDetailsApi';
 import {fetchUser} from '../../../actions/api/authApi'
 import { getHero,getHeroImages } from '../../../actions/api/heroApi';
 import { getHeroCards } from '../../../actions/api/heroCardApi';
+import { getAboutUs,getAboutUsImages } from '../../../actions/api/aboutUsApi';
 
 
 class Header extends React.Component {
@@ -28,6 +31,8 @@ class Header extends React.Component {
   this.props.getHero();
   this.props.getHeroImages();
   this.props.getHeroCards();
+  this.props.getAboutUs();
+  this.props.getAboutUsImages();
   }
 
   renderComponents(){
@@ -45,7 +50,9 @@ return <Router history={history}>
           <Route exact path="/heroCard/heroCardSettings" render={props => <HeroCardSectionSettings {...this.props}/>}></Route>
           <Route exact path="/heroCard/heroCardCreate" component={() => <CreateHeroCardSection {...this.props}/>}></Route>
           <Route exact path="/heroCard/edit/:uid" component={props => <EditHeroCardSection {...props} {...this.props} />}></Route>
-          <Route exact path="/Aboutus/aboutUsSectionSettings" render={props => <AboutUsSectionSettings {...this.props}/>}></Route>
+          <Route exact path="/aboutus/aboutUsSectionSettings" render={props => <AboutUsSectionSettings {...this.props}/>}></Route>
+          <Route exact path="/aboutus/heroAboutUsCreate" render={props => <CreateAboutUsSection {...this.props}/>}></Route>
+          <Route exact path="/aboutus/edit/:uid" component={props => <EditAboutUsSection {...props} {...this.props} />}></Route>
           <Route exact path="/aboutus" component={() => <div>About Us</div>}></Route>
           <Route exact path="/causes" component={() => <div>Causes</div>}></Route>
           <Route exact path="/news" component={() => <div>News</div>}></Route>
@@ -77,4 +84,6 @@ export default  connect(mapStateToProps,{
   getHero,
   getHeroImages,
   getHeroCards,
+  getAboutUs,
+  getAboutUsImages,
 })(Header);

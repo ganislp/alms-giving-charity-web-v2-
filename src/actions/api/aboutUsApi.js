@@ -38,13 +38,13 @@ export const createAboutUs = (formValues, isActive) => async (dispatch) => {
     let cardHeroRef = await db.collection("aboutUsSection");
     let cardCount = await cardHeroRef.get().then(snap => snap.size);
     let active = false;
-    if (cardCount <= 2) {
+    if (cardCount <= 0) {
       active = true;
     }
     const response = cardHeroRef.add({ ...formValues, createdAt: createdAt, active: active },);
     dispatch(aboutUsActions.createAboutUsSuccess(response.id));
     dispatch(showSuccessSnackbar("Data Saved Sucessfully!"));
-    history.push('/aboutUs/aboutUsSettings');
+    history.push('/aboutus/aboutUsSectionSettings');
   } catch (error) {
     dispatch(aboutUsActions.createAboutUsError(error));
     dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
@@ -57,8 +57,8 @@ export const EditAboutUs = (uid, formValues) => async dispatch => {
   try {
     await db.collection('aboutUsSection').doc(`${uid}`).update({ ...formValues, createdAt: createdAt });
     dispatch(aboutUsActions.editAboutUsSuccess(uid));
-    dispatch(showSuccessSnackbar("Hero Section Card Sucessfully Updated!"));
-    history.push('/aboutUs/aboutUsSettings');
+    dispatch(showSuccessSnackbar("Hero about us Sucessfully Updated!"));
+    history.push('/aboutus/aboutUsSectionSettings');
   } catch (error) {
     dispatch(aboutUsActions.editAboutUsError(error));
     dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
@@ -112,24 +112,61 @@ export const uploadAboutUsImages = (imagesPayload) => async (dispatch, getState)
   try {
 
     let imagesRef = await db.collection("aboutUsImages");
-    let imageExist = await imagesRef.get().then(snap => snap.size)
     let active = false;
 
-    let fileNameLength = await imagesRef.where("fileName", "==", `${imagesPayload.fileName}`).get().then(snap => snap.size);
-    if (fileNameLength === 0) {
-      if (imageExist <= 2) {
-        active = true;
-      }
-      await db.collection('aboutUsImages').add({ ...imagesPayload, createdAt: createdAt, active: active,  });
-      //userId: userUid
-      dispatch(showSuccessSnackbar("Images Uploaded Sucessfully!"));
-      dispatch(aboutUsActions.uploadAboutUsImagesSuccess());
-    }
-    else {
+   
+if(imagesPayload.backround){
+  let imageExistBackround = await imagesRef
+  .where("backround", "==", true)
+  .get().then(snap => snap.size) ;
 
-      dispatch(showWarningSnackbar(`This image ${imagesPayload.fileName} already exists`));
-      dispatch(aboutUsActions.uploadAboutUsImagesSuccess());
+  let fileNameLengthBackround = await imagesRef.where("fileName", "==", `${imagesPayload.fileName}`)
+  .where("backround", "==", true)
+  .get().then(snap => snap.size);
+
+  if (fileNameLengthBackround === 0) {
+    if (imageExistBackround <= 0) {
+      active = true;
     }
+    await db.collection('aboutUsImages').add({ ...imagesPayload, createdAt: createdAt, active: active,  });
+    //userId: userUid
+    dispatch(showSuccessSnackbar("Images Uploaded Sucessfully!"));
+    dispatch(aboutUsActions.uploadAboutUsImagesSuccess());
+  }
+  else {
+
+    dispatch(showWarningSnackbar(`This image ${imagesPayload.fileName} already exists`));
+    dispatch(aboutUsActions.uploadAboutUsImagesSuccess());
+  }
+}
+else{
+  let imageExist = await imagesRef
+  .where("backround", "==", false)
+  .get().then(snap => snap.size) ;
+
+  let fileNameLength = await imagesRef.where("fileName", "==", `${imagesPayload.fileName}`)
+  .where("backround", "==", false)
+  .get().then(snap => snap.size);
+
+  console.log("imageExist",imageExist);
+  if (fileNameLength === 0) {
+    if (imageExist <= 0) {
+      active = true;
+    }
+    await db.collection('aboutUsImages').add({ ...imagesPayload, createdAt: createdAt, active: active,  });
+    //userId: userUid
+    dispatch(showSuccessSnackbar("Images Uploaded Sucessfully!"));
+    dispatch(aboutUsActions.uploadAboutUsImagesSuccess());
+  }
+  else {
+
+    dispatch(showWarningSnackbar(`This image ${imagesPayload.fileName} already exists`));
+    dispatch(aboutUsActions.uploadAboutUsImagesSuccess());
+  }
+}
+
+
+   
 
   } catch (error) {
     dispatch(aboutUsActions.uploadAboutUsImagesError(error));
@@ -143,7 +180,7 @@ export const getAboutUsImages = () => async dispatch => {
   dispatch(aboutUsActions.getAboutUsImagesRequest());
   try {
 
-    await db.collection('aboutUsImages').orderBy("createdAt","desc").onSnapshot(snap => {
+    await db.collection('aboutUsImages').orderBy("backround","desc").onSnapshot(snap => {
       const data = snap.docs.map(doc => (
         {
           ...doc.data(),
@@ -179,6 +216,45 @@ export const deleteAboutUsImage = (uid,filename) => async dispatch => {
    
   } catch (error) {
     dispatch(aboutUsActions.deleteAboutUsImageError(error));
+    console.log("error",error)
+    dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
+  }
+};
+
+
+export const updateImageActive = (uid) => async dispatch => {
+
+  try {
+    await db.collection('aboutUsImages').doc(`${uid}`).update({ active: true, createdAt: createdAt });
+    dispatch(showSuccessSnackbar("Active Record Sucessfully Updated!"));
+  } catch (error) {
+    console.log("error",error)
+    dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
+  }
+};
+
+
+export const updateImageInActive = (backround,uid) => async dispatch => {
+  try {
+    dispatch(aboutUsActions.inActiveAboutUsImageRequest());
+    let imagesRef = await db.collection("aboutUsImages");
+    let inActiveId = await imagesRef.where("active", "==", true).where("backround", "==", backround)
+      .get().then(snap => snap.docs.map(doc => doc.id));
+    
+      await db.collection('aboutUsImages').doc(`${uid}`).update({ active: true, createdAt: createdAt });
+      if (inActiveId !== null) {
+      await db.collection('aboutUsImages').doc(`${inActiveId}`).update({ active: false, createdAt: createdAt });
+     
+      dispatch(aboutUsActions.inActiveAboutUsImageSuccess(inActiveId));
+      dispatch(showSuccessSnackbar("inActive Record Sucessfully Updated!"));
+     
+    }
+    else {
+      dispatch(aboutUsActions.inActiveAboutUsImageSuccess(inActiveId));
+      dispatch(showFaildSnackbar("No Active Record found!"));
+    }
+  } catch (error) {
+    dispatch(aboutUsActions.inActiveAboutUsImageError(error));
     console.log("error",error)
     dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
   }

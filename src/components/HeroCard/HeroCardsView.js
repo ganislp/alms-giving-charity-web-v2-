@@ -77,9 +77,7 @@ class HeroCardsView extends React.Component {
                   heading={data.heading}
                   subTitle={data.body}
                   image={data.cardImage}
-                  imageName={data.createdAt}
-
-                />
+                  imageName={data.createdAt} />
               </Grid>
 
             )

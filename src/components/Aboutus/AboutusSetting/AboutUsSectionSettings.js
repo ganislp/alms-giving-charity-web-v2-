@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container,Grid } from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-// import AboutUsSectionList from './AboutUsSectionList';
+import AboutUsSectionList from './AboutUsSectionList';
 import AboutUsImagesList from './AboutUsImagesList';
 
 const useStyles = theme => ({
@@ -24,7 +24,7 @@ class AboutUsSectionSettings extends React.Component{
       <Container maxWidth="lg" className={classes.mainContainer} >
 <Grid  container >
   <Grid item sm={12} style={{marginBottom:"1em",marginTop:"1em"}}>
-  {/* <AboutUsSectionList/> */}
+  <AboutUsSectionList/>
   </Grid>
   <Grid item sm={12} style={{marginBottom:"1em",marginTop:"1em"}}>
   <AboutUsImagesList/>

@@ -45,6 +45,12 @@ export default  createMuiTheme({
       lineHeight: 1.5, 
       fontWeight: 400,
     },
+    body1: {
+      fontFamily: "Raleway",
+      fontSize: "1rem",
+     color: appWhite,
+     fontWeight: 100,
+    },
 
     h1:{
       fontFamily: "Open Sans sans-serif",
