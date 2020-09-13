@@ -64,7 +64,9 @@ export default  createMuiTheme({
       fontSize: "1.2rem",
       lineHeight: 1,    
     },
-
+    button: {
+      textTransform: 'none'
+    },
     h6Grey : {
       fontFamily: "Raleway",
       textTransform: "none",

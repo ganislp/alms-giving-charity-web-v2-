@@ -194,10 +194,10 @@ updateActive = (stauts, uid) => {
       title={
       <Grid container spacing={2}>
         <Grid item>
-      <UploadImages uploadRef="aboutUs" upload={this.uploadBackroundImage}  label="Upload Backround Image" />
+      <UploadImages uploadRef="aboutUs" upload={this.uploadBackroundImage}  label="Upload Backround" />
       </Grid>
       <Grid item>
-      <UploadImages uploadRef="aboutUs" upload={this.uploadImage}  label="Upload Image" />
+      <UploadImages uploadRef="aboutUs" upload={this.uploadImage}  label="Upload" />
       </Grid>
       </Grid>
     

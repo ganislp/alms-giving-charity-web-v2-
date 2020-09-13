@@ -12,7 +12,7 @@ const useStyles = theme => ({
   imageConatiner:{
     backgroundImage:  (props) => `url(${props.aboutUsBackround.imageUrl})`,
     width:"100%",
-    height: "65vh",
+    //height: "100vh",
     backgroundPosition: "center center",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",  
@@ -24,7 +24,7 @@ const useStyles = theme => ({
   paper: {
     flexGrow: 1,
     width: "100%",
-    height: "65vh",
+   // height: "100vh",
     backgroundColor: "rgba(0,0,0, 0.8)",
     position: "relative",
     alignItems:"center",
@@ -45,38 +45,38 @@ const useStyles = theme => ({
    }, 
  
   },
-  body: {
-    ...theme.palette.typography.body,
-    color:theme.palette.common.lightGrey,
-    maxWidth:"40em",
-   // fontWeight: 500,
-  marginBottom:"2em",    
-    [theme.breakpoints.down("md")]: {
-    maxWidth:"0em",
-    marginBottom:"1em",    
-   } ,  
-  },
+//   body: {
+//     ...theme.palette.typography.body,
+//     color:theme.palette.common.lightGrey,
+//     maxWidth:"40em",
+//    // fontWeight: 500,
+//  // marginBottom:"2em",    
+//     [theme.breakpoints.down("md")]: {
+//     maxWidth:"0em",
+//     marginBottom:"1em",    
+//    } ,  
+//   },
 
   bodyContaner:{
    // maxWidth:"40em",
       fontSize:"1rem",
      color:theme.palette.common.lightGrey,
       lineHeight: 2,
-      paddingBottom:"5em",
-      paddingRight:"2em",
+      paddingBottom:"1em",
+     // paddingRight:"2em",
       [theme.breakpoints.down("md")]: {
-        paddingBottom:"1em",
+    
         fontSize:"0.8rem",
       //  maxWidth:"40em",
          },  
   },
   
   itemContainer:{
-  paddingTop:"5em",
-  paddingBottom:"5em",
+ // paddingTop:"5em",
+ paddingBottom:"3em",
   [theme.breakpoints.down("md")]: {
-    paddingTop:"0em",
-  paddingBottom:"2em"
+    paddingBottom:"2em",
+
      },  
   },
   img: {
@@ -91,7 +91,7 @@ const useStyles = theme => ({
        },  
   },
   iconContainer:{
-    paddingTop:"1em",
+   // marginTop:"1em",
     [theme.breakpoints.down("md")]: {
     paddingBottom:"1em"
        },
@@ -105,18 +105,25 @@ class AboutUsSectionView extends React.Component {
     const { classes } = this.props;
     
     return(
-      <Grid  className={classes.imageConatiner} container  >
-         <Grid item className={classes.paper}  container justify="flex-end" alignItems="center">
+      <Grid  className={classes.imageConatiner} container>
+         <Grid item className={classes.paper}  container  justify="center" >
+         <Hidden mdDown>   
+          <Grid item  container  justify="flex-end" >
+          <SettingButton size = "large" click = {() => history.push("/aboutus/aboutUsSectionSettings")}></SettingButton>
+          </Grid>
+          </Hidden>
          <Hidden  lgUp>
-          <Grid item  className={classes.iconContainer}>
+          <Grid item   container  justify="flex-end" className={classes.iconContainer}>
           <SettingButton size = "small" click = {() => history.push("/aboutus/aboutUsSectionSettings")}></SettingButton>
           </Grid>
           </Hidden>
-         <Container maxWidth="lg" >
-<Grid  container   justify="space-between" className={classes.itemContainer}>
+         
+        
+          <Container maxWidth="lg" className={classes.itemContainer}>
+<Grid  container   justify="space-between" spacing={2}>
 <Grid item xs={12} sm={6}>
 
-<Grid item container direction="column">
+<Grid item container direction="column" >
 
           <Grid item xs={12}>
             <Typography variant="h1" color="primary" className={classes.heading}  >
@@ -128,9 +135,9 @@ class AboutUsSectionView extends React.Component {
               {this.props.aboutUsDetails.body}
             </Typography>
           </Grid>
-          {/* <Grid item container justify="flex-start" className={classes.lernButton}>
-            <ReadMoreButton lable={heroBTStylesAndContent.HeroBottemTwoConst.buttonLable} />
-          </Grid> */}
+          <Grid item container justify="flex-start" style={{marginBottom:"1em"}}>
+          <HeaderButton  label="Read More"/>
+          </Grid>
         </Grid>   
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -141,12 +148,7 @@ class AboutUsSectionView extends React.Component {
         </Grid>
         
         </Container>
-    
-        <Hidden mdDown>   
-          <Grid item   >
-          <SettingButton size = "large" click = {() => history.push("/aboutus/aboutUsSectionSettings")}></SettingButton>
-          </Grid>
-          </Hidden>
+       
         </Grid>
         
       </Grid>
