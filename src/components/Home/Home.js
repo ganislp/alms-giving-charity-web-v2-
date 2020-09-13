@@ -7,7 +7,7 @@ import { Grid } from '@material-ui/core';
 
 const useStyles = theme => ({
   mainContainer:{
-    marginTop:"5em",marginBottom:"5em",
+    marginBottom:"5em",
     [theme.breakpoints.down("md")]: {
      marginTop:"0em",marginBottom:"3em",
    },
