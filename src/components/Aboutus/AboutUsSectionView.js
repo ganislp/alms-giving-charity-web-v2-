@@ -66,6 +66,7 @@ const useStyles = theme => ({
       paddingRight:"2em",
       [theme.breakpoints.down("md")]: {
         paddingBottom:"1em",
+        fontSize:"0.8rem",
       //  maxWidth:"40em",
          },  
   },
