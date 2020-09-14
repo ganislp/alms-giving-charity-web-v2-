@@ -20,7 +20,7 @@ import MUIDataTable from "mui-datatables";
 import { TableRowContent, ActionButtonsContent,ActiveButtonContent } from '../../ui/DataTableContentBuild';
 import { HomeHeaderButton } from '../../ui/Buttons';
 import { LoadingProcess, SubmitProcess } from '../../ui/ProgressBars'
-
+import AboutUsSectionPreview from './AboutUsSectionPreview'
 
 
 
@@ -162,24 +162,35 @@ updateActive = (stauts, uid) => {
       renderExpandableRow: (rowData, rowMeta) => {
         const colSpan = rowData.length;
         const cardIndex = Object.values(rowMeta).slice(0, 1);
+        let aboutUsBackround = null;
+        let aboutUsImage = null;
        
-       const { imageUrl } = this.props.aboutUsImages[cardIndex];
-       const { heading,body,cardImage,createdAt } = Object.assign({}, ...Object.values((this.props.aboutUsDetails.filter(card => card.cardImage === imageUrl))));
+       const aboutUsSeleted = _.pick(this.props.aboutUsImages[cardIndex],'imageUrl','fileName','backround');
+       const aboutUsDetails =  _.pick(...Object.values(this.props.aboutUsDetails).filter(item => item.active === true),'heading','body');
+       if(aboutUsSeleted.backround){
+        aboutUsBackround = _.pick(this.props.aboutUsImages[cardIndex],'imageUrl','fileName');
+        aboutUsImage = _.pick(...Object.values(this.props.aboutUsImages).filter(item => item.active === true && item.backround === false),'imageUrl','fileName');
+       }
+       else{
+        aboutUsBackround =  _.pick(...Object.values(this.props.aboutUsImages.filter(item => item.active === true && item.backround === true )),'imageUrl','fileName');
+        aboutUsImage = _.pick(this.props.aboutUsImages[cardIndex],'imageUrl','fileName');
+       }
+
         return (
           
           <TableRow >
             
             <TableCell colSpan={colSpan} align="center">
-             <Grid container justify="center" alignItems="center">
-               <Grid item xs={12} sm={4}>
-            {/* <CardBuild
-                  heading={heading}
-                  subTitle={body}
-                  image={cardImage}
-                  imageName={createdAt}
-                /> */}
-                </Grid>
-               </Grid>
+             {/* <Grid container justify="center" alignItems="center">
+               <Grid item xs={12} sm={4}> */}
+         <AboutUsSectionPreview
+                  aboutUsBackround={aboutUsBackround}
+                  aboutUsImage={aboutUsImage}
+                  aboutUsDetails={aboutUsDetails}
+ 
+                />
+                {/* </Grid>
+               </Grid> */}
             </TableCell>
           </TableRow>
      
@@ -233,7 +244,6 @@ updateActive = (stauts, uid) => {
 }
 
 const mapStateToProps = state => {
-  console.log("state", state)
   return {
     aboutUsImages: Object.values(state.aboutUsSection.aboutUsImages),
     aboutUsDetails: Object.values(state.aboutUsSection.aboutUsDetails),

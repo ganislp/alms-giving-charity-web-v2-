@@ -98,8 +98,13 @@ const useStyles = makeStyles(theme => ({
 
    settingsContainer:{
     backgroundColor:theme.palette.common.blue,
+padding:"0.5em",
+
+   [theme.breakpoints.down("md")]: {
     padding:"0.3em"
+ } ,
   },
+
 
 }))
 

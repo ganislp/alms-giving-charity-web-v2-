@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Grid, Container, Typography, IconButton,Hidden } from '@material-ui/core';
-import SettingsIcon from '@material-ui/icons/Settings';
+import { Grid, Container, Typography,Hidden } from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import history from '../../history';
 import {HeaderButton,SettingButton} from '../ui/Buttons'
