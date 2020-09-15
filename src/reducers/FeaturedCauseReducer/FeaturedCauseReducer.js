@@ -1,93 +1,93 @@
-import * as heroFeaturedCauseActionTypes from '../../actions/actionTypes/heroFeaturedCauseActionTypes';
+import * as featuredCauseActionTypes from '../../actions/actionTypes/featuredCauseActionTypes';
 
 import _ from 'lodash';
 
 const initialUserState = {
-  heroFeaturedCauseDetails: {},
-  heroFeaturedCauseImages: {},
+  featuredCauseDetails: {},
+  featuredCauseImages: {},
 };
 
 export default (state = initialUserState, action) => {
   switch (action.type) {
-    case heroFeaturedCauseActionTypes.GET_HERO_FEATURED_CAUSE_REQUEST:
+    case featuredCauseActionTypes.GET_FEATURED_CAUSE_REQUEST:
       return { ...state, ...action.payload }
-    case heroFeaturedCauseActionTypes.GET_HERO_FEATURED_CAUSE_SUCCESS:
-      return { ...state, heroFeaturedCauseDetails: { ..._.mapKeys(action.payload.heroFeaturedCauseDetails, 'uid') } }
-    case heroFeaturedCauseActionTypes.GET_HERO_FEATURED_CAUSE_ERROR:
+    case featuredCauseActionTypes.GET_FEATURED_CAUSE_SUCCESS:
+      return { ...state, featuredCauseDetails: { ..._.mapKeys(action.payload.featuredCauseDetails, 'uid') } }
+    case featuredCauseActionTypes.GET_FEATURED_CAUSE_ERROR:
       return { ...state, ...action.payload };
 
-    case heroFeaturedCauseActionTypes.CREATE_HERO_FEATURED_CAUSE_REQUEST:
+    case featuredCauseActionTypes.CREATE_FEATURED_CAUSE_REQUEST:
       return { ...state, ...action.payload };
-    case heroFeaturedCauseActionTypes.CREATE_HERO_FEATURED_CAUSE_SUCCESS:
+    case featuredCauseActionTypes.CREATE_FEATURED_CAUSE_SUCCESS:
       return { ...state, ...action.payload };
-    case heroFeaturedCauseActionTypes.CREATE_HERO_FEATURED_CAUSE_ERROR:
-      return { ...state, ...action.payload }
-
-    case heroFeaturedCauseActionTypes.EDIT_HERO_FEATURED_CAUSE_REQUEST:
-      return { ...state, ...action.payload };
-    case heroFeaturedCauseActionTypes.EDIT_HERO_FEATURED_CAUSE_SUCCESS:
-      return { ...state, ...action.payload };
-    case heroFeaturedCauseActionTypes.EDIT_HERO_FEATURED_CAUSE_ERROR:
+    case featuredCauseActionTypes.CREATE_FEATURED_CAUSE_ERROR:
       return { ...state, ...action.payload }
 
-    case heroFeaturedCauseActionTypes.ACTIVE_HERO_FEATURED_CAUSE_REQUEST:
+    case featuredCauseActionTypes.EDIT_FEATURED_CAUSE_REQUEST:
       return { ...state, ...action.payload };
-    case heroFeaturedCauseActionTypes.ACTIVE_HERO_FEATURED_CAUSE_SUCCESS:
+    case featuredCauseActionTypes.EDIT_FEATURED_CAUSE_SUCCESS:
       return { ...state, ...action.payload };
-    case heroFeaturedCauseActionTypes.ACTIVE_HERO_FEATURED_CAUSE_ERROR:
+    case featuredCauseActionTypes.EDIT_FEATURED_CAUSE_ERROR:
       return { ...state, ...action.payload }
 
-    case heroFeaturedCauseActionTypes.INACTIVE_HERO_FEATURED_CAUSE_REQUEST:
+    case featuredCauseActionTypes.ACTIVE_FEATURED_CAUSE_REQUEST:
       return { ...state, ...action.payload };
-    case heroFeaturedCauseActionTypes.INACTIVE_HERO_FEATURED_CAUSE_SUCCESS:
+    case featuredCauseActionTypes.ACTIVE_FEATURED_CAUSE_SUCCESS:
       return { ...state, ...action.payload };
-    case heroFeaturedCauseActionTypes.INACTIVE_HERO_FEATURED_CAUSE_ERROR:
+    case featuredCauseActionTypes.ACTIVE_FEATURED_CAUSE_ERROR:
       return { ...state, ...action.payload }
 
-
-    case heroFeaturedCauseActionTypes.DELETE_HERO_FEATURED_CAUSE_REQUEST:
+    case featuredCauseActionTypes.INACTIVE_FEATURED_CAUSE_REQUEST:
       return { ...state, ...action.payload };
-    case heroFeaturedCauseActionTypes.DELETE_HERO_FEATURED_CAUSE_SUCCESS:
+    case featuredCauseActionTypes.INACTIVE_FEATURED_CAUSE_SUCCESS:
       return { ...state, ...action.payload };
-    case heroFeaturedCauseActionTypes.DELETE_HERO_FEATURED_CAUSE_ERROR:
+    case featuredCauseActionTypes.INACTIVE_FEATURED_CAUSE_ERROR:
       return { ...state, ...action.payload }
 
 
-    case heroFeaturedCauseActionTypes.UPLOAD_HERO_FEATURED_CAUSE_IMAGES_REQUEST:
+    case featuredCauseActionTypes.DELETE_FEATURED_CAUSE_REQUEST:
       return { ...state, ...action.payload };
-    case heroFeaturedCauseActionTypes.UPLOAD_HERO_FEATURED_CAUSE_IMAGES_SUCCESS:
+    case featuredCauseActionTypes.DELETE_FEATURED_CAUSE_SUCCESS:
       return { ...state, ...action.payload };
-    case heroFeaturedCauseActionTypes.UPLOAD_HERO_FEATURED_CAUSE_IMAGES_FAILURE:
+    case featuredCauseActionTypes.DELETE_FEATURED_CAUSE_ERROR:
       return { ...state, ...action.payload }
 
 
-    case heroFeaturedCauseActionTypes.FETCH_HERO_FEATURED_CAUSE_IMAGES_REQUEST:
-      return { ...state, ...action.payload }
-    case heroFeaturedCauseActionTypes.FETCH_HERO_FEATURED_CAUSE_IMAGES_SUCCESS:
-      return { ...state, heroFeaturedCauseImages: { ..._.mapKeys(action.payload.heroFeaturedCauseImages, 'uid') } }
-    case heroFeaturedCauseActionTypes.FETCH_HERO_FEATURED_CAUSE_IMAGES_ERROR:
+    case featuredCauseActionTypes.UPLOAD_FEATURED_CAUSE_IMAGES_REQUEST:
       return { ...state, ...action.payload };
-
-
-    case heroFeaturedCauseActionTypes.DELETE_HERO_FEATURED_CAUSE_IMAGE_REQUEST:
+    case featuredCauseActionTypes.UPLOAD_FEATURED_CAUSE_IMAGES_SUCCESS:
       return { ...state, ...action.payload };
-    case heroFeaturedCauseActionTypes.DELETE_HERO_FEATURED_CAUSE_IMAGE_SUCCESS:
-      return { ...state, ...action.payload };
-    case heroFeaturedCauseActionTypes.DELETE_HERO_FEATURED_CAUSE_IMAGE_FAILURE:
+    case featuredCauseActionTypes.UPLOAD_FEATURED_CAUSE_IMAGES_FAILURE:
       return { ...state, ...action.payload }
 
-    case heroFeaturedCauseActionTypes.ACTIVE_HERO_FEATURED_CAUSE_IMAGE_REQUEST:
+
+    case featuredCauseActionTypes.FETCH_FEATURED_CAUSE_IMAGES_REQUEST:
+      return { ...state, ...action.payload }
+    case featuredCauseActionTypes.FETCH_FEATURED_CAUSE_IMAGES_SUCCESS:
+      return { ...state, featuredCauseImages: { ..._.mapKeys(action.payload.featuredCauseImages, 'uid') } }
+    case featuredCauseActionTypes.FETCH_FEATURED_CAUSE_IMAGES_ERROR:
       return { ...state, ...action.payload };
-    case heroFeaturedCauseActionTypes.ACTIVE_HERO_FEATURED_CAUSE_IMAGE_SUCCESS:
+
+
+    case featuredCauseActionTypes.DELETE_FEATURED_CAUSE_IMAGE_REQUEST:
       return { ...state, ...action.payload };
-    case heroFeaturedCauseActionTypes.ACTIVE_HERO_FEATURED_CAUSE_IMAGE_ERROR:
+    case featuredCauseActionTypes.DELETE_FEATURED_CAUSE_IMAGE_SUCCESS:
+      return { ...state, ...action.payload };
+    case featuredCauseActionTypes.DELETE_FEATURED_CAUSE_IMAGE_FAILURE:
       return { ...state, ...action.payload }
 
-    case heroFeaturedCauseActionTypes.INACTIVE_HERO_FEATURED_CAUSE_IMAGE_REQUEST:
+    case featuredCauseActionTypes.ACTIVE_FEATURED_CAUSE_IMAGE_REQUEST:
       return { ...state, ...action.payload };
-    case heroFeaturedCauseActionTypes.INACTIVE_HERO_FEATURED_CAUSE_IMAGE_SUCCESS:
+    case featuredCauseActionTypes.ACTIVE_FEATURED_CAUSE_IMAGE_SUCCESS:
       return { ...state, ...action.payload };
-    case heroFeaturedCauseActionTypes.INACTIVE_HERO_FEATURED_CAUSE_IMAGE_ERROR:
+    case featuredCauseActionTypes.ACTIVE_FEATURED_CAUSE_IMAGE_ERROR:
+      return { ...state, ...action.payload }
+
+    case featuredCauseActionTypes.INACTIVE_FEATURED_CAUSE_IMAGE_REQUEST:
+      return { ...state, ...action.payload };
+    case featuredCauseActionTypes.INACTIVE_FEATURED_CAUSE_IMAGE_SUCCESS:
+      return { ...state, ...action.payload };
+    case featuredCauseActionTypes.INACTIVE_FEATURED_CAUSE_IMAGE_ERROR:
       return { ...state, ...action.payload }
     default:
       return { ...state };

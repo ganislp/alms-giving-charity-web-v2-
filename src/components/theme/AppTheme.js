@@ -1,5 +1,5 @@
 import {createMuiTheme } from '@material-ui/core/styles';
-
+import lightBlue from "@material-ui/core/colors/lightBlue";
 const appWhite="#ffff";
 const appBlue= "#0B72B9";
  const arcGrey = "#333";
@@ -21,6 +21,7 @@ export default  createMuiTheme({
     secondary :{
     main : appBlue
     } ,
+  
 
   typography:{
     tab : {
@@ -30,6 +31,9 @@ export default  createMuiTheme({
       color: "#333",
       fontSize: "1rem",
     },
+      flatButton: {
+      primaryTextColor: appBlue, // Whatever color you want.
+  },
 
     h6White : {
       fontFamily: "Open Sans sans-serif",
@@ -132,7 +136,48 @@ export default  createMuiTheme({
     },
   }
 },
-overrides: {    
+overrides: {   
+  // 
+//  MuiPickersModal: {   
+  
+// dialogAction: {  
+//    MuiButton: { textPrimary: { color: 'red', } },             
+// color: lightBlue["400"],     
+//               },    
+//              },   
+  
+     
+  // MuiPickersToolbar: {
+  //   toolbar: {
+  //     backgroundColor: lightBlue.A200,
+  //   },
+  // },
+  
+  // MuiPickersCalendarHeader: {
+  //   // switchHeader: {
+  //   //   backgroundColor: lightBlue.A200,
+  //   //   color: "white",
+  //   // },
+  // },
+  // MuiPickersDay: {
+  //   day: {
+  //     color: lightBlue.A700,
+  //   },
+  //   daySelected: {
+  //     backgroundColor: lightBlue["400"],
+  //   },
+  //   dayDisabled: {
+  //     color: lightBlue["100"],
+  //   },
+  //   current: {
+  //     color: lightBlue["900"],
+  //   },
+  // },
+  // MuiPickersModal: {
+  //   dialogAction: {
+  //     color: lightBlue["400"],
+  //   },
+  // },
   // MuiAppBar: {
   //  root: {paddingRight: 0, }
 

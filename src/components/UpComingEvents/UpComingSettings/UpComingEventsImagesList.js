@@ -7,11 +7,11 @@ import Avatar from '@material-ui/core/Avatar';
 import { withTheme, withStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 import {
-  getHeroCardImages,
-  deleteHeroCardImage,
-  uploadHeroCardImages
+  getUpComingEventsImages,
+  deleteUpComingEventsImage,
+  uploadUpComingEventsImages
 
-} from '../../../actions/api/heroCardApi';
+} from '../../../actions/api/upComingEventsApi';
 import UploadImages from '../../ui/UploadImages';
 import { confiDialogOpen, previewDialogOpen } from '../../../actions/uiActions/navigationAcions';
 import ConfimationDialog from '../../model/ConfimationDialog';
@@ -19,7 +19,7 @@ import MUIDataTable from "mui-datatables";
 import { TableRowContent, ActionButtonsContent,ActiveButtonContent } from '../../ui/DataTableContentBuild';
 import { HomeHeaderButton } from '../../ui/Buttons';
 import { LoadingProcess, SubmitProcess } from '../../ui/ProgressBars'
-import CardBuild from '../CardsBuild';
+
 
 
 
@@ -49,26 +49,26 @@ const useStyles = theme => ({
 
 });
 
-class HeroCardImagesList extends React.Component {
+class UpComingEventsImagesList extends React.Component {
 
-  componentDidMount() {
-    this.props.getHeroCardImages();
-  }
+  // componentDidMount() {
+  //   this.props.getHeroUpComingEventsImages();
+  // }
 
 
 
-  deleteHeroCardImage = (uid) => {
+  deleteHeroUpComingEventsImage = (uid) => {
     this.props.confiDialogOpen({ open: true, heroImageSeletedUid: uid });
   }
 
   dialogImgeButtonClick = () => {
-    const {fileName} = Object.assign({}, ...Object.values((this.props.heroCardImages.filter(image => image.uid === this.props.confirmationUid))));
-    this.props.deleteHeroCardImage(this.props.confirmationUid,fileName);
+    const {fileName} = Object.assign({}, ...Object.values((this.props.heroUpComingEventsImages.filter(image => image.uid === this.props.confirmationUid))));
+    this.props.deleteUpComingEventsImage(this.props.confirmationUid,fileName);
     this.props.confiDialogOpen({ open: false, heroImageSeletedUid: {} });
   }
 
   uploadImage = (url,filename) => {
-    this.props.uploadHeroCardImages({imageUrl:url,fileName:filename})
+    this.props.uploadUpComingEventsImages({imageUrl:url,fileName:filename})
   }
 
 
@@ -101,8 +101,8 @@ class HeroCardImagesList extends React.Component {
         options: {
           customBodyRender: (value, dataIndex) => <ActionButtonsContent
             value={value}
-            dataIndex={ _.some(this.props.heroCardDetails, function(item) {return item.fileName === dataIndex.rowData[0]})}
-            click={this.deleteHeroCardImage}
+            dataIndex={ _.some(this.props.upComingEventsDetails, function(item) {return item.fileName === dataIndex.rowData[0]})}
+            click={this.deleteupComingEventsImage}
             hiddendEdit={true}           
           />,
           filter: false, sort: false,// empty: true,
@@ -122,9 +122,9 @@ class HeroCardImagesList extends React.Component {
       expandableRowsHeader: false,
       expandableRowsOnClick: true,
       isRowExpandable: (dataIndex, expandedRows) => {
-        if(!_.isEmpty(this.props.heroCardImages[dataIndex])){
-        const { fileName } = this.props.heroCardImages[dataIndex];
-        const newImagefileName =   _.some(this.props.heroCardDetails, function(card) {return card.fileName === fileName}) 
+        if(!_.isEmpty(this.props.upComingEventsImages[dataIndex])){
+        const { fileName } = this.props.upComingEventsImages[dataIndex];
+        const newImagefileName =   _.some(this.props.upComingEventsDetails, function(card) {return card.fileName === fileName}) 
         if (newImagefileName) return true;
         }
       },
@@ -136,20 +136,20 @@ class HeroCardImagesList extends React.Component {
       renderExpandableRow: (rowData, rowMeta) => {
         const colSpan = rowData.length;
         const cardIndex = Object.values(rowMeta).slice(0, 1);       
-       const { imageUrl } = this.props.heroCardImages[cardIndex];
-       const { heading,body,cardImage,createdAt } = Object.assign({}, ...Object.values((this.props.heroCardDetails.filter(card => card.cardImage === imageUrl))));
+       const { imageUrl } = this.props.upComingEventsImages[cardIndex];
+       const { heading,body,cardImage,createdAt } = Object.assign({}, ...Object.values((this.props.upComingEventsDetails.filter(card => card.imageUrl === imageUrl))));
         return (         
           <TableRow >            
             <TableCell colSpan={colSpan} align="center">
              <Grid container justify="center" alignItems="center">
                <Grid item xs={12} sm={4}>
-            <CardBuild
+            {/* <CardBuild
                   heading={heading}
                   subTitle={body}
                   image={cardImage}
                   imageName={createdAt}
 
-                />
+                /> */}
                 </Grid>
                </Grid>
             </TableCell>
@@ -163,9 +163,9 @@ class HeroCardImagesList extends React.Component {
 
 
     return <MUIDataTable
-      title={<UploadImages uploadRef="heroCard" upload={this.uploadImage} label="Upload Image"/>}
+      title={<UploadImages uploadRef="upComingEvents" upload={this.uploadImage} label="Upload Image"/>}
       columns={columns}
-      data={this.props.heroCardImages}
+      data={this.props.upComingEventsImages}
       options={options}
     />
   }
@@ -173,8 +173,8 @@ class HeroCardImagesList extends React.Component {
   renderConfimationDialog() {
     if (!_.isEmpty(this.props.confirmationUid)) {
       return <ConfimationDialog
-        title="Delete Hero Card Image"
-        content="Are you sure you want to delete this Hero Card Image?"
+        title="Delete UpComing Event Image"
+        content="Are you sure you want to delete this UpComing Event Image?"
         dialogButtonClick={this.dialogImgeButtonClick} />
     }
   }
@@ -196,11 +196,13 @@ class HeroCardImagesList extends React.Component {
 }
 
 const mapStateToProps = state => {
+  console.log("state",state);
   return {
-    heroCardImages: Object.values(state.heroCardSection.heroCardImages),
-    heroCardDetails: Object.values(state.heroCardSection.heroCardDetails),
-    isLoading: _.some(_.values(state.pendingStates.FETCH_HERO_CARD_IMAGES)),
-    isSubmiting: _.some(_.values(state.pendingStates.DELETE_HERO_CARD_IMAGE)),
+    
+    upComingEventsImages: Object.values(state.upComingEventsSection.upComingEventsImages),
+    upComingEventsDetails: Object.values(state.upComingEventsSection.upComingEventsDetails),
+    isLoading: _.some(_.values(state.pendingStates.FETCH_UP_COMING_EVENTS_IMAGES)),
+    isSubmiting: _.some(_.values(state.pendingStates.DELETE_UP_COMING_EVENTS_IMAGE)),
     confirmationUid: state.dialogOpen.heroImageSeletedUid,
     previewUid: state.previewOpen.uid,
 
@@ -209,6 +211,9 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps, {
-    getHeroCardImages,
-    deleteHeroCardImage, confiDialogOpen , previewDialogOpen,uploadHeroCardImages
-})(withTheme(withStyles(useStyles)(HeroCardImagesList)))
+    // getUpComingEventsImages,
+    deleteUpComingEventsImage, 
+    confiDialogOpen , 
+    previewDialogOpen,
+    uploadUpComingEventsImages
+})(withTheme(withStyles(useStyles)(UpComingEventsImagesList)))

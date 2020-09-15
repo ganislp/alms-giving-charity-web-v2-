@@ -1,16 +1,16 @@
 import { db, createdAt } from '../../firebase';
 import moment from 'moment';
 import {storage} from '../../firebase';
-import * as heroFeaturedCauseActions from '../HeroFeaturedCauseActions/heroFeaturedCauseActions';
+import * as featuredCauseActions from '../FeaturedCauseActions/featuredCauseActions';
 import { showFaildSnackbar, showSuccessSnackbar, showWarningSnackbar } from '../uiActions/snackbarActions';
 import history from '../../history';
 import { cookies } from '../api/authApi';
 
 const userUid = cookies.get('userUid');
-export const getHeroFeaturedCause = () => async dispatch => {
-  dispatch(heroFeaturedCauseActions.getHeroFeaturedCauseRequest());
+export const getFeaturedCause = () => async dispatch => {
+  dispatch(featuredCauseActions.getFeaturedCauseRequest());
   try {
-    await db.collection('heroFeaturedCauseSection').onSnapshot(snap => {
+    await db.collection('featuredCauseSection').onSnapshot(snap => {
       const data = snap.docs.map(doc => (
         {
           ...doc.data(),
@@ -20,92 +20,92 @@ export const getHeroFeaturedCause = () => async dispatch => {
         }
       ));
       if (data.length === 0) {
-        history.push('/heroFeaturedCause/heroFeaturedCauseCreate');
+        history.push('/featuredCause/featuredCauseCreate');
       }
-      dispatch(heroFeaturedCauseActions.getHeroFeaturedCauseSuccess(data));
+      dispatch(featuredCauseActions.getFeaturedCauseSuccess(data));
 
     });
   } catch (error) {
-    dispatch(heroFeaturedCauseActions.getHeroFeaturedCauseError(error));
+    dispatch(featuredCauseActions.getFeaturedCauseError(error));
   }
 };
 
-export const createHeroFeaturedCause = (formValues, isActive) => async (dispatch) => {
-  dispatch(heroFeaturedCauseActions.createHeroFeaturedCauseRequest());
+export const createFeaturedCause = (formValues, isActive) => async (dispatch) => {
+  dispatch(featuredCauseActions.createFeaturedCauseRequest());
   try {
-    const response = await db.collection('heroFeaturedCauseSection').add({ ...formValues, createdAt: createdAt, active: isActive },);
-    dispatch(heroFeaturedCauseActions.createHeroFeaturedCauseSuccess(response.id));
+    const response = await db.collection('featuredCauseSection').add({ ...formValues, createdAt: createdAt, active: isActive },);
+    dispatch(featuredCauseActions.createFeaturedCauseSuccess(response.id));
     dispatch(showSuccessSnackbar("Data Saved Sucessfully!"));
-    history.push('/heroFeaturedCause/heroFeaturedCauseSettings');
+    history.push('/featuredCause/featuredCauseSettings');
   } catch (error) {
-    dispatch(heroFeaturedCauseActions.createHeroFeaturedCauseError(error));
+    dispatch(featuredCauseActions.createFeaturedCauseError(error));
     dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
   }
 };
 
 
-export const EditHeroFeaturedCause = (uid, formValues) => async dispatch => {
-  dispatch(heroFeaturedCauseActions.editHeroFeaturedCauseRequest());
+export const EditFeaturedCause = (uid, formValues) => async dispatch => {
+  dispatch(featuredCauseActions.editFeaturedCauseRequest());
   try {
-    await db.collection('heroFeaturedCauseSection').doc(`${uid}`).update({ ...formValues, createdAt: createdAt });
-    dispatch(heroFeaturedCauseActions.editHeroFeaturedCauseSuccess(uid));
-    dispatch(showSuccessSnackbar("HeroFeaturedCause Section Sucessfully Updated!"));
-    history.push('/heroFeaturedCause/heroFeaturedCauseSettings');
+    await db.collection('featuredCauseSection').doc(`${uid}`).update({ ...formValues, createdAt: createdAt });
+    dispatch(featuredCauseActions.editFeaturedCauseSuccess(uid));
+    dispatch(showSuccessSnackbar("FeaturedCause Section Sucessfully Updated!"));
+    history.push('/featuredCause/featuredCauseSettings');
   } catch (error) {
-    dispatch(heroFeaturedCauseActions.editHeroFeaturedCauseError(error));
+    dispatch(featuredCauseActions.editFeaturedCauseError(error));
     dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
   }
 };
 
 
 export const updateActive = (uid) => async dispatch => {
-  dispatch(heroFeaturedCauseActions.activeHeroFeaturedCauseRequest());
+  dispatch(featuredCauseActions.activeFeaturedCauseRequest());
   try {
-    await db.collection('heroFeaturedCauseSection').doc(`${uid}`).update({ active: true, createdAt: createdAt });
-    dispatch(heroFeaturedCauseActions.activeHeroFeaturedCauseSuccess(uid));
+    await db.collection('featuredCauseSection').doc(`${uid}`).update({ active: true, createdAt: createdAt });
+    dispatch(featuredCauseActions.activeFeaturedCauseSuccess(uid));
     dispatch(showSuccessSnackbar("Active Record Sucessfully Updated!"));
   } catch (error) {
-    dispatch(heroFeaturedCauseActions.activeHeroFeaturedCauseError(error));
+    dispatch(featuredCauseActions.activeFeaturedCauseError(error));
     dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
   }
 };
 
 export const updateInActive = (uid) => async dispatch => {
-  dispatch(heroFeaturedCauseActions.inActiveHeroFeaturedCauseRequest());
+  dispatch(featuredCauseActions.inActiveFeaturedCauseRequest());
   try {
-    await db.collection('heroFeaturedCauseSection').doc(`${uid}`).update({ active: false, createdAt: createdAt });
-    dispatch(heroFeaturedCauseActions.inActiveHeroFeaturedCauseSuccess(uid));
+    await db.collection('featuredCauseSection').doc(`${uid}`).update({ active: false, createdAt: createdAt });
+    dispatch(featuredCauseActions.inActiveFeaturedCauseSuccess(uid));
     //dispatch(showSuccessSnackbar("inActive Record Sucessfully Updated!")); 
   } catch (error) {
-    dispatch(heroFeaturedCauseActions.inActiveHeroFeaturedCauseError(error));
+    dispatch(featuredCauseActions.inActiveFeaturedCauseError(error));
     dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
   }
 };
 
 
-export const deleteHeroFeaturedCause = (uid) => async dispatch => {
-  dispatch(heroFeaturedCauseActions.deleteHeroFeaturedCauseRequest());
+export const deleteFeaturedCause = (uid) => async dispatch => {
+  dispatch(featuredCauseActions.deleteFeaturedCauseRequest());
   try {
-    await db.collection('heroFeaturedCauseSection').doc(`${uid}`).delete();
-    dispatch(heroFeaturedCauseActions.deleteHeroFeaturedCauseSuccess(uid));
-    dispatch(showSuccessSnackbar("HeroFeaturedCause Section deleted Sucessfully!"));
+    await db.collection('featuredCauseSection').doc(`${uid}`).delete();
+    dispatch(featuredCauseActions.deleteFeaturedCauseSuccess(uid));
+    dispatch(showSuccessSnackbar("FeaturedCause Section deleted Sucessfully!"));
   } catch (error) {
-    dispatch(heroFeaturedCauseActions.deleteHeroFeaturedCauseError(error));
+    dispatch(featuredCauseActions.deleteFeaturedCauseError(error));
     dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
   }
 };
 
-export const uploadHeroFeaturedCauseFailed = () => dispatch => {
+export const uploadFeaturedCauseFailed = () => dispatch => {
   dispatch(showFaildSnackbar("Image Uplaod Failed! some thing went wrong!"));
 };
 
 
 
-export const uploadHeroFeaturedCauseImages = (imagesPayload) => async (dispatch, getState) => {
-  dispatch(heroFeaturedCauseActions.uploadHeroFeaturedCauseImagesRequest());
+export const uploadFeaturedCauseImages = (imagesPayload) => async (dispatch, getState) => {
+  dispatch(featuredCauseActions.uploadFeaturedCauseImagesRequest());
   try {
 
-    let imagesRef = await db.collection("heroFeaturedCauseImages");
+    let imagesRef = await db.collection("featuredCauseImages");
     let imageExist = await imagesRef.get().then(snap => snap.size)
     let active = false;
 
@@ -114,29 +114,29 @@ export const uploadHeroFeaturedCauseImages = (imagesPayload) => async (dispatch,
       if (imageExist <= 2) {
         active = true;
       }
-      await db.collection('heroFeaturedCauseImages').add({ ...imagesPayload, createdAt: createdAt, active: active,  });
+      await db.collection('featuredCauseImages').add({ ...imagesPayload, createdAt: createdAt, active: active,  });
       //userId: userUid
       dispatch(showSuccessSnackbar("Images Uploaded Sucessfully!"));
-      dispatch(heroFeaturedCauseActions.uploadHeroFeaturedCauseImagesSuccess());
+      dispatch(featuredCauseActions.uploadFeaturedCauseImagesSuccess());
     }
     else {
 
       dispatch(showWarningSnackbar(`This image ${imagesPayload.fileName} already exists`));
-      dispatch(heroFeaturedCauseActions.uploadHeroFeaturedCauseImagesSuccess());
+      dispatch(featuredCauseActions.uploadFeaturedCauseImagesSuccess());
     }
 
   } catch (error) {
-    dispatch(heroFeaturedCauseActions.uploadHeroFeaturedCauseImagesError(error));
+    dispatch(featuredCauseActions.uploadFeaturedCauseImagesError(error));
     dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
 
   }
 };
 
-export const getHeroFeaturedCauseImages = () => async dispatch => {
-  dispatch(heroFeaturedCauseActions.getHeroFeaturedCauseImagesRequest());
+export const getFeaturedCauseImages = () => async dispatch => {
+  dispatch(featuredCauseActions.getFeaturedCauseImagesRequest());
   try {
 
-    await db.collection('heroFeaturedCauseImages').orderBy("createdAt","desc").onSnapshot(snap => {
+    await db.collection('featuredCauseImages').orderBy("createdAt","desc").onSnapshot(snap => {
       const data = snap.docs.map(doc => (
         {
           ...doc.data(),
@@ -145,35 +145,35 @@ export const getHeroFeaturedCauseImages = () => async dispatch => {
           //userId:userUid
         }
       ));
-      dispatch(heroFeaturedCauseActions.getHeroFeaturedCauseImagesSuccess(data));
+      dispatch(featuredCauseActions.getFeaturedCauseImagesSuccess(data));
 
     });
   } catch (error) {
-    dispatch(heroFeaturedCauseActions.getHeroFeaturedCauseImagesError(error));
+    dispatch(featuredCauseActions.getFeaturedCauseImagesError(error));
   }
 };
 
-export const getHeroFeaturedCauseImageByImageName = (imageName) => async dispatch => {
-  dispatch(heroFeaturedCauseActions.getHeroFeaturedCauseImagesRequest());
+export const getFeaturedCauseImageByImageName = (imageName) => async dispatch => {
+  dispatch(featuredCauseActions.getFeaturedCauseImagesRequest());
   try {
-    await (await db.collection('heroFeaturedCauseImages').where('fileName', '==', imageName).get()).empty
+    await (await db.collection('featuredCauseImages').where('fileName', '==', imageName).get()).empty
   } catch (error) {
-    dispatch(heroFeaturedCauseActions.getHeroFeaturedCauseImagesError(error));
+    dispatch(featuredCauseActions.getFeaturedCauseImagesError(error));
   }
 };
 
-export const deleteHeroFeaturedCauseImage = (uid,filename) => async dispatch => {
-  dispatch(heroFeaturedCauseActions.deleteHeroFeaturedCauseImageRequest());
+export const deleteFeaturedCauseImage = (uid,filename) => async dispatch => {
+  dispatch(featuredCauseActions.deleteFeaturedCauseImageRequest());
   try {
-    let desertRef = storage.ref(`heroFeaturedCause/${filename}`)
+    let desertRef = storage.ref(`featuredCause/${filename}`)
     await desertRef.delete().then(() => {
-       db.collection('heroFeaturedCauseImages').doc(`${uid}`).delete();
-      dispatch(heroFeaturedCauseActions.deleteHeroFeaturedCauseImageSuccess(uid));
-      dispatch(showSuccessSnackbar("HeroFeaturedCause Section Image deleted Sucessfully!"));
+       db.collection('featuredCauseImages').doc(`${uid}`).delete();
+      dispatch(featuredCauseActions.deleteFeaturedCauseImageSuccess(uid));
+      dispatch(showSuccessSnackbar("FeaturedCause Section Image deleted Sucessfully!"));
     });;
    
   } catch (error) {
-    dispatch(heroFeaturedCauseActions.deleteHeroFeaturedCauseImageError(error));
+    dispatch(featuredCauseActions.deleteFeaturedCauseImageError(error));
     console.log("error",error)
     dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
   }
@@ -183,7 +183,7 @@ export const deleteHeroFeaturedCauseImage = (uid,filename) => async dispatch => 
 export const updateImageActive = (uid) => async dispatch => {
 
   try {
-    await db.collection('heroFeaturedCauseImages').doc(`${uid}`).update({ active: true, createdAt: createdAt });
+    await db.collection('featuredCauseImages').doc(`${uid}`).update({ active: true, createdAt: createdAt });
     dispatch(showSuccessSnackbar("Active Record Sucessfully Updated!"));
   } catch (error) {
     console.log("error",error)
@@ -194,21 +194,21 @@ export const updateImageActive = (uid) => async dispatch => {
 
 export const updateImageInActive = () => async dispatch => {
   try {
-    dispatch(heroFeaturedCauseActions.inActiveHeroFeaturedCauseImageRequest());
-    let imagesRef = await db.collection("heroFeaturedCauseImages");
+    dispatch(featuredCauseActions.inActiveFeaturedCauseImageRequest());
+    let imagesRef = await db.collection("featuredCauseImages");
     let inActiveId = await imagesRef.where("active", "==", true).orderBy("createdAt").limit(1)
       .get().then(snap => snap.docs.map(doc => doc.id));
     if (inActiveId !== null) {
-      await db.collection('heroFeaturedCauseImages').doc(`${inActiveId}`).update({ active: false, createdAt: createdAt });
-      dispatch(heroFeaturedCauseActions.inActiveHeroFeaturedCauseImageSuccess(inActiveId));
+      await db.collection('featuredCauseImages').doc(`${inActiveId}`).update({ active: false, createdAt: createdAt });
+      dispatch(featuredCauseActions.inActiveFeaturedCauseImageSuccess(inActiveId));
       dispatch(showSuccessSnackbar("inActive Record Sucessfully Updated!"));
     }
     else {
-      dispatch(heroFeaturedCauseActions.inActiveHeroFeaturedCauseImageSuccess(inActiveId));
+      dispatch(featuredCauseActions.inActiveFeaturedCauseImageSuccess(inActiveId));
       dispatch(showFaildSnackbar("No Active Record found!"));
     }
   } catch (error) {
-    dispatch(heroFeaturedCauseActions.inActiveHeroFeaturedCauseImageError(error));
+    dispatch(featuredCauseActions.inActiveFeaturedCauseImageError(error));
     console.log("error",error)
     dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
   }

@@ -129,7 +129,7 @@ class AboutUsSectionView extends React.Component {
           </Container>
           <Grid item   style={{height: "100%"}}  >
             <Hidden mdDown>
-              <SettingButton size="lage" click={() => history.push("/aboutus/aboutUsSectionSettings")}></SettingButton>
+              <SettingButton size="large" click={() => history.push("/aboutus/aboutUsSectionSettings")}></SettingButton>
             </Hidden>
             
           </Grid>

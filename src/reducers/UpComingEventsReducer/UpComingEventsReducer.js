@@ -1,93 +1,93 @@
-import * as HeroUpComingEventsActionTypes from '../../actions/actionTypes/heroUpComingEventsActionTypes';
+import * as HeroUpComingEventsActionTypes from '../../actions/actionTypes/upComingEventsActionTypes';
 
 import _ from 'lodash';
 
 const initialUserState = {
-  heroUpComingEventsDetails: {},
-  heroUpComingEventsImages: {},
+  upComingEventsDetails: {},
+  upComingEventsImages: {},
 };
 
 export default (state = initialUserState, action) => {
   switch (action.type) {
-    case HeroUpComingEventsActionTypes.GET_HERO_UP_COMING_EVENTS_REQUEST:
+    case HeroUpComingEventsActionTypes.GET_UP_COMING_EVENTS_REQUEST:
       return { ...state, ...action.payload }
-    case HeroUpComingEventsActionTypes.GET_HERO_UP_COMING_EVENTS_SUCCESS:
-      return { ...state, heroUpComingEventsDetails: { ..._.mapKeys(action.payload.heroUpComingEventsDetails, 'uid') } }
-    case HeroUpComingEventsActionTypes.GET_HERO_UP_COMING_EVENTS_ERROR:
+    case HeroUpComingEventsActionTypes.GET_UP_COMING_EVENTS_SUCCESS:
+      return { ...state, upComingEventsDetails: { ..._.mapKeys(action.payload.upComingEventsDetails, 'uid') } }
+    case HeroUpComingEventsActionTypes.GET_UP_COMING_EVENTS_ERROR:
       return { ...state, ...action.payload };
 
-    case HeroUpComingEventsActionTypes.CREATE_HERO_UP_COMING_EVENTS_REQUEST:
+    case HeroUpComingEventsActionTypes.CREATE_UP_COMING_EVENTS_REQUEST:
       return { ...state, ...action.payload };
-    case HeroUpComingEventsActionTypes.CREATE_HERO_UP_COMING_EVENTS_SUCCESS:
+    case HeroUpComingEventsActionTypes.CREATE_UP_COMING_EVENTS_SUCCESS:
       return { ...state, ...action.payload };
-    case HeroUpComingEventsActionTypes.CREATE_HERO_UP_COMING_EVENTS_ERROR:
-      return { ...state, ...action.payload }
-
-    case HeroUpComingEventsActionTypes.EDIT_HERO_UP_COMING_EVENTS_REQUEST:
-      return { ...state, ...action.payload };
-    case HeroUpComingEventsActionTypes.EDIT_HERO_UP_COMING_EVENTS_SUCCESS:
-      return { ...state, ...action.payload };
-    case HeroUpComingEventsActionTypes.EDIT_HERO_UP_COMING_EVENTS_ERROR:
+    case HeroUpComingEventsActionTypes.CREATE_UP_COMING_EVENTS_ERROR:
       return { ...state, ...action.payload }
 
-    case HeroUpComingEventsActionTypes.ACTIVE_HERO_UP_COMING_EVENTS_REQUEST:
+    case HeroUpComingEventsActionTypes.EDIT_UP_COMING_EVENTS_REQUEST:
       return { ...state, ...action.payload };
-    case HeroUpComingEventsActionTypes.ACTIVE_HERO_UP_COMING_EVENTS_SUCCESS:
+    case HeroUpComingEventsActionTypes.EDIT_UP_COMING_EVENTS_SUCCESS:
       return { ...state, ...action.payload };
-    case HeroUpComingEventsActionTypes.ACTIVE_HERO_UP_COMING_EVENTS_ERROR:
+    case HeroUpComingEventsActionTypes.EDIT_UP_COMING_EVENTS_ERROR:
       return { ...state, ...action.payload }
 
-    case HeroUpComingEventsActionTypes.INACTIVE_HERO_UP_COMING_EVENTS_REQUEST:
+    case HeroUpComingEventsActionTypes.ACTIVE_UP_COMING_EVENTS_REQUEST:
       return { ...state, ...action.payload };
-    case HeroUpComingEventsActionTypes.INACTIVE_HERO_UP_COMING_EVENTS_SUCCESS:
+    case HeroUpComingEventsActionTypes.ACTIVE_UP_COMING_EVENTS_SUCCESS:
       return { ...state, ...action.payload };
-    case HeroUpComingEventsActionTypes.INACTIVE_HERO_UP_COMING_EVENTS_ERROR:
+    case HeroUpComingEventsActionTypes.ACTIVE_UP_COMING_EVENTS_ERROR:
       return { ...state, ...action.payload }
 
-
-    case HeroUpComingEventsActionTypes.DELETE_HERO_UP_COMING_EVENTS_REQUEST:
+    case HeroUpComingEventsActionTypes.INACTIVE_UP_COMING_EVENTS_REQUEST:
       return { ...state, ...action.payload };
-    case HeroUpComingEventsActionTypes.DELETE_HERO_UP_COMING_EVENTS_SUCCESS:
+    case HeroUpComingEventsActionTypes.INACTIVE_UP_COMING_EVENTS_SUCCESS:
       return { ...state, ...action.payload };
-    case HeroUpComingEventsActionTypes.DELETE_HERO_UP_COMING_EVENTS_ERROR:
+    case HeroUpComingEventsActionTypes.INACTIVE_UP_COMING_EVENTS_ERROR:
       return { ...state, ...action.payload }
 
 
-    case HeroUpComingEventsActionTypes.UPLOAD_HERO_UP_COMING_EVENTS_IMAGES_REQUEST:
+    case HeroUpComingEventsActionTypes.DELETE_UP_COMING_EVENTS_REQUEST:
       return { ...state, ...action.payload };
-    case HeroUpComingEventsActionTypes.UPLOAD_HERO_UP_COMING_EVENTS_IMAGES_SUCCESS:
+    case HeroUpComingEventsActionTypes.DELETE_UP_COMING_EVENTS_SUCCESS:
       return { ...state, ...action.payload };
-    case HeroUpComingEventsActionTypes.UPLOAD_HERO_UP_COMING_EVENTS_IMAGES_FAILURE:
+    case HeroUpComingEventsActionTypes.DELETE_UP_COMING_EVENTS_ERROR:
       return { ...state, ...action.payload }
 
 
-    case HeroUpComingEventsActionTypes.FETCH_HERO_UP_COMING_EVENTS_IMAGES_REQUEST:
-      return { ...state, ...action.payload }
-    case HeroUpComingEventsActionTypes.FETCH_HERO_UP_COMING_EVENTS_IMAGES_SUCCESS:
-      return { ...state, heroUpComingEventsImages: { ..._.mapKeys(action.payload.heroUpComingEventsImages, 'uid') } }
-    case HeroUpComingEventsActionTypes.FETCH_HERO_UP_COMING_EVENTS_IMAGES_ERROR:
+    case HeroUpComingEventsActionTypes.UPLOAD_UP_COMING_EVENTS_IMAGES_REQUEST:
       return { ...state, ...action.payload };
-
-
-    case HeroUpComingEventsActionTypes.DELETE_HERO_UP_COMING_EVENTS_IMAGE_REQUEST:
+    case HeroUpComingEventsActionTypes.UPLOAD_UP_COMING_EVENTS_IMAGES_SUCCESS:
       return { ...state, ...action.payload };
-    case HeroUpComingEventsActionTypes.DELETE_HERO_UP_COMING_EVENTS_IMAGE_SUCCESS:
-      return { ...state, ...action.payload };
-    case HeroUpComingEventsActionTypes.DELETE_HERO_UP_COMING_EVENTS_IMAGE_FAILURE:
+    case HeroUpComingEventsActionTypes.UPLOAD_UP_COMING_EVENTS_IMAGES_FAILURE:
       return { ...state, ...action.payload }
 
-    case HeroUpComingEventsActionTypes.ACTIVE_HERO_UP_COMING_EVENTS_IMAGE_REQUEST:
+
+    case HeroUpComingEventsActionTypes.FETCH_UP_COMING_EVENTS_IMAGES_REQUEST:
+      return { ...state, ...action.payload }
+    case HeroUpComingEventsActionTypes.FETCH_UP_COMING_EVENTS_IMAGES_SUCCESS:
+      return { ...state, upComingEventsImages: { ..._.mapKeys(action.payload.upComingEventsImages, 'uid') } }
+    case HeroUpComingEventsActionTypes.FETCH_UP_COMING_EVENTS_IMAGES_ERROR:
       return { ...state, ...action.payload };
-    case HeroUpComingEventsActionTypes.ACTIVE_HERO_UP_COMING_EVENTS_IMAGE_SUCCESS:
+
+
+    case HeroUpComingEventsActionTypes.DELETE_UP_COMING_EVENTS_IMAGE_REQUEST:
       return { ...state, ...action.payload };
-    case HeroUpComingEventsActionTypes.ACTIVE_HERO_UP_COMING_EVENTS_IMAGE_ERROR:
+    case HeroUpComingEventsActionTypes.DELETE_UP_COMING_EVENTS_IMAGE_SUCCESS:
+      return { ...state, ...action.payload };
+    case HeroUpComingEventsActionTypes.DELETE_UP_COMING_EVENTS_IMAGE_FAILURE:
       return { ...state, ...action.payload }
 
-    case HeroUpComingEventsActionTypes.INACTIVE_HERO_UP_COMING_EVENTS_IMAGE_REQUEST:
+    case HeroUpComingEventsActionTypes.ACTIVE_UP_COMING_EVENTS_IMAGE_REQUEST:
       return { ...state, ...action.payload };
-    case HeroUpComingEventsActionTypes.INACTIVE_HERO_UP_COMING_EVENTS_IMAGE_SUCCESS:
+    case HeroUpComingEventsActionTypes.ACTIVE_UP_COMING_EVENTS_IMAGE_SUCCESS:
       return { ...state, ...action.payload };
-    case HeroUpComingEventsActionTypes.INACTIVE_HERO_UP_COMING_EVENTS_IMAGE_ERROR:
+    case HeroUpComingEventsActionTypes.ACTIVE_UP_COMING_EVENTS_IMAGE_ERROR:
+      return { ...state, ...action.payload }
+
+    case HeroUpComingEventsActionTypes.INACTIVE_UP_COMING_EVENTS_IMAGE_REQUEST:
+      return { ...state, ...action.payload };
+    case HeroUpComingEventsActionTypes.INACTIVE_UP_COMING_EVENTS_IMAGE_SUCCESS:
+      return { ...state, ...action.payload };
+    case HeroUpComingEventsActionTypes.INACTIVE_UP_COMING_EVENTS_IMAGE_ERROR:
       return { ...state, ...action.payload }
     default:
       return { ...state };

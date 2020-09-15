@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import { createCardHero,getHeroCards,getHeroCardImages } from '../../../actions/api/heroCardApi';
+import { createCardHero} from '../../../actions/api/heroCardApi';
 import HeroCardSectionForm from './HeroCardSectionForm';
 import ContentBuilder from '../../ui/ContentBuilder';
 
@@ -21,9 +21,9 @@ class CreateHeroCardSection extends Component {
  this.props.createCardHero({...formValues,fileName:fileName},isActive);
   };
 
-  componentDidMount() {
-    this.props.getHeroCardImages();
-  }
+  // componentDidMount() {
+  //   this.props.getHeroCardImages();
+  // }
 
   render() {
     return (
@@ -44,4 +44,4 @@ const mapStateToProps = state => {
     isSubmiting: _.some(_.values(state.pendingStates.CREATE_HERO_CARD)),
   };
 };
-export default connect(mapStateToProps, { createCardHero,getHeroCards,getHeroCardImages })(withTheme(withStyles(useStyles)(CreateHeroCardSection)));
+export default connect(mapStateToProps, { createCardHero })(withTheme(withStyles(useStyles)(CreateHeroCardSection)));

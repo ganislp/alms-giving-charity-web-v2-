@@ -69,6 +69,22 @@ export const validateHeroCardForm = values => {
   return errors
 }
 
+export const validateUpComingEventsForm = values => {
+  const errors = {}
+  const requiredFields = [
+    'heading',
+    'date',
+    'location',
+    'body',
+  ]
+  requiredFields.forEach(field => {
+    if (!values[field]) {
+      errors[field] = 'Required'
+    }
+  })
+  return errors
+}
+
 
 export const validateLoginForm = values => {
   const errors = {}
