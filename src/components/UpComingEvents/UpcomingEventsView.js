@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import { Grid, Container, Hidden,Typography } from '@material-ui/core';
+import { Grid,Typography } from '@material-ui/core';
 import _ from 'lodash';
 import history from '../../history';
 import { SettingButton } from '../ui/Buttons';
