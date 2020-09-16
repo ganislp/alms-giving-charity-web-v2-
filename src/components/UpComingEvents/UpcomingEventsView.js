@@ -22,34 +22,6 @@ itemContainer:{
       fontSize:'2rem',
     } 
   },
-  // cardItemContaner: {
-  //   [theme.breakpoints.down("sm")]: {
-  //     paddingLeft: "0em",
-  //     paddingRight: "0em",
-  //     marginRight: "1em",
-  //     marginBottom: "1em",
-  //   },
-  // },
-  // settingsContainer: {
-  //   backgroundColor: theme.palette.common.blue,
-  //   padding: "0.3em"
-  // },
-
-  // itemContainer: {
-  //   [theme.breakpoints.down("sm")]: {
-  //     marginBottom: "1em",
-  //   },
-  //   [theme.breakpoints.down("sm")]: {
-  //     marginBottom: "1em",
-  //   },
-  // },
-  // mainContainer: {
-  //   [theme.breakpoints.down("md")]: {
-  //     paddingLeft: "1em",
-  //     paddingRight: "1em",
-  //   },
-  // }
-
 });
 class UpComingEventsView extends React.Component {
 

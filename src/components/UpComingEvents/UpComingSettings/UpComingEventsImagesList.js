@@ -19,7 +19,7 @@ import MUIDataTable from "mui-datatables";
 import { TableRowContent, ActionButtonsContent,ActiveButtonContent } from '../../ui/DataTableContentBuild';
 import { HomeHeaderButton } from '../../ui/Buttons';
 import { LoadingProcess, SubmitProcess } from '../../ui/ProgressBars'
-
+import UpComingEventsBuild from '../UpComingEventsBuild';
 
 
 
@@ -136,20 +136,21 @@ class UpComingEventsImagesList extends React.Component {
       renderExpandableRow: (rowData, rowMeta) => {
         const colSpan = rowData.length;
         const cardIndex = Object.values(rowMeta).slice(0, 1);       
-       const { imageUrl } = this.props.upComingEventsImages[cardIndex];
-       const { heading,body,cardImage,createdAt } = Object.assign({}, ...Object.values((this.props.upComingEventsDetails.filter(card => card.imageUrl === imageUrl))));
+       const eventsImage = this.props.upComingEventsImages[cardIndex];
+       const { heading,body,imageUrl,fileName,location,eventDate }  = Object.assign({}, ...Object.values((this.props.upComingEventsDetails.filter(card => card.imageUrl === eventsImage.imageUrl))));
         return (         
           <TableRow >            
             <TableCell colSpan={colSpan} align="center">
              <Grid container justify="center" alignItems="center">
-               <Grid item xs={12} sm={4}>
-            {/* <CardBuild
+               <Grid item xs={12} sm={12}>
+               <UpComingEventsBuild            
                   heading={heading}
-                  subTitle={body}
-                  image={cardImage}
-                  imageName={createdAt}
-
-                /> */}
+                  body={body}
+                  imageUrl={imageUrl}
+                  fileName={fileName} 
+                  location={location}
+                  eventDate={eventDate}
+                  /> 
                 </Grid>
                </Grid>
             </TableCell>

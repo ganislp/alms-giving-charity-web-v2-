@@ -15,7 +15,7 @@ import {TableRowContent,
      ActionButtonsContent,
      CreateButtonContent } from '../../ui/DataTableContentBuild';
 import {LoadingProcess,SubmitProcess} from '../../ui/ProgressBars'
-// import CardBuild from '../CardsBuild';
+import UpComingEventsBuild from '../UpComingEventsBuild';
 
 
 const useStyles = theme => ({
@@ -151,7 +151,7 @@ class UpComingEventsList extends React.Component {
       renderExpandableRow: (rowData, rowMeta) => {
         const colSpan = rowData.length;
         const cardIndex = Object.values(rowMeta).slice(0, 1);
-       const { heading,body,cardImage,createdAt } = this.props.upComingEventsDetails[cardIndex];
+       const { heading,body,imageUrl,fileName,location,eventDate } = this.props.upComingEventsDetails[cardIndex];
 
   
         return (
@@ -160,13 +160,15 @@ class UpComingEventsList extends React.Component {
             
             <TableCell colSpan={colSpan} align="center">
              <Grid container justify="center" alignItems="center">
-               <Grid item xs={12} sm={4}>
-            {/* <CardBuild
+               <Grid item xs={12} sm={12}>
+               <UpComingEventsBuild            
                   heading={heading}
-                  subTitle={body}
-                  image={cardImage}
-                  imageName={createdAt}
-                /> */}
+                  body={body}
+                  imageUrl={imageUrl}
+                  fileName={fileName} 
+                  location={location}
+                  eventDate={eventDate}
+                  />          
                 </Grid>
                </Grid>
             </TableCell>

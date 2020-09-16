@@ -1,24 +1,19 @@
 import React from 'react';
 import {Grid,Typography} from '@material-ui/core';
-import { makeStyles,useTheme } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
 import { ReadMoreOutLinedButton} from '../ui/Buttons';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-const useStyles = makeStyles(theme => ({
-  h3container:{
-    ...theme.palette.typography.h3,
-  },
-  h3container:{
-    ...theme.palette.typography.h3,
-    color:"#333"    
-  },
+// const useStyles = makeStyles(theme => ({
+//   h3container:{
+//     ...theme.palette.typography.h3,
+//   },
+
   
-}))
+// }))
 
 export default function UpComingEventsBuild(props){
-  const classes = useStyles();
   const theme = useTheme();
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
-  //const classes = heroContatentAndStyles.useStylesUpcomingEvents();
   return(
   
       <Grid container  justify="flex-start"  spacing={matchesXS ? 1 : 4}>
