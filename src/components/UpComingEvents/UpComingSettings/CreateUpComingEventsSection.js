@@ -14,6 +14,7 @@ class CreateUpComingEventsSection extends Component {
 
   onSubmit = formValues => {
     let isActive = false;
+ 
     if(_.isEmpty(this.props.upComingEventsDetails)){
        isActive = true;
     }

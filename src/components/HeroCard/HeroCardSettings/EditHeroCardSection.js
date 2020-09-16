@@ -9,7 +9,7 @@ import {
   updateImageInActive} from '../../../actions/api/heroCardApi';
 import HeroCardSectionForm from './HeroCardSectionForm';
 import ContentBuilder from '../../ui/ContentBuilder';
-import { Card } from '@material-ui/core';
+
 
 class EditHeroCardSection extends Component{
 

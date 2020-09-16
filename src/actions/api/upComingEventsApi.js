@@ -12,11 +12,12 @@ const userUid = cookies.get('userUid');
 export const getUpComingEvents = () => async dispatch => {
   dispatch(upComingEventsActions.getUpComingEventsRequest());
   try {
-    await db.collection('upComingEventsSection').orderBy("createdAt","desc").onSnapshot(snap => {
+    await db.collection('upComingEventsSection').orderBy("createdAt","asc").onSnapshot(snap => {
       const data = snap.docs.map(doc => (
         {
           ...doc.data(),
           createdAt: moment(new Date(doc.data().createdAt.seconds * 1000 + doc.data().createdAt.nanoseconds / 1000000)).format('LLL'),
+          eventDate: moment(new Date(doc.data().eventDate.seconds * 1000 + doc.data().eventDate.nanoseconds / 1000000)).format('ll'),
           uid: doc.id,
           //userId:userUid
         }
@@ -44,7 +45,8 @@ export const CreateUpComingEvents = (formValues, isActive) => async (dispatch) =
     if (cardCount <= 2) {
       active = true;
     }
-    const response = cardHeroRef.add({ ...formValues, createdAt: createdAt, active: active },);
+    var dateMonthAsWord = moment(`${formValues.eventDate}`).format('DD-MMM-YYYY');
+    const response = cardHeroRef.add({ ...formValues, createdAt: createdAt, active: active,eventDate:new Date(dateMonthAsWord) },);
     cardHeroImageRef.doc(`${imagesRefuid}`).update({ active: active, createdAt: createdAt });
    dispatch(upComingEventsActions.createUpComingEventsSuccess(response.id));
     dispatch(showSuccessSnackbar("Data Saved Sucessfully!"));
@@ -58,8 +60,9 @@ export const CreateUpComingEvents = (formValues, isActive) => async (dispatch) =
 
 export const EditUpComingEvents = (uid, formValues) => async dispatch => {
   dispatch(upComingEventsActions.editUpComingEventsRequest());
-  try {      
-      await db.collection('upComingEventsSection').doc(`${uid}`).update({ ...formValues, createdAt: createdAt });
+  try {   
+    var dateMonthAsWord = moment(`${formValues.eventDate}`).format('DD-MMM-YYYY');   
+      await db.collection('upComingEventsSection').doc(`${uid}`).update({ ...formValues, createdAt: createdAt,eventDate:new Date(dateMonthAsWord) });
     dispatch(upComingEventsActions.editUpComingEventsSuccess(uid));
     dispatch(showSuccessSnackbar("Hero Section Card Sucessfully Updated!"));
     history.push('/upComingEvents/upComingEventsSettings');
@@ -95,8 +98,9 @@ export const updateUpComingEventsInActive = () => async dispatch => {
       dispatch(showSuccessSnackbar("inActive Record Sucessfully Updated!"));
     }
     else {
-      dispatch(upComingEventsActions.inActiveUpComingEventsImageSuccess(inActiveId));
       dispatch(showFaildSnackbar("No Active Record found!"));
+      dispatch(upComingEventsActions.inActiveUpComingEventsImageSuccess(inActiveId));
+      
     }
   } catch (error) {
     console.log("error",error)

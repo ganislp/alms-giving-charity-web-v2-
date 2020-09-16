@@ -265,4 +265,12 @@ export const SettingButton = (props) => {
 };
 
 
+export const ReadMoreOutLinedButton = (props) => {
+  const classes = useStyles();
+  return (
+  <Button color="secondary" style={{ textTransform: "none",padding:"0em"}} disableRipple>{props.label}</Button>
+  )
+};
+
+
 

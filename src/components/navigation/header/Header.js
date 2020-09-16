@@ -17,6 +17,7 @@ import CreateAboutUsSection from '../../Aboutus/AboutusSetting/CreateAboutUsSect
 import EditAboutUsSection from '../../Aboutus/AboutusSetting/EditAboutUsSection';
 import UpComingEventsSettings from '../../UpComingEvents/UpComingSettings/UpComingEventsSettings';
 import CreateUpComingEventsSection from '../../UpComingEvents/UpComingSettings/CreateUpComingEventsSection';
+import EditUpComingEventsSection from '../../UpComingEvents/UpComingSettings/EditUpComingEventsSection';
 import Home from '../../Home/Home'
 import { fetchCompanyDetails } from '../../../actions/api/companyDetailsApi';
 import {fetchUser} from '../../../actions/api/authApi'
@@ -60,6 +61,7 @@ return <Router history={history}>
           <Route exact path="/aboutus/edit/:uid" component={props => <EditAboutUsSection {...props} {...this.props} />}></Route>
           <Route exact path="/upComingEvents/upComingEventsSettings" render={props => <UpComingEventsSettings {...this.props}/>}></Route>
           <Route exact path="/upComingEvents/upComingEventsCreate" component={() => <CreateUpComingEventsSection {...this.props}/>}></Route>
+          <Route exact path="/upComingEvents/edit/:uid" component={props => <EditUpComingEventsSection {...props} {...this.props} />}></Route>
           <Route exact path="/aboutus" component={() => <div>About Us</div>}></Route>
           <Route exact path="/causes" component={() => <div>Causes</div>}></Route>
           <Route exact path="/news" component={() => <div>News</div>}></Route>

@@ -23,6 +23,7 @@ export const storage = firebase.storage();
 export const storageRef = storage.ref();
 export const createdAt =  firebase.firestore.Timestamp.now()
 
+
 // export const getAuthenticationStatus = () => {
 
 //   return localStorage.getItem("isAuthenticated");

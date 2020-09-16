@@ -1,10 +1,11 @@
 import {createMuiTheme } from '@material-ui/core/styles';
-import lightBlue from "@material-ui/core/colors/lightBlue";
+
 const appWhite="#ffff";
 const appBlue= "#0B72B9";
  const arcGrey = "#333";
  const lightGrey="#b7b7b7";
  const bgColour = '#edf3f5'
+ const boby1Colour = '#929191'
 export default  createMuiTheme({
   
   palette:{
@@ -52,8 +53,17 @@ export default  createMuiTheme({
     body1: {
       fontFamily: "Raleway",
       fontSize: "1rem",
-     color: appWhite,
-     fontWeight: 100,
+     color: boby1Colour,
+     fontWeight: 400,
+     lineHeight: "1.5"
+    },
+
+    subtitle1:{
+      fontFamily: "Raleway",
+      fontWeight:  500,
+      fontSize: "1rem",
+      color: arcGrey,
+      lineHeight: 1,
     },
 
     h1:{
@@ -62,11 +72,22 @@ export default  createMuiTheme({
       lineHeight: 1,    
     },
 
+    h2:{
+      fontFamily: "Open Sans sans-serif",
+      fontWeight: 300,
+      fontSize: "3rem",
+      color: appBlue,
+      lineHeight: 1,
+    
+    },
+
     h3:{
       fontFamily: "Raleway",
       fontWeight: 600,
-      fontSize: "1.2rem",
-      lineHeight: 1,    
+      fontSize: "1.3rem",
+      color: arcGrey,
+      lineHeight: 1,
+    
     },
     button: {
       textTransform: 'none'
@@ -137,6 +158,7 @@ export default  createMuiTheme({
   }
 },
 overrides: {   
+  MuiButton: {  textTransform: "none", },
   // 
 //  MuiPickersModal: {   
   

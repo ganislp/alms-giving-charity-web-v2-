@@ -109,7 +109,7 @@ else{
           </Grid>
           <Grid item className={classes.itemTextField} xs={12} >
             <Field
-              name="date"
+              name="eventDate"
               component={renderDateField}
               label="Event Date"                  
              
