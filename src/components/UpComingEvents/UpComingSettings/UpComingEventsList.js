@@ -6,7 +6,11 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import { Avatar,Grid } from '@material-ui/core';
 import { withTheme, withStyles } from '@material-ui/core/styles';
-import { updateUpComingEventsActive,updateUpComingEventsInActive, deleteUpComingEvents, } from '../../../actions/api/upComingEventsApi';
+import { updateUpComingEventsActive,
+  updateUpComingEventsInActive, 
+  deleteUpComingEvents,
+  updateFeaturedCauseActive 
+} from '../../../actions/api/upComingEventsApi';
 import { confiDialogOpen } from '../../../actions/uiActions/navigationAcions';
 import ConfimationDialog from '../../model/ConfimationDialog';
 import {TableHeaderButton,HomeHeaderButton} from '../../ui/Buttons';
@@ -30,6 +34,18 @@ const useStyles = theme => ({
 
 
 class UpComingEventsList extends React.Component {
+
+  updateFeaturedCauseActive = (stauts, uid) => {
+    if (!stauts) {
+      console.log("stauts",stauts);
+      console.log("uid",uid);
+      // const inActiveUid = (this.props.upComingEventsDetails.filter(upComingEvents => upComingEvents.active === true).map((value, key) => {
+      //   return value.uid
+      // }));
+    this.props.updateFeaturedCauseActive(uid)
+    }
+  }
+
   updateActive = (stauts, uid) => {
     if (!stauts) {
       console.log("stauts",stauts);
@@ -88,7 +104,7 @@ class UpComingEventsList extends React.Component {
         name: 'imageUrl', label: 'Image',
         options: {
           customBodyRender: (value, dataIndex) => <Avatar 
-            alt={dataIndex.rowData[7]} src={value} className={classes.large} > </Avatar>,
+            alt={dataIndex.rowData[8]} src={value} className={classes.large} > </Avatar>,
           filter: false,
          empty: false,
 
@@ -105,9 +121,22 @@ class UpComingEventsList extends React.Component {
       {
         name: 'active', label: 'Active', options: {
           customBodyRender: (value, dataIndex) => <ActiveButtonContent 
-          value={value} dataIndex={dataIndex.rowData[7]} 
+          value={value} 
+          dataIndex={dataIndex.rowData[8]} 
           disabled={value}
           click={this.updateActive} />,
+          filter: true,
+          empty: true,
+          // display: 'excluded',
+        }
+      },
+      {
+        name: 'isFeaturedCause', label: 'Featured Cause', options: {
+          customBodyRender: (value, dataIndex) => <ActiveButtonContent 
+          value={value} 
+          dataIndex={dataIndex.rowData[8]} 
+          disabled={value}
+          click={this.updateFeaturedCauseActive} />,
           filter: true,
           empty: true,
           // display: 'excluded',
@@ -118,7 +147,7 @@ class UpComingEventsList extends React.Component {
         options: {
           customBodyRender: (value, dataIndex) => <ActionButtonsContent 
           value={value} 
-          dataIndex={dataIndex.rowData[6]}          
+          dataIndex={dataIndex.rowData[7]}          
           edit="/upComingEvents/edit/"
           click={this.deleteHeroSection}
           hiddendEdit={false}
@@ -213,9 +242,15 @@ const mapStateToProps = state => {
     upComingEventsDetails: Object.values(state.upComingEventsSection.upComingEventsDetails),
     isLoading: _.some(_.values(state.pendingStates.GET_UP_COMING_EVENTS)),
     isSubmiting: _.some(_.values(state.pendingStates.DELETE_UP_COMING_EVENTS)) 
-    || _.some(_.values(state.pendingStates.ACTIVE_UP_COMING_EVENTS)) ,
+    || _.some(_.values(state.pendingStates.ACTIVE_UP_COMING_EVENTS) ) 
+    || _.some(_.values(state.pendingStates.ACTIVE_FEATURED_CAUSE) ),
     confirmationUid: state.dialogOpen.heroListCardSeletedUid,
   };
 };
-export default connect(mapStateToProps, { updateUpComingEventsActive, updateUpComingEventsInActive, confiDialogOpen, deleteUpComingEvents })
+export default connect(mapStateToProps, { 
+  updateUpComingEventsActive,
+   updateUpComingEventsInActive, 
+   updateFeaturedCauseActive,
+   confiDialogOpen, 
+   deleteUpComingEvents })
   (withTheme(withStyles(useStyles)(UpComingEventsList)));

@@ -250,3 +250,49 @@ export const inActiveUpComingEventsImageError = (error) => {
     payload: {  error: error }
   }
 };
+
+
+export const activeFeaturedCauseRequest = () => {
+
+  return {
+    type: upComingEventsActionTypes.ACTIVE_FEATURED_CAUSE_REQUEST,
+    payload: { }
+  }
+};
+export const activeFeaturedCauseSuccess = (uid) => {
+  return {
+    type: upComingEventsActionTypes.ACTIVE_FEATURED_CAUSE_SUCCESS,
+    payload: {  uid: uid, }
+
+  }
+};
+
+export const activeFeaturedCauseError = (error) => {
+  return {
+    type: upComingEventsActionTypes.ACTIVE_FEATURED_CAUSE_ERROR,
+    payload: {  error: error }
+  } 
+};
+
+
+export const inActiveFeaturedCauseRequest = () => {
+
+  return {
+    type: upComingEventsActionTypes.INACTIVE_FEATURED_CAUSE_REQUEST,
+    payload: {  }
+  }
+};
+export const inActiveFeaturedCauseSuccess = (uid) => {
+  return {
+    type: upComingEventsActionTypes.INACTIVE_FEATURED_CAUSE_SUCCESS,
+    payload: {  uid: uid, }
+
+  }
+};
+
+export const inActiveFeaturedCauseError = (error) => {
+  return {
+    type: upComingEventsActionTypes.INACTIVE_FEATURED_CAUSE_ERROR,
+    payload: {  error: error }
+  }
+};

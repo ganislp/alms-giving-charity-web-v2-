@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import { Grid, Container, Hidden } from '@material-ui/core';
+import { Grid, Container, Hidden,LinearProgress } from '@material-ui/core';
 import _ from 'lodash';
 import { getHeroCards } from '../../actions/api/heroCardApi';
 import CardBuild from './CardsBuild';
@@ -58,7 +58,9 @@ class HeroCardsView extends React.Component {
 
   render() {
     const { classes } = this.props;
-   
+    if(!_.isEmpty(this.props.heroCardDetails) && this.props.isLoading){
+      return <LinearProgress color="secondary"/>
+     }
     return (
      
       <Grid container justify="space-between" >

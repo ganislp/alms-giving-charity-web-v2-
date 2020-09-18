@@ -42,12 +42,16 @@ export const CreateUpComingEvents = (formValues, isActive) => async (dispatch) =
     let cardHeroRef = await db.collection("upComingEventsSection");
     let cardCount = await cardHeroRef.get().then(snap => snap.size);
     let active = false;
+    let isFeaturedCause = false;
     if (cardCount <= 2) {
       active = true;
     }
+    if (cardCount <= 0) {
+      isFeaturedCause = true;
+    }
     var dateMonthAsWord = moment(`${formValues.eventDate}`).format('DD-MMM-YYYY');
     const response = cardHeroRef.add({ ...formValues, createdAt: createdAt, active: active,eventDate:new Date(dateMonthAsWord) },);
-    cardHeroImageRef.doc(`${imagesRefuid}`).update({ active: active, createdAt: createdAt });
+    cardHeroImageRef.doc(`${imagesRefuid}`).update({ active: active, createdAt: createdAt,isFeaturedCause:isFeaturedCause });
    dispatch(upComingEventsActions.createUpComingEventsSuccess(response.id));
     dispatch(showSuccessSnackbar("Data Saved Sucessfully!"));
    history.push('/upComingEvents/upComingEventsSettings');
@@ -214,3 +218,34 @@ export const updateImageInActive = (uid,existingActive) => async dispatch => {
     dispatch(upComingEventsActions.inActiveUpComingEventsImageError(uid));
   }
 };
+
+export const updateFeaturedCauseActive = (uid) => async dispatch => {
+  dispatch(upComingEventsActions.activeFeaturedCauseRequest());
+  try {
+    let upComingEventsRef = await db.collection("upComingEventsSection");
+    let inActiveId = await upComingEventsRef.where("isFeaturedCause", "==", true)
+
+      .get().then(snap => snap.docs.map(doc => doc.id));
+
+      console.log("inActiveId",inActiveId)
+   
+    if (inActiveId !== null) {
+      await upComingEventsRef.doc(`${inActiveId}`).update({ isFeaturedCause: false, createdAt: createdAt });
+      dispatch(upComingEventsActions.inActiveFeaturedCauseSuccess(inActiveId));
+    }
+    else {
+      dispatch(upComingEventsActions.inActiveFeaturedCauseSuccess(inActiveId));
+      dispatch(showFaildSnackbar("No Active Record found!"));
+    }
+    await upComingEventsRef.doc(`${uid}`).update({ isFeaturedCause: true, createdAt: createdAt });
+    dispatch(upComingEventsActions.activeFeaturedCauseSuccess(uid));
+    dispatch(showSuccessSnackbar("Active Record Sucessfully Updated!"));
+  } catch (error) {
+    console.log("error",error)
+    dispatch(upComingEventsActions.activeFeaturedCauseError(error));
+    dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
+  }
+};
+
+
+

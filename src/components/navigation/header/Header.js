@@ -81,9 +81,11 @@ return <Router history={history}>
 }
 
 const mapStateToProps = state => {
+  console.log("state",state);
   return {
     companyDetails: state.companyDetails,
-    isLoading: _.some(_.values(state.pendingStates.GET_COMPANY_DETAILS)),
+    isLoading: _.some(_.values(state.pendingStates.GET_COMPANY_DETAILS))   
+    ,
   };
 };
 

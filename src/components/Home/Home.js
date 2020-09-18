@@ -4,9 +4,11 @@ import HeroSectionView from '../Hero/HeroSectionView';
 import HeroCardsView from '../HeroCard/HeroCardsView';
 import AboutUsSectionView from '../Aboutus/AboutUsSectionView';
 import UpComingEventsView from '../UpComingEvents/UpcomingEventsView'
-import { Grid ,Container} from '@material-ui/core';
+import FeaturedCauseView from '../FeaturedCause/FeaturedCauseView';
+import { Grid ,Container, Paper} from '@material-ui/core';
 import history from '../../history';
 import { SettingButton } from '../ui/Buttons';
+import {Heading} from '../ui/ContentHeadings'
 
 const useStyles = theme => ({
   mainContainer:{
@@ -20,24 +22,20 @@ const useStyles = theme => ({
     [theme.breakpoints.down("md")]: {
      marginTop:"0em",marginBottom:"0em",
    },
-  }
+  },
+  paper: {
+    flexGrow: 1,
+    height: "100%",
+    width: "100%",
+    backgroundColor: theme.palette.common.bgColour,    
+  },
 })
 class Home  extends React.Component{
 
-  renderSettingLargeButton() {
-    if (!this.props.isLoading) {
-      return <SettingButton size="large" click={() => history.push("/upComingEvents/upComingEventsSettings")}></SettingButton>
-    }
-  }
-
-  renderSettingSmallButton() {
-    if (!this.props.isLoading) {
-      return <SettingButton size="small" click={() => history.push("/upComingEvents/upComingEventsSettings")}></SettingButton>
-    }
-  }
+ 
 
   render(){
-    const { classes } = this.props; 
+    const { classes,theme } = this.props; 
     return(
      <React.Fragment>
        <HeroSectionView/>
@@ -48,14 +46,14 @@ class Home  extends React.Component{
        <AboutUsSectionView/>
        </Grid>   
        <Container maxWidth="lg"   >
-       <Grid container >
-         <Grid item   sm={6} xs={12}>
-        <UpComingEventsView/>
-         </Grid>
-         <Grid item   sm={6} xs={12}>
-         test
-         </Grid>
-         </Grid>
+     <Grid container >
+     <Grid item xs={12} sm={6}>
+     <UpComingEventsView/>
+     </Grid>
+     <Grid item xs={12} sm={6} style={{backgroundColor:theme.palette.common.bgColour}}>
+     <FeaturedCauseView/>
+</Grid>
+     </Grid>
          </Container>  
        </React.Fragment>
     )

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import { Grid,Typography } from '@material-ui/core';
+import { Grid,Typography,Hidden } from '@material-ui/core';
 import _ from 'lodash';
 import history from '../../history';
 import { SettingButton } from '../ui/Buttons';
@@ -43,9 +43,13 @@ class UpComingEventsView extends React.Component {
         Upcoming Events
             </Typography>
             </Grid>
+            <Hidden lgUp>
             <Grid item className={classes.itemContainer}>
+            
             {this.renderSettingSmallButton()} 
+           
               </Grid>
+              </Hidden>
           </Grid>
 
      

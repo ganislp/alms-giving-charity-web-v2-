@@ -75,7 +75,7 @@ export default  createMuiTheme({
     h2:{
       fontFamily: "Open Sans sans-serif",
       fontWeight: 300,
-      fontSize: "3rem",
+      fontSize: "2.5rem",
       color: appBlue,
       lineHeight: 1,
     
@@ -158,7 +158,7 @@ export default  createMuiTheme({
   }
 },
 overrides: {   
-  MuiButton: {  textTransform: "none", },
+  // MuiButton: {  textTransform: "none", },
   // 
 //  MuiPickersModal: {   
   

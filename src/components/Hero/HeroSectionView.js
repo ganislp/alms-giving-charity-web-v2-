@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import ItemsCarousel from 'react-items-carousel';
 import { makeStyles } from '@material-ui/core/styles';
-import { IconButton} from '@material-ui/core';
+import { IconButton,LinearProgress} from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import useTheme from '@material-ui/core/styles/useTheme';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
@@ -41,7 +42,9 @@ const HeroSectionView = (props) => {
    const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   const chevronWidth = 0;
-
+  if(!_.isEmpty(props.heroImages) && props.isLoading){
+    return <LinearProgress color="secondary"/>
+   }
 
    return(
     <ItemsCarousel
@@ -74,6 +77,8 @@ const HeroSectionView = (props) => {
  const mapStateToProps = state => {
    return {
      heroImages:  Object.values(state.heroSection.heroImages).filter(image => image.active === true),
+     isLoading: _.some(_.values(state.pendingStates.FETCH_HERO_IMAGES)) 
+     || _.some(_.values(state.pendingStates.GET_HERO)) 
    };
  };
  export default connect(mapStateToProps)(HeroSectionView);
