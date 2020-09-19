@@ -7,7 +7,6 @@ import Avatar from '@material-ui/core/Avatar';
 import { withTheme, withStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 import {
-  getUpComingEventsImages,
   deleteUpComingEventsImage,
   uploadUpComingEventsImages
 
@@ -197,7 +196,6 @@ class UpComingEventsImagesList extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log("state",state);
   return {
     
     upComingEventsImages: Object.values(state.upComingEventsSection.upComingEventsImages),

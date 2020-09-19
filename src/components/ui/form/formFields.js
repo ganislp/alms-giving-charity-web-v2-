@@ -30,6 +30,21 @@ export const renderTextField    = ({ classes, label, input, meta: { touched, inv
 />
 }
 
+export const renderNumberField    = ({ classes, label, input, meta: { touched, invalid, error }, ...custom }) => {
+  return  <TextField
+  label={label}
+  type="number"
+  required      
+  placeholder={label}
+  error={touched && invalid}
+  helperText={touched && error}
+  color="secondary"
+  {...input}
+  {...custom}
+  
+/>
+}
+
 
 export const renderSelectField = ({ label, input, meta: { touched, error }, children, ...custom }) =>  {
   return (

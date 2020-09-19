@@ -18,6 +18,9 @@ import EditAboutUsSection from '../../Aboutus/AboutusSetting/EditAboutUsSection'
 import UpComingEventsSettings from '../../UpComingEvents/UpComingSettings/UpComingEventsSettings';
 import CreateUpComingEventsSection from '../../UpComingEvents/UpComingSettings/CreateUpComingEventsSection';
 import EditUpComingEventsSection from '../../UpComingEvents/UpComingSettings/EditUpComingEventsSection';
+import OurCausesSectionSettings from '../../OurCauses/OurCausesSettings/OurCausesSectionSettings'
+import CreateOurCausesSection from '../../OurCauses/OurCausesSettings/CreateOurCausesSection';
+import EditOurCausesSection from '../../OurCauses/OurCausesSettings/EditOurCausesSection';
 import Home from '../../Home/Home'
 import { fetchCompanyDetails } from '../../../actions/api/companyDetailsApi';
 import {fetchUser} from '../../../actions/api/authApi'
@@ -25,6 +28,8 @@ import { getHero,getHeroImages } from '../../../actions/api/heroApi';
 import { getHeroCards } from '../../../actions/api/heroCardApi';
 import { getAboutUs,getAboutUsImages } from '../../../actions/api/aboutUsApi';
 import { getUpComingEvents,getUpComingEventsImages } from '../../../actions/api/upComingEventsApi';
+import { getOurCauses,getOurCausesImages } from '../../../actions/api/ourCausesApi';
+
 
 
 class Header extends React.Component {
@@ -39,6 +44,8 @@ class Header extends React.Component {
   this.props.getAboutUsImages();
   this.props.getUpComingEvents();
   this.props.getUpComingEventsImages();
+  this.props.getOurCauses();
+  this.props.getOurCausesImages();
   }
 
   renderComponents(){
@@ -63,6 +70,9 @@ return <Router history={history}>
           <Route exact path="/upComingEvents/upComingEventsCreate" component={() => <CreateUpComingEventsSection {...this.props}/>}></Route>
           <Route exact path="/upComingEvents/edit/:uid" component={props => <EditUpComingEventsSection {...props} {...this.props} />}></Route>
           <Route exact path="/aboutus" component={() => <div>About Us</div>}></Route>
+          <Route exact path="/ourCauses/ourCausesSectionSettings" render={props => <OurCausesSectionSettings {...this.props}/>}></Route>
+          <Route exact path="/ourCauses/ourCausesCreate" render={props => <CreateOurCausesSection {...this.props}/>}></Route>
+          <Route exact path="/ourCauses/edit/:uid" component={props => <EditOurCausesSection {...props} {...this.props} />}></Route>
           <Route exact path="/causes" component={() => <div>Causes</div>}></Route>
           <Route exact path="/news" component={() => <div>News</div>}></Route>
           <Route exact path="/gallery" component={() => <div>Gallery</div>}></Route>
@@ -81,7 +91,6 @@ return <Router history={history}>
 }
 
 const mapStateToProps = state => {
-  console.log("state",state);
   return {
     companyDetails: state.companyDetails,
     isLoading: _.some(_.values(state.pendingStates.GET_COMPANY_DETAILS))   
@@ -98,5 +107,7 @@ export default  connect(mapStateToProps,{
   getAboutUs,
   getAboutUsImages,
   getUpComingEvents,
-  getUpComingEventsImages
+  getUpComingEventsImages,
+  getOurCauses,
+  getOurCausesImages 
 })(Header);

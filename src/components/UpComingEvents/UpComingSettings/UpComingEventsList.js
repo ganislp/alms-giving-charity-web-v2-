@@ -37,19 +37,12 @@ class UpComingEventsList extends React.Component {
 
   updateFeaturedCauseActive = (stauts, uid) => {
     if (!stauts) {
-      console.log("stauts",stauts);
-      console.log("uid",uid);
-      // const inActiveUid = (this.props.upComingEventsDetails.filter(upComingEvents => upComingEvents.active === true).map((value, key) => {
-      //   return value.uid
-      // }));
     this.props.updateFeaturedCauseActive(uid)
     }
   }
 
   updateActive = (stauts, uid) => {
     if (!stauts) {
-      console.log("stauts",stauts);
-      console.log("uid",uid);
       // const inActiveUid = (this.props.upComingEventsDetails.filter(upComingEvents => upComingEvents.active === true).map((value, key) => {
       //   return value.uid
       // }));
@@ -209,7 +202,7 @@ class UpComingEventsList extends React.Component {
     };
 
     return <MUIDataTable
-    title={<TableHeaderButton label="Hero Section Card Settings"></TableHeaderButton>}
+    title={<TableHeaderButton label="Upcoming and Featured Cause Settings"></TableHeaderButton>}
       columns={columns}
       data={this.props.upComingEventsDetails}
       options={options}/>

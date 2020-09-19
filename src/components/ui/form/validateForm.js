@@ -63,6 +63,8 @@ export const validateHeroCardForm = values => {
     if (!values[field]) {
       errors[field] = 'Required'
     }
+
+
   })
 
 
@@ -82,6 +84,29 @@ export const validateUpComingEventsForm = values => {
       errors[field] = 'Required'
     }
   })
+  return errors
+}
+
+export const validateOurCausesForm = values => {
+  const errors = {}
+  const requiredFields = [
+    'heading',
+    'body',
+    'foundRaised',
+    'foundGoal',
+  ]
+  requiredFields.forEach(field => {
+    if (!values[field] || values[field] <= 0) {
+      errors[field] = 'Required'
+    }
+   
+  })
+  //  if(Object.keys(values)[0] === 'foundRaised'){
+  //   console.log("field", Object.keys(values)[0]) ;
+  //   console.log("field", values['foundRaised']) ;
+  //  }
+
+  
   return errors
 }
 

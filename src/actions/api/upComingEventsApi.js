@@ -224,11 +224,7 @@ export const updateFeaturedCauseActive = (uid) => async dispatch => {
   try {
     let upComingEventsRef = await db.collection("upComingEventsSection");
     let inActiveId = await upComingEventsRef.where("isFeaturedCause", "==", true)
-
       .get().then(snap => snap.docs.map(doc => doc.id));
-
-      console.log("inActiveId",inActiveId)
-   
     if (inActiveId !== null) {
       await upComingEventsRef.doc(`${inActiveId}`).update({ isFeaturedCause: false, createdAt: createdAt });
       dispatch(upComingEventsActions.inActiveFeaturedCauseSuccess(inActiveId));

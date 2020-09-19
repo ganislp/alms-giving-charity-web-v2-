@@ -11,6 +11,7 @@ import heroCardReducer from './HeroCard/HeroCardReducer';
 import AboutUsReducer from './AboutUs/AboutUsReducer';
 import UpComingEventsReducer from './UpComingEventsReducer/UpComingEventsReducer';
 import FeaturedCauseReducer from './FeaturedCauseReducer/FeaturedCauseReducer';
+import OurCausesReducer from './OurCausesReducer/OurCausesReducer';
 import uiReducer from './uiReducer';
 import authReducer from './authReducer';
 import pendingReducer from './pendingReducer'
@@ -29,6 +30,7 @@ export default combineReducers({
   aboutUsSection: AboutUsReducer,
   upComingEventsSection: UpComingEventsReducer,
   featuredCauseSection: FeaturedCauseReducer,
+  ourCausesSection: OurCausesReducer,
   uiReducer : uiReducer,
   userDetails:authReducer,
   form: formReducer,

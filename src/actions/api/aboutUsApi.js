@@ -112,9 +112,7 @@ export const uploadAboutUsImages = (imagesPayload) => async (dispatch, getState)
   try {
 
     let imagesRef = await db.collection("aboutUsImages");
-    let active = false;
-
-   
+    let active = false;   
 if(imagesPayload.backround){
   let imageExistBackround = await imagesRef
   .where("backround", "==", true)
