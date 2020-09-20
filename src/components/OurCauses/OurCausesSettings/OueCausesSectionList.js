@@ -125,6 +125,7 @@ class OurCausesSectionList extends React.Component {
       pagination: false,
       selectableRows: "none",
       responsive: 'vertical',
+      
       customToolbar: () => {
         return (
          <React.Fragment>

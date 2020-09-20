@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import MUIDataTable from "mui-datatables";
+import {Avatar,} from '@material-ui/core';
 import { withTheme, withStyles } from '@material-ui/core/styles';
 import { updateAboutUsActive,updateAboutUsInActive, deleteAboutUs } from '../../../actions/api/aboutUsApi';
 import { confiDialogOpen } from '../../../actions/uiActions/navigationAcions';
@@ -66,12 +67,20 @@ class AboutUsSectionList extends React.Component {
           customBodyRender: value => <TableRowContent value={value} />
         }
       },
+      {
+        name: 'imageUrl', label: 'Image',
+        options: {
+          customBodyRender: (value, dataIndex) => <Avatar alt={dataIndex.rowData[5]} src={value} /> ,
+           filter: false,
+           empty: true,
+        }
+      },
 
       {
         name: 'active', label: 'Active', options: {
           customBodyRender: (value, dataIndex) => <ActiveButtonContent 
           value={value}
-           dataIndex={dataIndex.rowData[4]} 
+           dataIndex={dataIndex.rowData[5]} 
           disabled={value}
           click={this.updateActive} />,
           filter: true,
@@ -84,7 +93,7 @@ class AboutUsSectionList extends React.Component {
         options: {
           customBodyRender: (value, dataIndex) => <ActionButtonsContent 
           value={value} 
-          dataIndex={dataIndex.rowData[3]}          
+          dataIndex={dataIndex.rowData[4]}          
           edit="/aboutUs/edit/"
           click={this.deleteAboutUsSection}
           hiddendEdit={false}
@@ -144,7 +153,6 @@ return <ConfimationDialog
 }
 
 const mapStateToProps = state => {
- 
   return {
     aboutUsDetails: Object.values(state.aboutUsSection.aboutUsDetails),
     isLoading: _.some(_.values(state.pendingStates.GET_ABOUT_US)),

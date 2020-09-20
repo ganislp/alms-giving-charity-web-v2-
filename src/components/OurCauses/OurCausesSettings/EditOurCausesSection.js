@@ -10,7 +10,7 @@ class EditOurCausesSection extends Component{
  
 
   onSubmit = formValues => {
-    this.props.EditOurCauses(this.props.match.params.uid,formValues);
+    
     const {fileName,imageUrl} = Object.assign({}, ...Object.values((this.props.ourCausesImages.filter(image => image.imageUrl === formValues.imageUrl))));
     const existingImageNew=   Object.assign({}, ...Object.values((this.props.ourCausesDetailss.filter(card => card.fileName === fileName))));
     const newImagefileName =   _.some(this.props.ourCausesDetailss, function(card) {return card.fileName === fileName}) 

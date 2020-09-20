@@ -22,7 +22,7 @@ export const getAboutUs = () => async dispatch => {
         }
       ));
       if (data.length === 0) {
-        history.push('/aboutUs/aboutUsCreate');
+        //history.push('/aboutUs/aboutUsCreate');
       }
       dispatch(aboutUsActions.getAboutUsSuccess(data));
 
@@ -32,7 +32,7 @@ export const getAboutUs = () => async dispatch => {
   }
 };
 
-export const createAboutUs = (formValues, isActive) => async (dispatch) => {
+export const createAboutUs = (formValues,) => async (dispatch) => {
   dispatch(aboutUsActions.createAboutUsRequest());
   try {
     let cardHeroRef = await db.collection("aboutUsSection");

@@ -109,11 +109,11 @@ updateActive = (stauts, uid) => {
       },
       {
         name: 'active', label: 'Active', options: {
-          customBodyRender: (value, dataIndex) => <ActiveButtonContent
+          customBodyRender: (value, dataIndex) => dataIndex.rowData[4] ? <ActiveButtonContent
             value={value} 
             dataIndex={dataIndex.rowData[5]} 
             disabled={value}
-            click={this.updateActive} />,
+            click={this.updateActive} /> : null,
           filter: true,
           empty: true,
 

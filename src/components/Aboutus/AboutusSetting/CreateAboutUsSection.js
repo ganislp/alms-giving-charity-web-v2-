@@ -12,12 +12,9 @@ const useStyles = theme => ({
 
 class CreateAboutUsSection extends Component {
 
-  onSubmit = formValues => {
-    let isActive = false;
-    if(_.isEmpty(this.props.aboutUsDetails)){
-       isActive = true;
-    }
- this.props.createAboutUs(formValues,isActive);
+  onSubmit = formValues => {     
+ const {fileName} = Object.assign({}, ...Object.values((this.props.aboutUsImages.filter(image => image.imageUrl === formValues.imageUrl))));
+ this.props.createAboutUs({...formValues,fileName:fileName});
   };
 
   componentDidMount() {
@@ -38,6 +35,7 @@ class CreateAboutUsSection extends Component {
 const mapStateToProps = state => {
   return {
     aboutUsDetails:  Object.values(state.aboutUsSection.aboutUsDetails),
+    aboutUsImages: Object.values(state.aboutUsSection.aboutUsImages),
     isSubmiting: _.some(_.values(state.pendingStates.CREATE_ABOUT_US)),
   };
 };
