@@ -5,10 +5,9 @@ import HeroCardsView from '../HeroCard/HeroCardsView';
 import AboutUsSectionView from '../Aboutus/AboutUsSectionView';
 import UpComingEventsView from '../UpComingEvents/UpcomingEventsView'
 import FeaturedCauseView from '../FeaturedCause/FeaturedCauseView';
-import { Grid ,Container, Paper} from '@material-ui/core';
-import history from '../../history';
-import { SettingButton } from '../ui/Buttons';
-import {Heading} from '../ui/ContentHeadings'
+import { Grid ,Container} from '@material-ui/core';
+import OurCausesImageSlider from '../OurCauses/OurCausesImageSlider'
+
 
 const useStyles = theme => ({
   mainContainer:{
@@ -45,7 +44,7 @@ class Home  extends React.Component{
        <Grid container className={classes.mainContainer}>
        <AboutUsSectionView/>
        </Grid>   
-       <Container maxWidth="lg"   >
+       <Container maxWidth="lg"   className={classes.mainContainer}>
      <Grid container >
      <Grid item xs={12} sm={6}>
      <UpComingEventsView/>
@@ -55,6 +54,9 @@ class Home  extends React.Component{
 </Grid>
      </Grid>
          </Container>  
+         <Grid container className={classes.mainContainer}>
+         <OurCausesImageSlider/>
+         </Grid>
        </React.Fragment>
     )
   }

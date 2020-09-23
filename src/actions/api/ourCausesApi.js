@@ -36,7 +36,7 @@ export const createOurCauses = (formValues) => async (dispatch) => {
     let ourCausesRef = await db.collection("ourCausesSection");
     let imageExist = await ourCausesRef.get().then(snap => snap.size)
     let active = false;
-    if (imageExist <= 2) {
+    if (imageExist <= 4) {
       active = true;
     }
     const response = ourCausesRef.add({ ...formValues,

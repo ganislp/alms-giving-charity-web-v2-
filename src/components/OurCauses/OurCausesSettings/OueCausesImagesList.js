@@ -4,9 +4,9 @@ import _ from 'lodash';
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import { withTheme, withStyles } from '@material-ui/core/styles';
-import { Grid ,Avatar,Checkbox } from '@material-ui/core';
+import { Grid, Avatar, Checkbox } from '@material-ui/core';
 import {
- 
+
   deleteOurCausesImage,
   uploadOurCausesImages,
   updateImageActive,
@@ -17,10 +17,10 @@ import UploadImages from '../../ui/UploadImages';
 import { confiDialogOpen, previewDialogOpen } from '../../../actions/uiActions/navigationAcions';
 import ConfimationDialog from '../../model/ConfimationDialog';
 import MUIDataTable from "mui-datatables";
-import { TableRowContent, ActionButtonsContent,ActiveButtonContent } from '../../ui/DataTableContentBuild';
+import { TableRowContent, ActionButtonsContent, ActiveButtonContent } from '../../ui/DataTableContentBuild';
 import { HomeHeaderButton } from '../../ui/Buttons';
 import { LoadingProcess, SubmitProcess } from '../../ui/ProgressBars'
-// import OurCausesSectionPreview from './OurCausesSectionPreview'
+import OueCausesCardView from '../OueCausesCardView'
 
 
 
@@ -52,18 +52,16 @@ const useStyles = theme => ({
 
 class OurCausesImagesList extends React.Component {
 
-
-
-addImageConfirmDialog = () => {
-  this.props.confiDialogOpen({ open: true });
-}
-
-updateActive = (stauts, uid) => {
-  if (!stauts) {  
-    const {backround} = Object.assign({}, ...Object.values((this.props.ourCausesImages.filter(image => image.uid === uid)))); 
-    this.props.updateImageInActive(backround,uid);
+  addImageConfirmDialog = () => {
+    this.props.confiDialogOpen({ open: true });
   }
-}
+
+  updateActive = (stauts, uid) => {
+    if (!stauts) {
+      const { backround } = Object.assign({}, ...Object.values((this.props.ourCausesImages.filter(image => image.uid === uid))));
+      this.props.updateImageInActive(backround, uid);
+    }
+  }
 
 
   deleteOurCausesImage = (uid) => {
@@ -71,27 +69,60 @@ updateActive = (stauts, uid) => {
   }
 
   dialogImgeButtonClick = () => {
-    const {fileName} = Object.assign({}, ...Object.values((this.props.ourCausesImages.filter(image => image.uid === this.props.confirmationUid))));
-    this.props.deleteOurCausesImage(this.props.confirmationUid,fileName);
+    const { fileName } = Object.assign({}, ...Object.values((this.props.ourCausesImages.filter(image => image.uid === this.props.confirmationUid))));
+    this.props.deleteOurCausesImage(this.props.confirmationUid, fileName);
     this.props.confiDialogOpen({ open: false, ourCausesSeletedUid: {} });
   }
 
-  uploadImage = (url,filename) => {
-    this.props.uploadOurCausesImages({imageUrl:url,fileName:filename,backround:false})
+  uploadImage = (url, filename) => {
+    this.props.uploadOurCausesImages({ imageUrl: url, fileName: filename, backround: false })
   }
 
-  uploadBackroundImage = (url,filename) => {
-    this.props.uploadOurCausesImages({imageUrl:url,fileName:filename,backround:true})
+  uploadBackroundImage = (url, filename) => {
+    this.props.uploadOurCausesImages({ imageUrl: url, fileName: filename, backround: true })
   }
 
-  disableImage(isBackround,isActive,imageName){
-    if(isBackround && isActive){
-return true;
+  disableImage(isBackround, isActive, imageName) {
+    if (isBackround && isActive) {
+      return true;
     }
-    else{
-return _.some(this.props.ourCausesDetails, function(item) {return item.fileName === imageName})
+    else {
+      return _.some(this.props.ourCausesDetails, function (item) { return item.fileName === imageName })
     }
-    
+
+  }
+
+  renderExpandable(ourCausesSeleted,ourCausesDetails,colSpan){
+if(ourCausesSeleted.backround){
+  return <TableRow >   
+  <TableCell colSpan={colSpan} align="center">
+  <Grid container >
+    <Grid item xs={12}>
+  <img src={ourCausesSeleted.imageUrl} alt={ourCausesSeleted.fileName} width="100%"></img>
+  </Grid>
+  </Grid>
+  </TableCell>
+</TableRow>
+}
+ else{
+return <TableRow >
+<TableCell colSpan={colSpan} >
+  <Grid container justify="center" alignItems="center">
+    <Grid item xs={12} sm={4}>
+      <OueCausesCardView
+        imageUrl={ourCausesDetails.imageUrl}
+        imgname={ourCausesDetails.fileName}
+        heading={ourCausesDetails.heading}
+        body={ourCausesDetails.body}
+        foundGoal={ourCausesDetails.foundGoal}
+        foundRaised={ourCausesDetails.foundRaised}
+      />
+    </Grid>
+  </Grid>
+</TableCell>
+</TableRow>
+ }
+
   }
 
 
@@ -106,9 +137,9 @@ return _.some(this.props.ourCausesDetails, function(item) {return item.fileName 
       {
         name: 'imageUrl', label: 'Image',
         options: {
-          customBodyRender: (value, dataIndex) => <Avatar alt={dataIndex.rowData[0]} src={value} /> ,
-           filter: false,
-           empty: true,
+          customBodyRender: (value, dataIndex) => <Avatar alt={dataIndex.rowData[0]} src={value} />,
+          filter: false,
+          empty: true,
         }
       },
 
@@ -120,9 +151,9 @@ return _.some(this.props.ourCausesDetails, function(item) {return item.fileName 
       {
         name: 'active', label: 'Active', options: {
           customBodyRender: (value, dataIndex) => dataIndex.rowData[4] ? <ActiveButtonContent
-            value={value} 
-            dataIndex={dataIndex.rowData[5]} 
-            disabled={ dataIndex.rowData[3] }
+            value={value}
+            dataIndex={dataIndex.rowData[5]}
+            disabled={dataIndex.rowData[3]}
             click={this.updateActive} /> : null,
           filter: true,
           empty: true,
@@ -133,20 +164,20 @@ return _.some(this.props.ourCausesDetails, function(item) {return item.fileName 
       {
         name: 'backround', label: 'isBackround',
         options: {
-          customBodyRender: (value, dataIndex) => <Checkbox checked={value} disabled color="secondary"/> ,
-           filter: false,
-           empty: true,
+          customBodyRender: (value, dataIndex) => <Checkbox checked={value} disabled color="secondary" />,
+          filter: false,
+          empty: true,
         }
       },
-     
+
       {
         name: 'uid', label: 'Actions', filter: false,
         options: {
           customBodyRender: (value, dataIndex) => <ActionButtonsContent
             value={value}
-            dataIndex={this.disableImage(dataIndex.rowData[4],value,dataIndex.rowData[0]) }            
+            dataIndex={this.disableImage(dataIndex.rowData[4], value, dataIndex.rowData[0])}
             click={this.deleteOurCausesImage}
-            hiddendEdit={true}           
+            hiddendEdit={true}
           />,
           filter: false, sort: false,// empty: true,
         },
@@ -172,38 +203,16 @@ return _.some(this.props.ourCausesDetails, function(item) {return item.fileName 
       renderExpandableRow: (rowData, rowMeta) => {
         const colSpan = rowData.length;
         const cardIndex = Object.values(rowMeta).slice(0, 1);
-        let ourCausesBackround = null;
-        let ourCausesImage = null;
-       
-       const ourCausesSeleted = _.pick(this.props.ourCausesImages[cardIndex],'imageUrl','fileName','backround');
-       const ourCausesDetails =  _.pick(...Object.values(this.props.ourCausesDetails).filter(item => item.active === true),'heading','body');
-       if(ourCausesSeleted.backround){
-        ourCausesBackround = _.pick(this.props.ourCausesImages[cardIndex],'imageUrl','fileName');
-        ourCausesImage = _.pick(...Object.values(this.props.ourCausesImages).filter(item => item.active === true && item.backround === false),'imageUrl','fileName');
-       }
-       else{
-        ourCausesBackround =  _.pick(...Object.values(this.props.ourCausesImages.filter(item => item.active === true && item.backround === true )),'imageUrl','fileName');
-        ourCausesImage = _.pick(this.props.ourCausesImages[cardIndex],'imageUrl','fileName');
-       }
-
+        let ourCausesDetails = null;
+        const ourCausesSeleted = _.pick(this.props.ourCausesImages[cardIndex], 'imageUrl', 'fileName', 'backround');
+      ourCausesDetails = _.pick(...Object.values(this.props.ourCausesDetails).filter(item => item.fileName === ourCausesSeleted.fileName), 'heading', 'body', 'imageUrl', 'fileName', 'foundGoal', 'foundRaised');
+       if(_.isEmpty(ourCausesDetails)){
+      ourCausesDetails = _.pick(...Object.values(this.props.ourCausesDetails).filter(item => item.active === true), 'heading', 'body', 'imageUrl', 'fileName', 'foundGoal', 'foundRaised');
+      ourCausesDetails = {...ourCausesDetails,imageUrl:ourCausesSeleted.imageUrl,fileName:ourCausesSeleted.fileName}
+    }
+      
         return (
-          
-          <TableRow >
-            
-            <TableCell colSpan={colSpan} align="center">
-             {/* <Grid container justify="center" alignItems="center">
-               <Grid item xs={12} sm={4}> */}
-         {/* <OurCausesSectionPreview
-                  ourCausesBackround={ourCausesBackround}
-                  ourCausesImage={ourCausesImage}
-                  ourCausesDetails={ourCausesDetails}
- 
-                /> */}
-                {/* </Grid>
-               </Grid> */}
-            </TableCell>
-          </TableRow>
-     
+this.renderExpandable(ourCausesSeleted,ourCausesDetails,colSpan)
         );
       },
 
@@ -213,16 +222,16 @@ return _.some(this.props.ourCausesDetails, function(item) {return item.fileName 
 
     return <MUIDataTable
       title={
-      <Grid container spacing={2}>
-        <Grid item>
-      <UploadImages uploadRef="ourCauses" upload={this.uploadBackroundImage}  label="Upload Backround" />
-      </Grid>
-      <Grid item>
-      <UploadImages uploadRef="ourCauses" upload={this.uploadImage}  label="Upload" />
-      </Grid>
-      </Grid>
-    
-    }
+        <Grid container spacing={2}>
+          <Grid item>
+            <UploadImages uploadRef="ourCauses" upload={this.uploadBackroundImage} label="Upload Backround" />
+          </Grid>
+          <Grid item>
+            <UploadImages uploadRef="ourCauses" upload={this.uploadImage} label="Upload" />
+          </Grid>
+        </Grid>
+
+      }
       columns={columns}
       data={this.props.ourCausesImages}
       options={options}
@@ -258,8 +267,8 @@ const mapStateToProps = state => {
     ourCausesImages: Object.values(state.ourCausesSection.ourCausesImages),
     ourCausesDetails: Object.values(state.ourCausesSection.ourCausesDetails),
     isLoading: _.some(_.values(state.pendingStates.FETCH_OUR_CAUSES_IMAGES)),
-    isSubmiting: _.some(_.values(state.pendingStates.DELETE_OUR_CAUSES_IMAGE) 
-    ||  _.some(_.values(state.pendingStates.INACTIVE_OUR_CAUSES_IMAGE))),
+    isSubmiting: _.some(_.values(state.pendingStates.DELETE_OUR_CAUSES_IMAGE)
+      || _.some(_.values(state.pendingStates.INACTIVE_OUR_CAUSES_IMAGE))),
     confirmationUid: state.dialogOpen.ourCausesSeletedUid,
     previewUid: state.previewOpen.uid,
 
@@ -268,11 +277,11 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps, {
-    deleteOurCausesImage, 
-    confiDialogOpen , 
-    previewDialogOpen,
-    uploadOurCausesImages,
-    updateImageActive,
-    updateImageInActive
+  deleteOurCausesImage,
+  confiDialogOpen,
+  previewDialogOpen,
+  uploadOurCausesImages,
+  updateImageActive,
+  updateImageInActive
 
 })(withTheme(withStyles(useStyles)(OurCausesImagesList)))

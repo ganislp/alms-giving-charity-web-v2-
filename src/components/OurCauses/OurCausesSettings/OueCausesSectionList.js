@@ -139,7 +139,7 @@ class OurCausesSectionList extends React.Component {
     };
 
     return <MUIDataTable
-    title={<TableHeaderButton label="Our Causes Section Settings"></TableHeaderButton>}
+    title={<TableHeaderButton label="Our Causes Settings"></TableHeaderButton>}
       columns={columns}
       data={this.props.ourCausesDetails}
       options={options}/>

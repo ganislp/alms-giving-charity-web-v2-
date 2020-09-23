@@ -79,16 +79,42 @@ const useStyles = makeStyles(theme => ({
     }
    },
 
+   contentMediumButton: {
+    ...theme.palette.typography.contentButtonMain,
+    fontSize: "1rem",
+    // marginRight:"0.5em",
+      padding: "0.4em",
+     "&:hover": {
+       backgroundColor: theme.palette.common.blue
+     },
+
+     [theme.breakpoints.down("md")]: {
+      fontSize: "1rem",
+     marginRight:"0.5em",
+      padding: "0.5em",
+    },
+     [theme.breakpoints.down("sm")]: {
+      fontSize: "0.6rem",
+     marginRight:"0.5em",
+      padding: "0.5em",
+    }
+   },
+
 
    contentButtonSpan:{
     marginRight: 20, 
     marginLeft: 20,
-
-  //   [theme.breakpoints.down("md")]: {
-  //     marginRight: 15, 
-  //     marginLeft: 15,
-  //  } ,
  
+    [theme.breakpoints.down("sm")]: {
+      marginRight: 5, 
+      marginLeft: 5,
+   } ,
+ 
+   },
+
+   contentMediumButtonSpan:{
+    marginRight: 8, 
+    marginLeft: 8,
     [theme.breakpoints.down("sm")]: {
       marginRight: 5, 
       marginLeft: 5,
@@ -98,7 +124,7 @@ const useStyles = makeStyles(theme => ({
 
    settingsContainer:{
     backgroundColor:theme.palette.common.blue,
-padding:"0.5em",
+padding:"0.1em",
 
    [theme.breakpoints.down("md")]: {
     padding:"0.3em"
@@ -269,6 +295,15 @@ export const ReadMoreOutLinedButton = (props) => {
   const classes = useStyles();
   return (
   <Button color="secondary" style={{ textTransform: "none",padding:"0em"}} disableRipple>{props.label}</Button>
+  )
+};
+
+export const HeaderMediumButton = (props) => {
+  const classes = useStyles();
+  return (
+    <Button className={classes.contentMediumButton} variant="outlined" color="secondary" disableRipple disableFocusRipple>
+      <span className={classes.contentMediumButtonSpan}>{props.label}</span>
+    </Button>
   )
 };
 
