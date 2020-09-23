@@ -224,7 +224,7 @@ this.renderExpandable(ourCausesSeleted,ourCausesDetails,colSpan)
       title={
         <Grid container spacing={2}>
           <Grid item>
-            <UploadImages uploadRef="ourCauses" upload={this.uploadBackroundImage} label="Upload Backround" />
+            <UploadImages uploadRef="ourCauses" upload={this.uploadBackroundImage} label="Backround" />
           </Grid>
           <Grid item>
             <UploadImages uploadRef="ourCauses" upload={this.uploadImage} label="Upload" />

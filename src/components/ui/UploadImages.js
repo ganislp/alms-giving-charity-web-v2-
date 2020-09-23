@@ -71,7 +71,7 @@ handleUploadSuccess = filename => {
      </Grid>
      <Grid item>
    <Button variant="contained" component="label"  color="secondary" startIcon={<PublishIcon />}
-   disabled={this.state.isUploading} style={{ textTransform: "none" }}>
+   disabled={this.state.isUploading} style={{ textTransform: "none",paddingLeft:"0.9em",paddingRight:"0.9em" }}>
     
    {this.state.isUploading ?  <CircularProgress size={30} color="secondary"/> : this.props.label}
     <CustomUploadButton 
