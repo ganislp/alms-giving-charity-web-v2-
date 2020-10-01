@@ -21,6 +21,9 @@ import EditUpComingEventsSection from '../../UpComingEvents/UpComingSettings/Edi
 import OurCausesSectionSettings from '../../OurCauses/OurCausesSettings/OurCausesSectionSettings'
 import CreateOurCausesSection from '../../OurCauses/OurCausesSettings/CreateOurCausesSection';
 import EditOurCausesSection from '../../OurCauses/OurCausesSettings/EditOurCausesSection';
+import CausesStatsSettings from '../../CausesStats/CausesStatsSettings/CausesStatsSettings';
+import CreateCausesStats from '../../CausesStats/CausesStatsSettings/CreateCausesStats';
+import EditCausesStatsSection from '../../CausesStats/CausesStatsSettings/EditCausesStatsSection';
 import Home from '../../Home/Home'
 import { fetchCompanyDetails } from '../../../actions/api/companyDetailsApi';
 import {fetchUser} from '../../../actions/api/authApi'
@@ -29,6 +32,7 @@ import { getHeroCards } from '../../../actions/api/heroCardApi';
 import { getAboutUs,getAboutUsImages } from '../../../actions/api/aboutUsApi';
 import { getUpComingEvents,getUpComingEventsImages } from '../../../actions/api/upComingEventsApi';
 import { getOurCauses,getOurCausesImages } from '../../../actions/api/ourCausesApi';
+import { getCausesStats } from '../../../actions/api/causeStatsApi';
 
 
 
@@ -46,6 +50,7 @@ class Header extends React.Component {
   this.props.getUpComingEventsImages();
   this.props.getOurCauses();
   this.props.getOurCausesImages();
+  this.props.getCausesStats();
   }
 
   renderComponents(){
@@ -73,6 +78,9 @@ return <Router history={history}>
           <Route exact path="/ourCauses/ourCausesSectionSettings" render={props => <OurCausesSectionSettings {...this.props}/>}></Route>
           <Route exact path="/ourCauses/ourCausesCreate" render={props => <CreateOurCausesSection {...this.props}/>}></Route>
           <Route exact path="/ourCauses/edit/:uid" component={props => <EditOurCausesSection {...props} {...this.props} />}></Route>
+          <Route exact path="/causesStats/causesStatsSettings" render={props => <CausesStatsSettings {...this.props}/>}></Route>
+          <Route exact path="/causesStats/causesStatsCreate" component={() => <CreateCausesStats {...this.props}/>}></Route>
+          <Route exact path="/causesStats/edit/:uid" component={props => <EditCausesStatsSection {...props} {...this.props} />}></Route>
           <Route exact path="/causes" component={() => <div>Causes</div>}></Route>
           <Route exact path="/news" component={() => <div>News</div>}></Route>
           <Route exact path="/gallery" component={() => <div>Gallery</div>}></Route>
@@ -109,5 +117,6 @@ export default  connect(mapStateToProps,{
   getUpComingEvents,
   getUpComingEventsImages,
   getOurCauses,
-  getOurCausesImages 
+  getOurCausesImages ,
+  getCausesStats
 })(Header);

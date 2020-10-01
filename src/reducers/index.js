@@ -12,6 +12,7 @@ import AboutUsReducer from './AboutUs/AboutUsReducer';
 import UpComingEventsReducer from './UpComingEventsReducer/UpComingEventsReducer';
 import FeaturedCauseReducer from './FeaturedCauseReducer/FeaturedCauseReducer';
 import OurCausesReducer from './OurCausesReducer/OurCausesReducer';
+import CausesStatsReducer from './CausesStatsReducer/CausesStatsReducer';
 import uiReducer from './uiReducer';
 import authReducer from './authReducer';
 import pendingReducer from './pendingReducer'
@@ -31,6 +32,7 @@ export default combineReducers({
   upComingEventsSection: UpComingEventsReducer,
   featuredCauseSection: FeaturedCauseReducer,
   ourCausesSection: OurCausesReducer,
+  causesStatsSection: CausesStatsReducer,
   uiReducer : uiReducer,
   userDetails:authReducer,
   form: formReducer,
