@@ -64,7 +64,7 @@ export const updateCausesStatsActive = (uid) => async dispatch => {
   dispatch(causesStatsActions.activeCausesStatsRequest());
   try {
     let causesStatsSectionRef = await db.collection("causesStatsSection");
-    let inActiveId = await causesStatsSectionRef.where("active", "==", true).orderBy("createdAt").limit(1)
+    let inActiveId = await causesStatsSectionRef.where("active", "==", true)
     .get().then(snap => snap.docs.map(doc => doc.id));
 
     if (inActiveId !== null) {

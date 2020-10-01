@@ -26,11 +26,7 @@ const useStyles = theme => ({
 class CausesStatsList extends React.Component {
   updateActive = (stauts, uid) => {
     if (!stauts) {
-      const inActiveUid = (this.props.causesStatsDetails.filter(causesStats => causesStats.active === true).map((value, key) => {
-        return value.uid
-      }));
-      this.props.updateActive(uid)
-      this.props.updateInActive(inActiveUid);
+      this.props.updateCausesStatsActive(uid)
     }
   }
 
