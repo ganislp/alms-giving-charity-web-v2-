@@ -24,6 +24,8 @@ import EditOurCausesSection from '../../OurCauses/OurCausesSettings/EditOurCause
 import CausesStatsSettings from '../../CausesStats/CausesStatsSettings/CausesStatsSettings';
 import CreateCausesStats from '../../CausesStats/CausesStatsSettings/CreateCausesStats';
 import EditCausesStatsSection from '../../CausesStats/CausesStatsSettings/EditCausesStatsSection';
+import CreateCausesStatsViewSection from '../../CausesStats/CausesStatsSettings/CreateCausesStatsViewSection';
+import EditCausesStatsViewSection from '../../CausesStats/CausesStatsSettings/EditCausesStatsViewSection'
 import Home from '../../Home/Home'
 import { fetchCompanyDetails } from '../../../actions/api/companyDetailsApi';
 import {fetchUser} from '../../../actions/api/authApi'
@@ -32,7 +34,8 @@ import { getHeroCards } from '../../../actions/api/heroCardApi';
 import { getAboutUs,getAboutUsImages } from '../../../actions/api/aboutUsApi';
 import { getUpComingEvents,getUpComingEventsImages } from '../../../actions/api/upComingEventsApi';
 import { getOurCauses,getOurCausesImages } from '../../../actions/api/ourCausesApi';
-import { getCausesStats } from '../../../actions/api/causeStatsApi';
+import { getCausesStats,getCausesStatsImages } from '../../../actions/api/causeStatsApi';
+import { getCausesStatsView } from '../../../actions/api/causeStatsViewApi';
 
 
 
@@ -51,6 +54,8 @@ class Header extends React.Component {
   this.props.getOurCauses();
   this.props.getOurCausesImages();
   this.props.getCausesStats();
+  this.props.getCausesStatsImages();
+  this.props.getCausesStatsView()
   }
 
   renderComponents(){
@@ -81,6 +86,8 @@ return <Router history={history}>
           <Route exact path="/causesStats/causesStatsSettings" render={props => <CausesStatsSettings {...this.props}/>}></Route>
           <Route exact path="/causesStats/causesStatsCreate" component={() => <CreateCausesStats {...this.props}/>}></Route>
           <Route exact path="/causesStats/edit/:uid" component={props => <EditCausesStatsSection {...props} {...this.props} />}></Route>
+          <Route exact path="/causesStats/causesStatsViewCreate" component={() => <CreateCausesStatsViewSection {...this.props}/>}></Route>
+          <Route exact path="/causesStats/viewEdit/:uid" component={props => <EditCausesStatsViewSection {...props} {...this.props} />}></Route>
           <Route exact path="/causes" component={() => <div>Causes</div>}></Route>
           <Route exact path="/news" component={() => <div>News</div>}></Route>
           <Route exact path="/gallery" component={() => <div>Gallery</div>}></Route>
@@ -118,5 +125,7 @@ export default  connect(mapStateToProps,{
   getUpComingEventsImages,
   getOurCauses,
   getOurCausesImages ,
-  getCausesStats
+  getCausesStats,
+  getCausesStatsImages,
+  getCausesStatsView
 })(Header);

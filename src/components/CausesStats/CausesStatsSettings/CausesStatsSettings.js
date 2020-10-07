@@ -2,7 +2,8 @@ import React from 'react';
 import { Container,Grid } from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import CausesStatsList from './CausesStatsList';
-//import HeroImagesList from './HeroImagesList'
+import CausesStatsImagesList from './CausesStatsImagesList';
+import CausesStatsViewList from './CausesStatsViewList'
 
 const useStyles = theme => ({
   mainContainer: {
@@ -19,10 +20,10 @@ class CausesStatsSettings extends React.Component{
   rednderCausesStatsList(){
       return <CausesStatsList/>
   }
-  // rednderHeroImageList(){
-  //     return <HeroImagesList/>
+  rednderCausesStatsImageList(){
+      return <CausesStatsImagesList/>
   
-  // }
+  }
   render(){
     const { classes } = this.props;
     return (
@@ -32,7 +33,10 @@ class CausesStatsSettings extends React.Component{
 {this.rednderCausesStatsList()}
   </Grid>
   <Grid item sm={12} style={{marginBottom:"1em",marginTop:"1em"}}>
-  {/* {this.rednderCausesStatsImageList()} */}
+  <CausesStatsViewList/>
+  </Grid>
+  <Grid item sm={12} style={{marginBottom:"1em",marginTop:"1em"}}>
+  {this.rednderCausesStatsImageList()}
   </Grid>
     </Grid>   
   </Container>

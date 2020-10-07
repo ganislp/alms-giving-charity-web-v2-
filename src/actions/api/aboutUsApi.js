@@ -145,8 +145,6 @@ else{
   let fileNameLength = await imagesRef.where("fileName", "==", `${imagesPayload.fileName}`)
   .where("backround", "==", false)
   .get().then(snap => snap.size);
-
-  console.log("imageExist",imageExist);
   if (fileNameLength === 0) {
     if (imageExist <= 0) {
       active = true;
@@ -226,7 +224,6 @@ export const updateImageActive = (uid) => async dispatch => {
     await db.collection('aboutUsImages').doc(`${uid}`).update({ active: true, createdAt: createdAt });
     dispatch(showSuccessSnackbar("Active Record Sucessfully Updated!"));
   } catch (error) {
-    console.log("error",error)
     dispatch(showFaildSnackbar("Please Contact Admistator! some thing went wrong!"));
   }
 };

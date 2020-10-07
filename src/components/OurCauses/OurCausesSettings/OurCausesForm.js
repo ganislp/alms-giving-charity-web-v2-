@@ -93,7 +93,7 @@ else{
           <Grid item className={classes.itemTextField} xs={12} >
             <Field
               name="body"
-              component={renderNumberField}
+              component={renderTextField}
               label="Body"
               multiline
               rowsMax="10"

@@ -110,6 +110,27 @@ export const validateOurCausesForm = values => {
   return errors
 }
 
+export const validateCausesStatsForm = values => {
+  const errors = {}
+  const requiredFields = [
+    'heading',
+    'stats',
+  ]
+  requiredFields.forEach(field => {
+    if (!values[field] || values[field] <= 0) {
+      errors[field] = 'Required'
+    }
+   
+  })
+  //  if(Object.keys(values)[0] === 'foundRaised'){
+  //   console.log("field", Object.keys(values)[0]) ;
+  //   console.log("field", values['foundRaised']) ;
+  //  }
+
+  
+  return errors
+}
+
 
 export const validateLoginForm = values => {
   const errors = {}

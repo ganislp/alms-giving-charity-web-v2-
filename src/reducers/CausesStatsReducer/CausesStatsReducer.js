@@ -5,6 +5,7 @@ import _ from 'lodash';
 const initialUserState = {
   causesStatsDetails: {},
   causesStatsImages: {},
+  causesStatsViewDetails: {},
 };
 
 export default (state = initialUserState, action) => {
@@ -89,6 +90,50 @@ export default (state = initialUserState, action) => {
       return { ...state, ...action.payload };
     case causesStatsActionTypes.INACTIVE_CAUSES_STATS_IMAGE_ERROR:
       return { ...state, ...action.payload }
+
+      case causesStatsActionTypes.GET_CAUSES_STATS_VIEW_REQUEST:
+        return { ...state, ...action.payload }
+      case causesStatsActionTypes.GET_CAUSES_STATS_VIEW_SUCCESS:
+        return { ...state, causesStatsViewDetails: { ..._.mapKeys(action.payload.causesStatsViewDetails, 'uid') } }
+      case causesStatsActionTypes.GET_CAUSES_STATS_VIEW_ERROR:
+        return { ...state, ...action.payload };
+  
+      case causesStatsActionTypes.CREATE_CAUSES_STATS_VIEW_REQUEST:
+        return { ...state, ...action.payload };
+      case causesStatsActionTypes.CREATE_CAUSES_STATS_VIEW_SUCCESS:
+        return { ...state, ...action.payload };
+      case causesStatsActionTypes.CREATE_CAUSES_STATS_VIEW_ERROR:
+        return { ...state, ...action.payload }
+  
+      case causesStatsActionTypes.EDIT_CAUSES_STATS_VIEW_REQUEST:
+        return { ...state, ...action.payload };
+      case causesStatsActionTypes.EDIT_CAUSES_STATS_VIEW_SUCCESS:
+        return { ...state, ...action.payload };
+      case causesStatsActionTypes.EDIT_CAUSES_STATS_VIEW_ERROR:
+        return { ...state, ...action.payload }
+  
+      case causesStatsActionTypes.ACTIVE_CAUSES_STATS_VIEW_REQUEST:
+        return { ...state, ...action.payload };
+      case causesStatsActionTypes.ACTIVE_CAUSES_STATS_VIEW_SUCCESS:
+        return { ...state, ...action.payload };
+      case causesStatsActionTypes.ACTIVE_CAUSES_STATS_VIEW_ERROR:
+        return { ...state, ...action.payload }
+  
+      case causesStatsActionTypes.INACTIVE_CAUSES_STATS_VIEW_REQUEST:
+        return { ...state, ...action.payload };
+      case causesStatsActionTypes.INACTIVE_CAUSES_STATS_VIEW_SUCCESS:
+        return { ...state, ...action.payload };
+      case causesStatsActionTypes.INACTIVE_CAUSES_STATS_VIEW_ERROR:
+        return { ...state, ...action.payload }
+  
+  
+      case causesStatsActionTypes.DELETE_CAUSES_STATS_VIEW_REQUEST:
+        return { ...state, ...action.payload };
+      case causesStatsActionTypes.DELETE_CAUSES_STATS_VIEW_SUCCESS:
+        return { ...state, ...action.payload };
+      case causesStatsActionTypes.DELETE_CAUSES_STATS_VIEW_ERROR:
+        return { ...state, ...action.payload }
+  
     default:
       return { ...state };
   }

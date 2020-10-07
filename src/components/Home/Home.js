@@ -6,7 +6,8 @@ import AboutUsSectionView from '../Aboutus/AboutUsSectionView';
 import UpComingEventsView from '../UpComingEvents/UpcomingEventsView'
 import FeaturedCauseView from '../FeaturedCause/FeaturedCauseView';
 import { Grid ,Container} from '@material-ui/core';
-import OurCausesImageSlider from '../OurCauses/OurCausesImageSlider'
+import OurCausesImageSlider from '../OurCauses/OurCausesImageSlider';
+import CausesStatsViewView from '../CausesStats/CausesStatsView'
 
 
 const useStyles = theme => ({
@@ -50,13 +51,17 @@ class Home  extends React.Component{
      <UpComingEventsView/>
      </Grid>
      <Grid item xs={12} sm={6} style={{backgroundColor:theme.palette.common.bgColour}}>
-     <FeaturedCauseView/>
+     {/* <FeaturedCauseView/> */}
 </Grid>
      </Grid>
          </Container>  
          <Grid container className={classes.mainContainer}>
          <OurCausesImageSlider/>
          </Grid>
+
+         <Grid container className={classes.mainContainer}>
+       <CausesStatsViewView/>
+       </Grid>   
        </React.Fragment>
     )
   }

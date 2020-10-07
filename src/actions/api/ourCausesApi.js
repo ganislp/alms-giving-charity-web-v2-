@@ -154,7 +154,6 @@ else{
   let fileNameLength = await imagesRef.where("fileName", "==", `${imagesPayload.fileName}`)
   .where("backround", "==", false)
   .get().then(snap => snap.size);
-  console.log("imageExist",imageExist);
   if (fileNameLength === 0) {
     if (imageExist <= 2) {
       active = true;

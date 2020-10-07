@@ -9,7 +9,6 @@ class OurCausesSectionView extends Component{
 
   render(){
     const {imageUrl} = Object.assign({}, ...this.props.ourCausesImageBackground);
-  //console.log("OurCausesSectionView",imageUrl)
     return(
 
 <OurCausesImageSlider backgroundImage={imageUrl}/>
