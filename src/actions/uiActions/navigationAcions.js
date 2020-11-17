@@ -2,7 +2,11 @@ import {
   ON_SELECT_APP_TAB,
   DRAWER_OPEN,
   ON_CONFI_DIALOG_OPEN,
-  ON_POPOVER_DIALOG_OPEN,ON_PREVIEW_DIALOG_OPEN} from '../actionTypes/uiActionTypes'
+  ON_POPOVER_DIALOG_OPEN,
+  ON_PREVIEW_DIALOG_OPEN,
+  ON_SELECT_SETTING_TAB
+
+} from '../actionTypes/uiActionTypes'
 
 export const headerMenutabAct = (selectdTabValue) => {
   return {
@@ -36,6 +40,14 @@ export const previewDialogOpen = (previewOpen,uid) => {
   return {
     type: ON_PREVIEW_DIALOG_OPEN,
     payload: {previewOpen,uid}
+}
+};
+
+
+export const headerSettingsMenutabAct = (selectdSettingsTabValue) => {
+  return {
+    type: ON_SELECT_SETTING_TAB,
+    payload: selectdSettingsTabValue
 }
 };
 

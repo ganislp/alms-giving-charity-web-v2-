@@ -113,8 +113,8 @@ class CausesStatsViewList extends React.Component {
       customToolbar: () => {
         return (
          <React.Fragment>
-          <CreateButtonContent create="/causesStats/causesStatsViewCreate"/>
-          <HomeHeaderButton/>
+          <CreateButtonContent create="/settings/causesStatsViewCreate"/>
+          {/* <HomeHeaderButton/> */}
           </React.Fragment>
           
         );

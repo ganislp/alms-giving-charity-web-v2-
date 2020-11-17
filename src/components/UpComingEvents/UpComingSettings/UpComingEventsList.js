@@ -164,8 +164,8 @@ class UpComingEventsList extends React.Component {
       customToolbar: () => {
         return (
          <React.Fragment>
-          <CreateButtonContent create="/upComingEvents/upComingEventsCreate"/>
-          <HomeHeaderButton/>
+          <CreateButtonContent create="/settings/upComingEventsCreate"/>
+          {/* <HomeHeaderButton/> */}
           </React.Fragment>
           
         );

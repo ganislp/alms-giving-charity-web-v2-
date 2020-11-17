@@ -129,8 +129,8 @@ class OurCausesSectionList extends React.Component {
       customToolbar: () => {
         return (
          <React.Fragment>
-          <CreateButtonContent create="/ourCauses/ourCausesCreate"/>
-          <HomeHeaderButton/>
+          <CreateButtonContent create="/settings/ourCausesCreate"/>
+          {/* <HomeHeaderButton/> */}
           </React.Fragment>
           
         );

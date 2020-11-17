@@ -127,11 +127,11 @@ class CausesStatsImagesList extends React.Component {
         if (newImagefileName) return true;
         }
       },
-      customToolbar: () => {
-        return (
-          <HomeHeaderButton />
-        );
-      },
+      // customToolbar: () => {
+      //   return (
+      //     <HomeHeaderButton />
+      //   );
+      // },
       renderExpandableRow: (rowData, rowMeta) => {
         const colSpan = rowData.length;
         const cardIndex = Object.values(rowMeta).slice(0, 1);       

@@ -112,14 +112,14 @@ class HeroSectionContent extends React.Component {
                            
               <Hidden  lgUp>
           <Grid item  >
-          <SettingButton size = "small" click = {() => history.push("/hero/heroSettings")}></SettingButton>
+          <SettingButton size = "small" click = {() => history.push("/settings/heroSettings/heroCreate")}></SettingButton>
           </Grid>
           </Hidden>
 </Grid>
           </Container>
           <Hidden mdDown>
           <Grid item     >
-          <SettingButton size = "large" click = {() => history.push("/hero/heroSettings")}></SettingButton>
+          <SettingButton size = "large" click = {() => history.push("/settings/heroSettings/heroCreate")}></SettingButton>
           </Grid>
           </Hidden>
           </Grid>

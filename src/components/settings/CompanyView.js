@@ -36,7 +36,7 @@ const useStyles = theme => ({
 
 });
 
-class Settings extends React.Component {
+class CompanyView extends React.Component {
 
   onSubmit = formValues => {
     const convertedFormValues = Object.assign({}, {
@@ -64,9 +64,7 @@ class Settings extends React.Component {
         <React.Fragment>
           <LoadingProcess isLoading={this.props.isLoading}/>
           <SubmitProcess  isSubmiting={this.props.isSubmiting}/>
-          <CompanyForm onSubmit={this.onSubmit}
-            initialValues={{ ...addresses, ...contactDetails, companyName }}
-          />
+          <CompanyForm onSubmit={this.onSubmit} initialValues={{ ...addresses, ...contactDetails, companyName }} />
             <SubmitProcess  isSubmiting={this.props.isSubmiting}/>
         </React.Fragment>
 
@@ -94,4 +92,4 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, { createCompanyDetails, showSuccessSnackbar })
-  (withTheme(withStyles(useStyles)(Settings)));
+  (withTheme(withStyles(useStyles)(CompanyView)));

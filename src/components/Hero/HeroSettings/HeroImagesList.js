@@ -13,7 +13,6 @@ import {
   uploadHeroImages
 } from '../../../actions/api/heroApi';
 import UploadImages from '../../ui/UploadImages';
-//import SubmitProcess from '../../ui/SubmitProcess';
 import { confiDialogOpen, previewDialogOpen } from '../../../actions/uiActions/navigationAcions';
 import ConfimationDialog from '../../model/ConfimationDialog';
 import MUIDataTable from "mui-datatables";
@@ -147,11 +146,11 @@ class HeroImagesList extends React.Component {
       expandableRows: true,
       expandableRowsHeader: false,
       expandableRowsOnClick: true,
-      customToolbar: () => {
-        return (
-          <HomeHeaderButton />
-        );
-      },
+      // customToolbar: () => {
+      //   return (
+      //     <HomeHeaderButton />
+      //   );
+      // },
       renderExpandableRow: (rowData, rowMeta) => {
         const colSpan = rowData.length + 1;
         const cardIndex = Object.values(rowMeta).slice(0, 1);

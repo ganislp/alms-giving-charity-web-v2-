@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 import {
   selectdAppTabReducer,
+  selectdSettingsAppTabReducer,
   drawerOpenReducer,
   confDialogOpenReducer,
 popOverDialogOpenReducer,previewDialogOpenReducer} from './NavigationReducer';
@@ -21,6 +22,7 @@ import { reducer as formReducer } from 'redux-form';
 
 export default combineReducers({
   selectdTabValue:selectdAppTabReducer,
+  selectdSettingsTabValue:  selectdSettingsAppTabReducer,
   drawerOpen:drawerOpenReducer,
   dialogOpen:confDialogOpenReducer,
   previewOpen:previewDialogOpenReducer,

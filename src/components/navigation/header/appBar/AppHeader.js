@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import { AppBar, Toolbar, Grid, Container, Hidden  } from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import DrawerBuilder from './drawer/DrawerBuilder'
 import TopAppBar from './TopAppBar';
-import TabsBuilder from './tabsBuilder/TabsBuilder'
+import TabsBuilder from './tabsBuilder/TabsBuilder';
+import SettingsTabsBuilder from './tabsBuilder/SettingsTabsBuilder'
 import Logo from '../logo/Logo';
+import history from '../../../../history';
+
 
 const useStyles = theme => ({
   toolbarMargin: {
@@ -27,11 +31,21 @@ const useStyles = theme => ({
 });
 class AppHeader extends Component {
 
+
+  rednderTabBuilder(){
+if(history.location.pathname.startsWith('/settings/')){
+  return <SettingsTabsBuilder/>
+}
+else {
+  return <TabsBuilder /> 
+}
+  }
+
   rednderDrawer() {
     return (
       <React.Fragment>    
         <Hidden smDown>   
-          <TabsBuilder /> 
+          {this.rednderTabBuilder()}
           </Hidden>  
           
           <Hidden mdUp>   
@@ -82,8 +96,14 @@ class AppHeader extends Component {
   }
 }
 
-
-export default  (withTheme(withStyles(useStyles)(AppHeader)));
+const mapStateToProps = (state) => {
+  return {
+    seletedValue: state.selectdTabValue,
+    seletedSettingsTabValue: state.selectdSettingsTabValue,
+  }
+}
+//export default  (withTheme(withStyles(useStyles)(AppHeader)));
+export default connect(mapStateToProps,null) (withTheme(withStyles(useStyles)(AppHeader)));
 
 
 

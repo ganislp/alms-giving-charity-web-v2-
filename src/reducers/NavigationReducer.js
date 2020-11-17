@@ -1,7 +1,7 @@
 import {ON_SELECT_APP_TAB,
   DRAWER_OPEN,
   ON_CONFI_DIALOG_OPEN,
-  ON_POPOVER_DIALOG_OPEN,ON_PREVIEW_DIALOG_OPEN} from '../actions/actionTypes/uiActionTypes'
+  ON_POPOVER_DIALOG_OPEN,ON_PREVIEW_DIALOG_OPEN,ON_SELECT_SETTING_TAB} from '../actions/actionTypes/uiActionTypes'
 
 export const   selectdAppTabReducer = (selectdTabValue=0,action) => {
   switch (action.type) {
@@ -9,6 +9,16 @@ export const   selectdAppTabReducer = (selectdTabValue=0,action) => {
       return action.payload;      
       default:
         return selectdTabValue;
+    }
+
+};
+
+export const   selectdSettingsAppTabReducer = (selectdSettingsTabValue=1,action) => {
+  switch (action.type) {
+    case ON_SELECT_SETTING_TAB:
+      return action.payload;      
+      default:
+        return selectdSettingsTabValue;
     }
 
 };

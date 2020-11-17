@@ -111,8 +111,8 @@ class HeroSectionList extends React.Component {
       customToolbar: () => {
         return (
          <React.Fragment>
-          <CreateButtonContent create="/hero/heroCreate"/>
-          <HomeHeaderButton/>
+          <CreateButtonContent create="/settings/heroSettings/heroCreate"/>
+          {/* <HomeHeaderButton/> */}
           </React.Fragment>
           
         );
