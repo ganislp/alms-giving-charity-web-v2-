@@ -105,18 +105,19 @@ class AboutUsSectionView extends React.Component {
           <Container maxWidth="lg" className={classes.itemContainer} disableGutters>
             <Grid container spacing={1}  >
               <Grid item  xs={12} sm={6}>
-                <Grid item container justify="space-between"   style={{height: "100%"}}>
-                  <Grid item >
-                    <Typography variant="h1" color="primary" className={classes.heading}  >
+                <Grid item container justify="space-between"   style={{height: "100%"}} >
+                  <Grid item xs={12} >
+                    <Typography variant="h1" color="primary" className={classes.heading}  disableGutters 
+                    >
                       {this.props.aboutUsDetails.heading}
                     </Typography>
                   </Grid>
-                  <Grid item >
+                  <Grid item xs={12}>
                     <Typography variant="body1" color="primary"  className={classes.bodyContaner} >
                       {this.props.aboutUsDetails.body}
                     </Typography>
                   </Grid>
-                  <Grid item style={{ paddingBottom: "1em",}}>
+                  <Grid item style={{ paddingBottom: "1em",}} xs={12}>
                     <HeaderButton label="Read More" />
                   </Grid>
                 </Grid>

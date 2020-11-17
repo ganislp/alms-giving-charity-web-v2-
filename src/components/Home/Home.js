@@ -51,7 +51,7 @@ class Home  extends React.Component{
      <UpComingEventsView/>
      </Grid>
      <Grid item xs={12} sm={6} style={{backgroundColor:theme.palette.common.bgColour}}>
-     {/* <FeaturedCauseView/> */}
+     <FeaturedCauseView/>
 </Grid>
      </Grid>
          </Container>  

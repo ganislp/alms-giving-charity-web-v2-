@@ -44,9 +44,7 @@ const useStyles = makeStyles(theme => ({
 
   return <Paper className={classes.paperHeader} square={true} >
   <Grid container alignItems="center" justify="space-between">
-  <Grid item >
-    <FormBackButton/>
-    </Grid>
+  
     <Grid item>
       <Typography variant="h6" align="center"
         className={classes.h6Heading} >{props.label}</Typography>
