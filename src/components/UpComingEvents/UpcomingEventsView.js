@@ -43,13 +43,13 @@ class UpComingEventsView extends React.Component {
         Upcoming Events
             </Typography>
             </Grid>
-            <Hidden lgUp>
+            {/* <Hidden lgUp>
             <Grid item className={classes.itemContainer}>
             
             {this.renderSettingSmallButton()} 
            
               </Grid>
-              </Hidden>
+              </Hidden> */}
           </Grid>
 
      

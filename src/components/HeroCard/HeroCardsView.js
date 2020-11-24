@@ -63,13 +63,13 @@ class HeroCardsView extends React.Component {
      }
     return (
      
-      <Grid container justify="space-between" >
-        <Grid item container justify="flex-end" style={{ marginBottom: "1em", marginTop: "1em" }}>
+      <Grid container justify="space-between" style={{ marginBottom: "1em", marginTop: "5em" }}>
+        {/* <Grid item container justify="flex-end" style={{ marginBottom: "1em", marginTop: "1em" }}>
           <Hidden lgUp>
             {this.renderSettingSmallButton()}  </Hidden>
           <Hidden mdDown>
             {this.renderSettingLargeButton()}  </Hidden>
-        </Grid>
+        </Grid> */}
 
         <Container maxWidth="lg" disableGutters className={classes.mainContainer} >
           <Grid item container justify="space-between" spacing={3}>

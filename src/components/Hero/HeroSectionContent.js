@@ -110,18 +110,18 @@ class HeroSectionContent extends React.Component {
                 <HeaderButton  label="Read More"/>
               </Grid> 
                            
-              <Hidden  lgUp>
+              {/* <Hidden  lgUp>
           <Grid item  >
           <SettingButton size = "small" click = {() => history.push("/settings/heroSettings/heroCreate")}></SettingButton>
           </Grid>
-          </Hidden>
+          </Hidden> */}
 </Grid>
           </Container>
-          <Hidden mdDown>
+          {/* <Hidden mdDown>
           <Grid item     >
           <SettingButton size = "large" click = {() => history.push("/settings/heroSettings/heroCreate")}></SettingButton>
           </Grid>
-          </Hidden>
+          </Hidden> */}
           </Grid>
          
         </Grid>

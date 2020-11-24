@@ -112,7 +112,7 @@ if(!_.isEmpty(props.ourCausesDetails) && props.isLoading){
     <Grid  style={{...styles}}  container justify="center" >
        
     <Grid item className={classes.paper} container  justify="flex-end" alignItems="center">  
-    <Hidden  lgUp>
+    {/* <Hidden  lgUp>
           <Grid item   style={{backgroundColor:"red"}} >
           <SettingButton size = "small" click = {() => history.push("/ourCauses/ourCausesSectionSettings")}></SettingButton>
           </Grid>
@@ -122,7 +122,7 @@ if(!_.isEmpty(props.ourCausesDetails) && props.isLoading){
           <Grid item     >
           <SettingButton size = "large" click = {() => history.push("/ourCauses/ourCausesSectionSettings")}></SettingButton>
           </Grid>
-          </Hidden>
+          </Hidden> */}
      
     <Grid container className={classes.slideItemContainer} justify="center" alignItems="center">   
 <Container maxWidth="lg" >

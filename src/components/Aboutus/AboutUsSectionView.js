@@ -97,9 +97,9 @@ class AboutUsSectionView extends React.Component {
       <Grid className={classes.imageConatiner} container>
         <Grid item className={classes.paper} container justify="flex-end" >
         <Grid item   className={classes.iconContainer} >
-            <Hidden lgUp>
+            {/* <Hidden lgUp>
             <SettingButton size = "small" click = {() => history.push("/aboutus/aboutUsSectionSettings")}></SettingButton>
-            </Hidden>
+            </Hidden> */}
             
           </Grid>
           <Container maxWidth="lg" className={classes.itemContainer} disableGutters>
@@ -129,9 +129,9 @@ class AboutUsSectionView extends React.Component {
             </Grid>
           </Container>
           <Grid item   style={{height: "100%"}}  >
-            <Hidden mdDown>
+            {/* <Hidden mdDown>
               <SettingButton size="large" click={() => history.push("/aboutus/aboutUsSectionSettings")}></SettingButton>
-            </Hidden>
+            </Hidden> */}
             
           </Grid>
      </Grid>

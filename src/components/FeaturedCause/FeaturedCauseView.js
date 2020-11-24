@@ -46,9 +46,9 @@ const { heading,body,imageUrl,fileName,location,eventDate }  = Object.assign({},
         Featured Cause
             </Typography>
             </Grid>
-            <Grid item className={classes.itemContainer}>
+            {/* <Grid item className={classes.itemContainer}>
             {this.renderSettingSmallButton()} 
-              </Grid>
+              </Grid> */}
           </Grid>
      <Grid item xs={12}   style={{backgroundColor:theme.palette.common.bgColour,height:"auto"}}>
                 <FeaturedCauseBuild       

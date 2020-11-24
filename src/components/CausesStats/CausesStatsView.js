@@ -59,12 +59,12 @@ class CausesStatsViewView extends React.Component {
     return (
 
       <Grid container justify="space-between" >
-        <Grid item container justify="flex-end" >
+        {/* <Grid item container justify="flex-end" >
           <Hidden lgUp>
             {this.renderSettingSmallButton()}  </Hidden>
           <Hidden mdDown>
             {this.renderSettingLargeButton()}  </Hidden>
-        </Grid>
+        </Grid> */}
 
         <Container maxWidth="lg"  className={classes.mainContainer} >
           <Grid container justify="space-between" spacing={3}>
