@@ -107,7 +107,7 @@ class AboutUsSectionView extends React.Component {
               <Grid item  xs={12} sm={6}>
                 <Grid item container justify="space-between"   style={{height: "100%"}} >
                   <Grid item xs={12} >
-                    <Typography variant="h1" color="primary" className={classes.heading}  disableGutters 
+                    <Typography variant="h1" color="primary" className={classes.heading}   
                     >
                       {this.props.aboutUsDetails.heading}
                     </Typography>

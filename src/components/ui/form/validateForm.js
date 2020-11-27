@@ -12,6 +12,7 @@ export const validateCompanyForm = values => {
     'citytown',
     'province',
     'zipcode',
+    'body',
   ]
   requiredFields.forEach(field => {
     if (!values[field]) {

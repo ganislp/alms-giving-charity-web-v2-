@@ -18,4 +18,29 @@ export const settingsRoutes = [
   { label: 'UpComingEvents', link: '/settings/upComingEventsSettings', activeIndex: 5,component:"upComingEventsSettings",icon:"home"  },
   { label: 'OurCauses', link: '/settings/ourCausesSectionSettings', activeIndex: 6,component:"ourCausesSectionSettings",icon:"home"  },
   { label: 'Causes Stats', link: '/settings/causesStatsSettings', activeIndex: 7,component:"causesStatsSettings",icon:"home"  },
+  { label: 'Footer', link: '/settings/footerSettings', activeIndex: 8,component:"footerSettings",icon:"home"  },
 ]
+
+export const FooterUseFullLinks = {
+  Heading:'Useful Links',links :
+  [
+    {linkName:"Privacy Polticy"},
+    {linkName:"Become a Volunteer"},
+    {linkName:"Donate"},
+    {linkName:"Testimonials"},
+    {linkName:"Causes"},
+    {linkName:"Portfolio"},
+    {linkName:"News"}
+  ]
+
+}
+
+
+export const FooterLatestNewsLinks = {
+  Heading:'Latest News',links :
+  [
+    {title:"A new cause to help",subTitle:"MArch 12, 2018"},
+    {title:"We love to help people",subTitle:"MArch 12, 2018"},
+    {title:"The new ideas for helping",subTitle:"MArch 12, 2018"},
+  ]
+}

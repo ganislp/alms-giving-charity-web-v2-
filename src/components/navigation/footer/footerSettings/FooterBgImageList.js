@@ -6,20 +6,19 @@ import TableCell from "@material-ui/core/TableCell";
 import Avatar from '@material-ui/core/Avatar';
 import { withTheme, withStyles } from '@material-ui/core/styles';
 import {
-  getHeroImages,
-  deleteHeroImage,
-  updateImageActive,
-  updateImageInActive,
-  uploadHeroImages
-} from '../../../actions/api/heroApi';
-import UploadImages from '../../ui/UploadImages';
-import { confiDialogOpen, previewDialogOpen } from '../../../actions/uiActions/navigationAcions';
-import ConfimationDialog from '../../model/ConfimationDialog';
+  uploadFooterImages,
+  deleteFooterImage,
+  getFooterBgImages,
+  updateFooterImageInActive
+} from '../../../../actions/api/footerApi';
+import UploadImages from '../../../ui/UploadImages';
+import { confiDialogOpen, previewDialogOpen } from '../../../../actions/uiActions/navigationAcions';
+import ConfimationDialog from '../../../model/ConfimationDialog';
 import MUIDataTable from "mui-datatables";
-import { TableRowContent, ActiveButtonContent, ActionButtonsContent, } from '../../ui/DataTableContentBuild';
-import { LoadingProcess, SubmitProcess } from '../../ui/ProgressBars'
-import PreviewDialog from '../../model/PreviewDialog';
-import HeroSectionContent from '../HeroSectionContent';
+import { TableRowContent, ActiveButtonContent, ActionButtonsContent, } from '../../../ui/DataTableContentBuild';
+import { LoadingProcess, SubmitProcess } from '../../../ui/ProgressBars'
+import { Grid } from '@material-ui/core';
+
 
 
 const useStyles = theme => ({
@@ -48,37 +47,36 @@ const useStyles = theme => ({
 
 });
 
-class HeroImagesList extends React.Component {
+class footerBgImageList extends React.Component {
 
   componentDidMount() {
-    this.props.getHeroImages();
+    this.props.getFooterBgImages();
   }
 
 
 
   deleteHeroImage = (uid) => {
-    this.props.confiDialogOpen({ open: true, heroImageSeletedUid: uid });
+    this.props.confiDialogOpen({ open: true, footerBgImageSeletedUid: uid });
   }
 
   dialogImgeButtonClick = () => {
-    const {fileName} = Object.assign({}, ...Object.values((this.props.heroImages.filter(image => image.uid === this.props.confirmationUid))));
-    this.props.deleteHeroImage(this.props.confirmationUid,fileName);
-    this.props.confiDialogOpen({ open: false, heroImageSeletedUid: {} });
+    const {fileName} = Object.assign({}, ...Object.values((this.props.footerBgImages.filter(image => image.uid === this.props.confirmationUid))));
+    this.props.deleteFooterImage(this.props.confirmationUid,fileName);
+    this.props.confiDialogOpen({ open: false, footerBgImageSeletedUid: {} });
   }
 
   updateActive = (stauts, uid) => {
     if (!stauts) {   
-   this.props.updateImageActive(uid)
-   this.props.updateImageInActive();
+ this.props.updateFooterImageInActive(uid)
     }
   }
 
   clickImagePreviewWithAvatar = () => {
-    // this.props.previewDialogOpen(true);
+ this.props.previewDialogOpen(true);
   }
 
   uploadImage = (url,filename) => {
-    this.props.uploadHeroImages({imageUrl:url,fileName:filename})
+    this.props.uploadFooterImages({imageUrl:url,fileName:filename})
   }
 
   renderDataTableResponsive() {
@@ -153,14 +151,15 @@ class HeroImagesList extends React.Component {
       renderExpandableRow: (rowData, rowMeta) => {
         const colSpan = rowData.length + 1;
         const cardIndex = Object.values(rowMeta).slice(0, 1);
-        const { imageUrl, fileName } = this.props.heroImages[cardIndex]
+      const { imageUrl, fileName } = this.props.footerBgImages[cardIndex]
         return (
           <TableRow>
             <TableCell colSpan={colSpan}>
-              <HeroSectionContent
-                imageUrl={imageUrl}
-                imgname={fileName}
-              />
+              <Grid container>
+              <Grid item>
+              <img src={imageUrl} alt={fileName} width="100%" ></img>
+              </Grid>
+              </Grid>         
             </TableCell>
           </TableRow>
 
@@ -172,9 +171,9 @@ class HeroImagesList extends React.Component {
 
 
     return <MUIDataTable
-      title={<UploadImages uploadRef="hero" upload={this.uploadImage} label="Upload Image"/>}
+      title={<UploadImages uploadRef="footerImages" upload={this.uploadImage} label="Upload Image"/>}
       columns={columns}
-      data={this.props.heroImages}
+      data={this.props.footerBgImages}
       options={options}
     />
   }
@@ -182,21 +181,13 @@ class HeroImagesList extends React.Component {
   renderConfimationDialog() {
     if (!_.isEmpty(this.props.confirmationUid)) {
       return <ConfimationDialog
-        title="Delete Hero Section Image"
-        content="Are you sure you want to delete this Hero Section Image?"
+        title="Delete Footer Section Image"
+        content="Are you sure you want to delete this Footer Section Image?"
         dialogButtonClick={this.dialogImgeButtonClick} />
     }
   }
 
-  renderPreviewDialog() {
-    if (!_.isEmpty(this.props.previewUid)) {
-      const seletedHeroImage = Object.assign({}, ...Object.values((this.props.heroImages.filter(image => image.uid === this.props.previewUid))));
-      return <PreviewDialog>
-        <HeroSectionContent imageUrl={seletedHeroImage.imageUrl}
-          imgname={seletedHeroImage.fileName} />
-      </PreviewDialog>
-    }
-  }
+ 
 
   render() {
     return (
@@ -215,12 +206,12 @@ class HeroImagesList extends React.Component {
 const mapStateToProps = state => {
 
   return {
-    heroImages: Object.values(state.heroSection.heroImages),
-    isLoading: _.some(_.values(state.pendingStates.FETCH_HERO_IMAGES)),
-    isSubmiting: _.some(_.values(state.pendingStates.INACTIVE_HERO_IMAGE))
-      || _.some(_.values(state.pendingStates.DELETE_HERO_IMAGE))
-      || _.some(_.values(state.pendingStates.UPLOAD_HERO_IMAGES)),
-    confirmationUid: state.dialogOpen.heroImageSeletedUid,
+    footerBgImages: Object.values(state.footerSection.footerBgImages),
+ isLoading: _.some(_.values(state.pendingStates.FETCH_FOOTER_BG_IMAGES)),
+     isSubmiting: _.some(_.values(state.pendingStates.INACTIVE_FOOTER_BG_IMAGE))
+       || _.some(_.values(state.pendingStates.DELETE_FOOTER_BG_IMAGE))
+      || _.some(_.values(state.pendingStates.UPLOAD_FOOTER_BG_IMAGES)),
+    confirmationUid: state.dialogOpen.footerBgImageSeletedUid,
     previewUid: state.previewOpen.uid,
 
   };
@@ -228,6 +219,10 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps, {
-    getHeroImages,
-  deleteHeroImage, confiDialogOpen,uploadHeroImages, updateImageActive, updateImageInActive, previewDialogOpen
-})(withTheme(withStyles(useStyles)(HeroImagesList)))
+    uploadFooterImages,
+    deleteFooterImage, 
+    confiDialogOpen,
+    getFooterBgImages, 
+    updateFooterImageInActive, 
+     previewDialogOpen
+})(withTheme(withStyles(useStyles)(footerBgImageList)))

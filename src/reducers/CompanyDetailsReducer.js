@@ -1,8 +1,10 @@
 import * as companyActionTypes from '../actions/actionTypes/companyActionTypes'
 import _ from 'lodash';
+const initialUserState = {
+  footerBgImages: {addresses:{},contactDetails:{}},
+};
 
-
-export default   (state = {}, action) => {
+export default   (state = initialUserState, action) => {
   switch (action.type) {
     case  companyActionTypes.CREATE_COMPANY_DETAILS_REQUEST:
         return { ...state,...action.payload };

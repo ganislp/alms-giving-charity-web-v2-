@@ -36,10 +36,12 @@ import { getUpComingEvents,getUpComingEventsImages } from '../../../actions/api/
 import { getOurCauses,getOurCausesImages } from '../../../actions/api/ourCausesApi';
 import { getCausesStats,getCausesStatsImages } from '../../../actions/api/causeStatsApi';
 import { getCausesStatsView } from '../../../actions/api/causeStatsViewApi';
+import { getFooterBgImages } from '../../../actions/api/footerApi';
 import HeroSectionSettings from '../../Hero/HeroSettings/HeroSectionSettings';
 import CreateHeroSection from '../../Hero/HeroSettings/CreateHeroSection';
 import EditHeroSection from '../../Hero/HeroSettings/EditHeroSection';
-import CompanyView from '../../settings/CompanyView'
+import CompanyView from '../../settings/CompanyView';
+import FooterSectionSettings from '../footer/footerSettings/FooterSectionSettings';
 
 class Header extends React.Component {
  
@@ -58,7 +60,8 @@ class Header extends React.Component {
   this.props.getOurCausesImages();
   this.props.getCausesStats();
   this.props.getCausesStatsImages();
-  this.props.getCausesStatsView()
+  this.props.getCausesStatsView();
+  this.props.getFooterBgImages();
   }
 
   renderAppBar(history){
@@ -100,6 +103,7 @@ return <Router history={history}>
           <Route exact path="/news" component={() => <div>News</div>}></Route>
           <Route exact path="/gallery" component={() => <div>Gallery</div>}></Route>
           <Route exact path="/contact" component={() => <div>News</div>}></Route>
+          <Route exact path="/settings/footerSettings" component={props => <FooterSectionSettings {...this.props}/>}></Route>
           <Route exact path="/settings/company" component={props => <CompanyView {...this.props}/>}  ></Route> 
         </Switch>
       </Router>
@@ -136,5 +140,6 @@ export default  connect(mapStateToProps,{
   getOurCausesImages ,
   getCausesStats,
   getCausesStatsImages,
-  getCausesStatsView
+  getCausesStatsView,
+  getFooterBgImages
 })(Header);

@@ -41,6 +41,7 @@ class CompanyView extends React.Component {
   onSubmit = formValues => {
     const convertedFormValues = Object.assign({}, {
       companyName: formValues.companyName,
+      body: formValues.body,
       addresses: {
         addressline1: formValues.addressline1,
         addressline2: formValues.addressline2,
@@ -59,12 +60,13 @@ class CompanyView extends React.Component {
   };
 
   renderCompantForm() {
-    const { addresses, contactDetails, companyName } = Object.assign({}, ...Object.values(this.props.companyDetails));
-      return (
+    const { addresses, contactDetails, companyName,body } = Object.assign({}, ...Object.values(this.props.companyDetails));
+     
+    return (
         <React.Fragment>
           <LoadingProcess isLoading={this.props.isLoading}/>
           <SubmitProcess  isSubmiting={this.props.isSubmiting}/>
-          <CompanyForm onSubmit={this.onSubmit} initialValues={{ ...addresses, ...contactDetails, companyName }} />
+          <CompanyForm onSubmit={this.onSubmit} initialValues={{ ...addresses, ...contactDetails, companyName,body }} />
             <SubmitProcess  isSubmiting={this.props.isSubmiting}/>
         </React.Fragment>
 

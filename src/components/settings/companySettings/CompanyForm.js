@@ -98,7 +98,7 @@ class CompanyForm extends React.Component {
               type="number"
               fullWidth />
           </Grid>
-          <Grid item className={classes.itemTextField} xs={12} sm={12}>
+          <Grid item className={classes.itemTextField} xs={12} sm={6}>
             <Field
               name="country"
               component={renderSelectField}
@@ -106,6 +106,18 @@ class CompanyForm extends React.Component {
               <option value="">Please Select Country</option>
               <option value="south Africa">South Africa</option>
             </Field>
+          </Grid>
+
+          <Grid item className={classes.itemTextField} xs={12} sm={6}>
+            <Field
+              name="body"
+              component={renderTextField}
+              label="Desc"
+              multiline
+              rowsMax="10"
+              margin="normal"
+              fullWidth
+            />
           </Grid>
         </Grid>
         <Hidden smUp>
